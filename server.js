@@ -6,9 +6,7 @@ var app = require('./index');
 var http = require('http');
 var server;
 
-/*
- * Create and start HTTP server.
- */
+// Create and start HTTP server.
 server = http.createServer(app);
 
 // Load up the database, start the Server
