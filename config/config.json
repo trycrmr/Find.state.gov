@@ -7,7 +7,7 @@
    * Database setup // Change to production settings when not testing
    */
   "database": {
-    "name": "test4",
+    "name": "test5",
     "username": "postgres",
     "password": "postgres",
     "settings": {
