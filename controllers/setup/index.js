@@ -6,8 +6,7 @@
  */
 'use strict';
 
-import CategoryModel from '../../models/category';
-import IndicatorModel from '../../models/indicator';
+var model = require("../../models").getModel();
 
 module.exports = function (router) {
 
@@ -15,16 +14,18 @@ module.exports = function (router) {
 	 * @GET localhost/setup/category
 	 */
     router.get('/category', function (req, res) {
-    	var cm = new CategoryModel();
-    	res.send(cm.getAllCategories());
+
+    	model.Country.findAll().then(function(data) {
+    		console.log(data);
+    	});
 	});      
 
 	/**
 	 * @GET localhost/setup/indicator
 	 */
 	router.get('/indicator', function (req, res) {
-    	var cm = new CategoryModel();
-    	res.send(cm.getAllCategories());
+    	
+    	console.log(model.Indicator);
 	});   
 
 };

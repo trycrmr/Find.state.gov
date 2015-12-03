@@ -3,8 +3,6 @@
 var express = require('express');
 var kraken = require('kraken-js');
 var options, app;
-// var ModelSet = require("./models");
-import ModelSet from './models';
 
 /*
  * Create and configure application. Also exports application instance for use by tests.
@@ -16,9 +14,9 @@ options = {
         
         // start, sync the database with models
         // call next to continue setting up middleware
-        var ms = new ModelSet(config.get('database'));
-
-        ms.init().then(function () {
+        var model = require("./models");
+        model.init(config.get('database'));
+        model.getModel().sequelize.sync().then(function () {
             console.log('===> 💾  Database Synced -- Success');
             // Make sure to call next to move on
             next(null, config);
