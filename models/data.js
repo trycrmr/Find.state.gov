@@ -23,10 +23,10 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       // Executed in ./index.js
       associate: function(models) {
-        Data.hasMany(models.Indicator, {
+        Data.belongsTo(models.Indicator, {
             foreignKey: 'Indicator_ID'
         });
-        Data.hasMany(models.Country, {
+        Data.belongsTo(models.Country, {
             foreignKey: 'Country_ID'
         });
       }
