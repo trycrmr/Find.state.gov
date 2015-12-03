@@ -17,13 +17,34 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     Indicator_URL: {
+      type: DataTypes.STRING(520)
+    },
+    Indicator_Data_URL: {
+      type: DataTypes.STRING(520)
+    },
+    Direct_Indicator_Source: {
       type: DataTypes.STRING
     },
-    Direct_Indicator_URL: {
+    Original_Indicator_Source: {
       type: DataTypes.STRING
     },
-    Original_Indicator_URL: {
+    Years: {
+      type: DataTypes.STRING(720)
+    },
+    Update_Cycle: {
       type: DataTypes.STRING
+    },
+    Scope: {
+      type: DataTypes.STRING
+    },
+    Units: {
+      type: DataTypes.STRING
+    },
+    Last_Source_Update_TS: {
+      type: DataTypes.DATE
+    },
+    When_To_Update_TS: {
+      type: DataTypes.DATE
     },
     Indicator_Definition: {
       type: DataTypes.TEXT
