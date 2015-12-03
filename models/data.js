@@ -1,0 +1,37 @@
+/**
+ * Data Model
+ *
+ * @desc find.state.gov, data, data fact, sequelize orm
+ * @author Michael Ramos 
+ */
+'use strict';
+
+module.exports = function(sequelize, DataTypes) {
+  var Data = sequelize.define("Data", {
+    Data_ID: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    Date: {
+        type: DataTypes.DATE
+    },
+    Value: {
+        type: DataTypes.DOUBLE
+    }
+  }, {
+    classMethods: {
+      // Executed in ./index.js
+      associate: function(models) {
+        Data.hasMany(models.Indicator, {
+            foreignKey: 'Indicator_ID'
+        });
+        Data.hasMany(models.Country, {
+            foreignKey: 'Country_ID'
+        });
+      }
+    }   
+  });
+  
+  return Data;
+};
