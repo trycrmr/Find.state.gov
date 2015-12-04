@@ -2,7 +2,7 @@ import psycopg2
 import sys
 
 
-s="***conection string*****"
+s="host='localhost' dbname='openspending' user='postgres' password='postgres'"
 con = psycopg2.connect(s) 
 
 def populateDataTable():
@@ -262,12 +262,12 @@ def populateCategoriesTable():
 def main():
 	
 	populateCollectionsTable()   
-	#populateCategoriesTable()
-	#populateIndicatorsTable()
-	#populateCategoriesJunctionTable()
-	#populateCollectionsJunctionTable()
-	#populateCountryTable()
-	#populateDataTable()
+	populateCategoriesTable()
+	populateIndicatorsTable()
+	populateCategoriesJunctionTable()
+	populateCollectionsJunctionTable()
+	populateCountryTable()
+	populateDataTable()
 
 
 if __name__ == "__main__":
