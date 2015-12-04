@@ -28,7 +28,7 @@ options = {
 
 app = module.exports = express();
 app.use(kraken(options));
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/public/static'));
 app.on('start', function () {    
     var env = app.kraken.get('env:env') || "development";
     if ( env === "production" ) {
