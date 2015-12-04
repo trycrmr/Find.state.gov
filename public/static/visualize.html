@@ -1,0 +1,122 @@
+<!doctype html>
+
+<html>
+  
+  <head>
+    <title>Build Visualizations</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bv-style.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </head>
+  
+  <body>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+          <a href="index.html" class="navbar-brand">Find</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="visualize.html">Build a Visualization</a>
+            </li>
+            <li>
+              <a href="#">Explore</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="#">Login/Register(USG Only)</a>
+            </li>
+       </ul>
+        </div>
+      </div>
+    </div>
+
+      <!-- main body -->
+    <div class="content">
+     <div class="loading"></div>
+      <span class="msg">
+        <h3>No data loaded</h3>
+        <button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal">Build a Visualization</button>
+      </span>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Visualization Options</h4>
+          </div>
+          <div class="modal-body">
+          <div class="row viz-column-set">
+            <div class="col-md-4 viz-column-box">
+              <div class="viz-column">
+              <header class="viz-col-head"><h4>Choose Indicator(s)</h4><hr/></header>
+              <dl class="category-list">
+                <dt>Category</dt>
+                <dd><span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Indicator 1</dd>
+                <dd><span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Indicator 2</dd>
+                <dd><span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Indicator 3</dd>
+                <dd><span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Indicator 4</dd>
+                <dt>Category</dt>
+                <dt>Category</dt>
+              </dl>
+
+              </div>
+            </div>
+            <div class="col-md-4 viz-column-box">
+              <div class="viz-column">
+                <header class="viz-col-head"><h4>Choose Countries</h4><hr/></header>
+                <input class="filter-country" placeholder="Quick Search">
+                <ul class="country-list">
+                  <li><span class="glyphicon glyphicon-th-list">&nbsp;</span>Afghanastan</li>
+                  <li><span class="glyphicon glyphicon-th-list">&nbsp;</span>Iraq</li>
+                  <li><span class="glyphicon glyphicon-th-list">&nbsp;</span>Qatar</li>
+                  <li><span class="glyphicon glyphicon-th-list">&nbsp;</span>Turkey</li>
+                  <li><span class="glyphicon glyphicon-th-list">&nbsp;</span>Syria</li>
+                  <li><span class="glyphicon glyphicon-th-list">&nbsp;</span>Russia</li>
+                  <li><span class="glyphicon glyphicon-th-list">&nbsp;</span>United States</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-4 viz-column-box">
+              <div class="viz-column">
+                <header class="viz-col-head"><h4>Choose Graph</h4><hr/></header>
+                <table class="chart-list">
+                  <tr>
+                    <td><span class="barcon chartcon"></span><br/>Bar</td>
+                    <td><span class="linecon chartcon"></span><br/>Line</td>
+                  </tr>
+                  <tr>
+                    <td><span class="scattercon chartcon"></span><br/>Scatter</td>
+                    <td><span class="bubblecon chartcon"></span><br/>Bubble</td>
+                  </tr>
+                  <tr>
+                    <td><span class="mapcon chartcon"></span><br/>Map</td>
+                    <td class="soon"><span class="radarcon chartcon"></span><br/>Radar (Coming Soon)</td>
+                  </td>
+                  <tr>
+                    <td class="soon"><span class="treecon chartcon"></span><br/>Tree (Coming Soon)</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </body>
+
+</html>
