@@ -38,7 +38,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.GEOMETRY('MULTIPOLYGON')
       //GEOMETRY('MULTIPOLYGON')
     }
+
   }, {
+    createdAt:false,
+    updatedAt:false,
     classMethods: {
       // Executed in ./index.js
       associate: function(models) {

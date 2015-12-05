@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
         autoIncrement: true
     },
     Date: {
-        type: DataTypes.DATE
+        type: DataTypes.INTEGER
     },
     Value: {
         type: DataTypes.DOUBLE

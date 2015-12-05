@@ -17,6 +17,9 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING
       }
     }, {
+
+    createdAt: false,
+    updatedAt: false,
     classMethods: {
       // Executed in ./index.js
       associate: function(models) {
