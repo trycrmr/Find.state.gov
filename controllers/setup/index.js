@@ -27,7 +27,24 @@ module.exports = function (router) {
 	 */
 	router.get('/indicator', function (req, res) {
     	
-    	console.log(model.Indicator);
-	});   
+    	model.Indicator.findAll({
+    		attributes:['Indicator_Name']
+    	}).then(function(data) {
+    		res.send(data);
+    	});
+	});  
+
+	/**
+	 * @GET localhost/setup/country
+	 */
+	router.get('/country', function (req, res) {
+    	
+    	model.Country.findAll({
+    		attributes:['Country_Name']
+    	}).then(function(data) {
+    		res.send(data);
+    	});
+	}); 
+
 
 };

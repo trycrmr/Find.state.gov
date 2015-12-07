@@ -1,0 +1,373 @@
+<!DOCTYPE HTML>
+
+<html>
+<title>D3 Bar Chart Test for FInd</title>
+
+<style>
+text {
+  font-family: sans-serif;
+  font-size: 10px;
+}
+rect {
+  fill: #7cb5ec;
+}
+rect:hover {
+  fill: #95ceff;
+}
+path {
+  fill: none;
+  stroke: #ccc;
+}
+line {
+  stroke: #ccc;
+}
+.d3-tip {
+  line-height: 1;
+  padding: 12px;
+  background: #fff;
+  color: #000;
+  border-style: solid;
+  border-color: #95ceff;
+  border-radius: 2px;
+  padding:3px;
+}
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 80%;
+  line-height: 1;
+  color: #000;
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+#chartlabelstext{
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+  color:#3d3d3d;
+}
+</style>
+
+<body>
+<div class="row tabs-app">
+  <div id="chartlabels"></div>
+
+  <svg width="1000" height="350">
+    <g class="chart-wrapper" transform="translate(30,20)">
+      <g class="bars"></g>
+      <g class="x axis"></g>
+      <g class="y axis"></g>
+    </g>
+  </svg>
+</div>
+</body>
+
+<script src="js/lib/d3jsv3.js"></script>
+<script>
+function barChart(year){
+  var maxWidth = 900, rightPadding = 80;
+  var xScale, yScale, xAxisComponent, yAxisComponent;
+  var data = [], desc, units, maxDate, minDate;
+
+  var container = d3.select('svg g.chart-wrapper'),
+    barGroup = container.select('.bars')
+    xAxis = container.select('.x.axis')
+    yAxis = container.select('.y.axis');
+
+  //Initialize tool tip
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) {
+      return mlabel+": <strong>" + d.toFixed(2) + "%</strong>";
+    });
+    container.call(tip);
+  // Parse the date / time
+  var parseDate = d3.time.format("%Y").parse;
+
+  function toTitleCase(str){
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
+  d3.json("js/data/chartdatasample.json", function(error, data) { // chartdata2 
+    function dataReduce(dataArray){
+      if(dataArray){
+        var reducedData = dataArray.reduce(function(pv, cv) {
+          if ( pv[cv.geo__name] ) {
+              pv[cv.geo__name] += cv.gdp_growth__avg;
+          } else {
+              pv[cv.geo__name] = cv.gdp_growth__avg;
+          }
+          return pv;
+        }, {});
+      }else{
+        console.log("dataArray is emppty in dataReduce()");
+      }
+      
+      return reducedData;
+    }
+
+    function indicatorData(data, type, year) { 
+        var i, dataArray = Array();
+
+        switch(type){
+          case "cells":
+            for(i =0; i < data.cells.length; i++){ 
+              if(parseInt(year) == data.cells[i].time){
+                dataArray.push(data.cells[i]);
+              }               
+            }
+          break;
+          case "models":
+            for(i =0; i < data.models.length; i++){ 
+              dataArray.push(data.models[i]);
+            }
+          break;
+          default:
+            console.log("indicatorData type var is empty.");
+        }
+     
+      return dataArray; 
+    }
+
+    function initChart() {
+      var width = 400, height = 300, totalyears = Array();
+
+      //Retrieve Data Objects and arrays
+      indidata = indicatorData(data, "cells", year);
+      metadata = indicatorData(data, "models", year);
+      //console.log(indidata);
+      
+      //Tranform and aggregate values into key value pair
+      reducedData = dataReduce(indidata);
+
+      //console.log(reducedData);
+      
+      //Build array of strings
+      countriesArray = Object.keys(reducedData), countryNumbers = Array();
+      //console.log(countriesArray);
+      //Build array of the average for the numbers that corespond to above strings
+      for(var key in reducedData){        
+        countryNumbers.push(reducedData[key]);//The Math is off
+      }
+      //console.log(countryNumbers);
+
+      // Intialize new variables for meta data
+      metadata.forEach(function(d) { 
+      console.log(d);   
+        mlabel = toTitleCase(d.label);
+        desc = d.description;
+        units = d.units;
+        //Not being used yet
+        maxDate = Math.max.apply(null,d.years);
+        minDate = Math.min.apply(null,d.years);   
+      }); 
+     
+      // Initialise scales
+      xScale = d3.scale.ordinal()
+        .domain(countryNumbers.map(function(d, i) {return toTitleCase(countriesArray[i]);}))
+        .rangeBands([0, width], 0.04);
+
+      yScale = d3.scale.linear()
+        .domain([0, d3.max(countryNumbers)])
+        .range([height, 0]);
+
+      // Build the x-axis
+      xAxisComponent = d3.svg.axis()
+        .scale(xScale)
+        .orient('bottom');
+
+      xAxis.attr('transform', 'translate(0,'+height+')');
+
+      // Build the y-axis
+      yAxisComponent = d3.svg.axis()
+        .scale(yScale)
+        .orient('left');
+
+      if(minDate){
+        yAxisText = mlabel+" (annual %)";
+      }else{
+        //yAxisText = mlabel+" from: "+minDate+" to "+ maxDate+".";
+      }
+
+      var chartheading = d3.select("#chartlabels");
+
+      chartheading.append("h5").attr("id", "chartlabelstext")
+        .text(yAxisText);
+
+      chartheading.append("p").attr("id", "chartlabelstext").text(desc);
+
+      yAxis.call(yAxisComponent).append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0)
+        .attr("dy", ".85em")
+        .style("text-anchor", "end")
+        .text(yAxisText);
+    }
+
+    function initEvents() {
+      // Set up event handler for resizes
+      W.addListener(update);
+    }
+
+    function update() {
+      updateScales();
+      updateAxes();
+      updateBars();
+    }
+
+    function updateScales() {
+      var width = d3.min([W.getViewportWidth(), maxWidth]) - rightPadding;
+      xScale.rangeBands([0, width], 0.04);
+    }
+
+    function updateAxes() {
+      xAxis.transition().call(xAxisComponent);
+    }
+
+    function updateBars() {
+      
+      var u = barGroup
+        .selectAll('rect')
+        .data(countryNumbers); //Need to get countries to show in tool tip
+
+      u.enter()
+        .append('rect')
+        .on('mouseover', tip.show)    
+        .on('mouseout', tip.hide);
+
+      u.exit()
+        .remove();
+
+      u.transition()
+        .attr('x', function(d, i) {return xScale(toTitleCase(countriesArray[i]));})
+        .attr('width', xScale.rangeBand())
+        .attr('y', function(d) { return yScale(d);})
+        .attr('height', function(d) {return yScale(0) - yScale(d);});
+    }
+
+    initChart();
+    update();
+
+    initEvents();
+  });
+
+}
+var year = "2012";
+barChart(year);
+
+/*
+var maxWidth = 900, rightPadding = 70;
+var xScale, yScale, xAxisComponent, yAxisComponent;
+var numBars = 26, yMax = 100;
+var data = [];
+
+var container = d3.select('svg g.chart-wrapper'),
+  barGroup = container.select('.bars')
+  xAxis = container.select('.x.axis')
+  yAxis = container.select('.y.axis');
+
+function intToChar(i) {
+  return String.fromCharCode(i + 65);
+}
+
+
+function randomData(data) {
+  for(var i = 0; i < numBars; i++)
+    data[i] = Math.random() * yMax;
+  return data;
+}
+
+function initChart() {
+  var width = 400, height = 300;
+
+  data = randomData(data);
+  console.log(data);
+
+  // Initialise scales
+  xScale = d3.scale.ordinal()
+    .domain(data.map(function(d, i) {return intToChar(i);}))
+    .rangeBands([0, width], 0.04);
+
+  yScale = d3.scale.linear()
+    .domain([0, yMax])
+    .range([height, 0]);
+
+  // Build the x-axis
+  xAxisComponent = d3.svg.axis()
+    .scale(xScale)
+    .orient('bottom');
+
+  xAxis.attr('transform', 'translate(0,'+height+')');
+
+  // Build the y-axis
+  yAxisComponent = d3.svg.axis()
+    .scale(yScale)
+    .orient('left');
+
+  yAxis.call(yAxisComponent);
+}
+
+function initEvents() {
+  // Set up event handler for resizes
+  W.addListener(update);
+
+  // Update data button
+  d3.select('#update').on('click', function() {
+    data = randomData(data);
+    update();
+  });
+}
+
+function update() {
+  updateScales();
+  updateAxes();
+  updateBars();
+}
+
+function updateScales() {
+  var width = d3.min([W.getViewportWidth(), maxWidth]) - rightPadding;
+  xScale.rangeBands([0, width], 0.04);
+}
+
+function updateAxes() {
+  xAxis.transition().call(xAxisComponent);
+}
+
+function updateBars() {
+  var u = barGroup
+    .selectAll('rect')
+    .data(data);
+
+  u.enter()
+    .append('rect');
+
+  u.exit()
+    .remove();
+
+  u.transition()
+    .attr('x', function(d, i) {return xScale(intToChar(i));})
+    .attr('width', xScale.rangeBand())
+    .attr('y', function(d) {return yScale(d);})
+    .attr('height', function(d) {console.log("test"); return yScale(0) - yScale(d);});
+}
+
+
+initChart();
+update();
+
+initEvents();
+*/
+
+</script>
