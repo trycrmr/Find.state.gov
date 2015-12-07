@@ -16,7 +16,9 @@ module.exports = function (router) {
     router.get('/category', function (req, res) {
 
     	model.Country.findAll().then(function(data) {
-    		console.log(data);
+    		//format to json
+    		res.json(data);
+    		//console.log(data);
     	});
 	});      
 

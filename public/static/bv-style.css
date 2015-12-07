@@ -209,10 +209,15 @@ color: #981b1e;
   background: url("http://find.state.gov/static/find-ui/dist/app/images/treemap.png") center center no-repeat;
   background-size: contain;
 }
-
+#viz {
+  background-color: blue;
+}
 /* Main Content */
 .content {
   text-align: center;
+  width: 100%;
+  min-height: 800px;
+  
 }
 .msg {
   position: absolute;

@@ -5,10 +5,25 @@
   <head>
     <title>Build Visualizations</title>
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">  
     <link rel="stylesheet" href="bv-style.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link href="css/linechart.css" rel="stylesheet" type="text/css">
+
+    <style>
+      #test1 {
+        margin: 0;
+        padding: 0;
+        overflow: none;
+      }
+    </style>
+     
+    <script type="text/javascript" src="./js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/d3jsv3.js"></script>
+    <script src="js/lib/nvtooltip.js"></script>
+    <script src="js/lib/linechartlegend.js"></script> 
+    <script src="js/lib/d3lineInLineChart.js"></script> 
+    <script src="js/lib/d3linewithlegend.js"></script>
   </head>
   
   <body>
@@ -39,7 +54,7 @@
     </div>
 
       <!-- main body -->
-    <div class="content">
+    <div id="content" class="content">
      <div class="loading"></div>
       <span class="msg">
         <h3>No data loaded</h3>
@@ -94,8 +109,8 @@
                 <header class="viz-col-head"><h4>Choose Graph</h4><hr/></header>
                 <table class="chart-list">
                   <tr>
-                    <td><span class="barcon chartcon"></span><br/>Bar</td>
-                    <td><span class="linecon chartcon"></span><br/>Line</td>
+                    <td><span onclick="loadViz('bar')" class="barcon chartcon"></span><br/>Bar</td>
+                    <td><span onclick="loadViz('line')" class="linecon chartcon"></span><br/>Line</td>
                   </tr>
                   <tr>
                     <td><span class="scattercon chartcon"></span><br/>Scatter</td>
@@ -116,7 +131,22 @@
       </div>
     </div>
 
+  <script type="text/javascript">
+  $('#myModal').modal('show');
 
+  function loadViz(chart) {
+    if ( chart === "line" ) {
+      $("#content").load('d3-line.html');
+    }
+    else if ( chart === "bar" ){
+      $("#content").load('d3-bar.html');
+    }
+    
+    $('#myModal').modal('hide');
+  }
+    
+  </script>
   </body>
+  }
 
 </html>
