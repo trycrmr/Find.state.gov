@@ -12,17 +12,19 @@
     "babel-core": "^6.2.1",
     "babel-preset-es2015": "^6.1.18",
     "body-parser": "~1.2.0",
+    "bootstrap": "^3.3.6",
     "construx": "^1.0.0",
     "construx-copier": "^1.0.0",
     "excel-export": "~0.4.1",
     "express": "^4.12.2",
     "express-csv": "~0.6.0",
+    "jquery": "^2.1.4",
     "kraken-js": "^1.0.3",
     "lodash": "*",
     "moment": "*",
     "pg": "*",
     "request": "*",
-    "squel": "*",
-    "sequelize": "*"
+    "sequelize": "*",
+    "squel": "*"
   }
 }
