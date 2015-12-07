@@ -72,11 +72,26 @@ body {
   }
 }
 
+.head-container {
+  width: 100%;
+  height: 130px;
+  background-color: rgba(40,40,40, .9);
+  margin-top: 10%;
+}
+
+.input-group {
+  width: 50%;
+  margin: auto;
+}
+
+.input-group button {
+  color: #981b1e;
+}
   
 .data-story-container {
   width: 100%;
   background-color: rgba(40,40,40, .9);
-  margin-top: 20%;
+  margin-top: 5%;
 }
 .data-story-head {
   color: white;
