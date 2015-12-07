@@ -12,4 +12,4 @@
 ######################
 /node_modules/
 npm-debug.log
-/public/static/lib/
+/public/static/bower_components/
