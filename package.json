@@ -5,7 +5,8 @@
   "author": "Office of eDiplomacy - Department of State",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "prod": "forever start server.js"
   },
   "dependencies": {
     "babel": "^6.1.18",
@@ -18,6 +19,7 @@
     "excel-export": "~0.4.1",
     "express": "^4.12.2",
     "express-csv": "~0.6.0",
+    "forever": "^0.15.1",
     "jquery": "^2.1.4",
     "kraken-js": "^1.0.3",
     "lodash": "*",
