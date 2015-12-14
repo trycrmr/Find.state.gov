@@ -75,7 +75,7 @@ def populateCountryTable():
 
 		cur.execute("""update public."geometry__country_level0" set wb_inc_lvl = '' where wb_inc_lvl is null""")
 		
-		cur.execute("""INSERT INTO public."Countries" ("Country_ID", "Continent","DOD_Gorup","DOS_Group", "USAID_Group", "INCOME_Group", "Country_Name", "Sub_Country_Name", "Country_Geography") select gid,continent, dod_cmd,dos_region,usaid_reg,wb_inc_lvl,sovereignt,geounit,geom from public."geometry__country_level0"
+		cur.execute("""INSERT INTO public."Countries" ("Country_ID", "Continent","DOD_Group","DOS_Group", "USAID_Group", "INCOME_Group", "Country_Name", "Sub_Country_Name", "Country_Geography") select gid,continent, dod_cmd,dos_region,usaid_reg,wb_inc_lvl,sovereignt,geounit,geom from public."geometry__country_level0"
  """)    
 			
 		con.commit()
