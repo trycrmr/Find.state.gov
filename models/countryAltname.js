@@ -8,27 +8,27 @@
 
 module.exports = function(sequelize, DataTypes) {
     var Country_Altname = sequelize.define("Country_Altname", {
-      Country_Altname_ID: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-      },
-      Altname: {
-        type: DataTypes.STRING
-      }
-    }, {
-
-    createdAt: false,
-    updatedAt: false,
-    classMethods: {
-      // Executed in ./index.js
-      associate: function(models) {
-        Country_Altname.belongsTo(models.Country, {
-            foreignKey: 'Country_ID'
-        });
-      }
-    }   
-  });
+        Country_Altname_ID: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        Altname: {
+            type: DataTypes.STRING
+        }
+    }, 
+    {
+        createdAt: false,
+        updatedAt: false,
+        classMethods: {
+          // Executed in ./index.js
+          associate: function(models) {
+            Country_Altname.belongsTo(models.Country, {
+                foreignKey: 'Country_ID'
+            });
+          }
+        }   
+      });
   
   return Country_Altname;
 };

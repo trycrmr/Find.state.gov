@@ -9,7 +9,6 @@
 
 //import UserModel from '../../lib/user';
 
-
 module.exports = function (router) {
 
 	/**

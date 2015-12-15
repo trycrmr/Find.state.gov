@@ -7,26 +7,27 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Collection = sequelize.define("Collection", {
-    Collection_ID: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+    var Collection = sequelize.define("Collection", {
+        Collection_ID: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        Collection_Name: {
+            type: DataTypes.STRING
+        }
     },
-    Collection_Name: {
-        type: DataTypes.STRING
-    }
-  }, {
-    classMethods: {
-      // Executed in ./index.js
-      associate: function(models) {
-        Collection.belongsToMany(models.Indicator, {
-            through: 'Collection_Junction',
-            foreignKey: 'Collection_ID'
-        });
-      }
-    }   
-  });
+    {
+        classMethods: {
+          // Executed in ./index.js
+            associate: function(models) {
+                Collection.belongsToMany(models.Indicator, {
+                    through: 'Collection_Junction',
+                    foreignKey: 'Collection_ID'
+                });
+            }
+        }   
+    });
   
   return Collection;
 };
