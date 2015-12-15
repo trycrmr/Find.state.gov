@@ -13,7 +13,7 @@ module.exports = function (router) {
 	/**
 	 * @GET localhost/visualize
 	 */
-    router.get('/', function (req, res) {
+    router.get('/data', function (req, res) {
 
     	var ds = new DataModel(req, res, function(resdata){
 			if (! ds){
