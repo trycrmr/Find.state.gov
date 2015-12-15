@@ -60,7 +60,6 @@ app.get('/*', function (req, res) {
       }
 
       match({ routes, location }, (err, redirectLocation, renderProps) => {
-
         if(err) {
           console.error(err);
           return res.status(500).end('Internal server error');
@@ -77,11 +76,9 @@ app.get('/*', function (req, res) {
           </Provider>
         );
 
-       
         const componentHTML = ReactDOMServer.renderToString(InitialView);
         const initialState = store.getState();
-        res.status(200).end(renderFullPage(componentHTML,initialState));
-         
+        res.status(200).end(renderFullPage(componentHTML,initialState));  
       });
 
     }
@@ -89,7 +86,7 @@ app.get('/*', function (req, res) {
 
 });
 
-const server = app.listen(3002, function () {
+const server = app.listen(3001, function () {
   const host = server.address().address;
   const port = server.address().port;
   console.log('Example app listening at http://%s:%s', host, port);

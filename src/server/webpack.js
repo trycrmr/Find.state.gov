@@ -1,5 +1,7 @@
 // Webpack dev server
-// Ran in parallel with the Express server
+// runs in parallel with the Express server
+// enables hot loading
+// use 8080
 
 import WebpackDevServer from "webpack-dev-server";
 import webpack from "webpack";
