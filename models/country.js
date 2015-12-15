@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
     Continent: {
       type: DataTypes.STRING
     },
-    DOD_Gorup: {
+    DOD_Group: {
       type: DataTypes.STRING
     },
     DOS_Group: {
