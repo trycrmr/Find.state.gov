@@ -4,3 +4,15 @@ To support increased efficiencies and effectiveness in how USG agencies incorpor
 
 This site is developed by the Office of eDiplomacy. For questions or concerns, please contact steppdn@state.gov
 
+
+## Installation
+
+```bash
+npm install
+```
+
+## Running Dev Server
+
+```bash
+npm run dev
+```
