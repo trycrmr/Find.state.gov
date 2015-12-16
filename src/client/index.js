@@ -11,7 +11,7 @@ import createBrowserHistory from 'history/lib/createBrowserHistory'
 import configureStore from '../common/store/configureStore';
 import routes from '../common/routes';
 
-import "../../styles/index.css";
+import "../assets/styles/index.css";
 
 const history = createBrowserHistory();
 const initialState = window.__INITIAL_STATE__;
@@ -21,7 +21,7 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(
   <Provider store={store}>
         <ReduxRouter>
-          <Router children={routes} history={history} />
+  			<Router children={routes} history={history} />
         </ReduxRouter>
   </Provider>,
   document.getElementById('root')

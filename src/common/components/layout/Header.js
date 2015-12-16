@@ -1,25 +1,38 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 class Header extends Component {
 
   render() {
 
     return (
-      	<div className="masthead">
-			<div className="container">
-			  <h3 className="masthead-title">
-			    <a href="/" title="Home">Find State Gov Componenets</a>
-			    <small>Click on menu icon to get started</small>
-			  </h3>
-			</div>
+		<div className="navbar navbar-default">
+		  <div className="container">
+		    <div className="navbar-header">
+		      <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		        <span className="sr-only">Toggle navigation</span><span className="icon-bar"></span><span className="icon-bar"></span><span className="icon-bar"></span>
+		      </button>
+		       <Link to="home" className="navbar-brand">Find</Link>
+		    </div>
+		    <div className="collapse navbar-collapse">
+		      <ul className="nav navbar-nav">
+		        <li>
+		          <Link to="visualize">Build a Visualization</Link>
+		        </li>
+		        <li>
+		          <Link to="explore">Explore</Link>
+		        </li>
+		      </ul>
+		      <ul className="nav navbar-nav pull-right">
+		        <li>
+		          <Link to="authin">Login/Register(USG Only)</Link>
+		        </li>
+		   </ul>
+		    </div>
+		  </div>
 		</div>
     );
   }
 }
-
-// Header.propTypes = {
-//   counter: PropTypes.number.isRequired,
-//   todos: PropTypes.array.isRequired
-// };
 
 export default Header;

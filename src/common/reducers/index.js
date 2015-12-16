@@ -8,9 +8,9 @@ import user from './user';
 
 const rootReducer = combineReducers({
 	user : user,
-  layout : undoable(layout),
-  storiesReducer : undoable(storiesReducer),
-  router : routerStateReducer
+	layout : undoable(layout),
+	storiesReducer : undoable(storiesReducer),
+	router : routerStateReducer
 });
 
 export default rootReducer;

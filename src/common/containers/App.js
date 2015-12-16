@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import * as LayoutActions from '../actions/layout';
 import Home from '../components/Home'
 import Header from '../components/layout/Header'
-import Sidebar from '../components/layout/Sidebar'
 
 class App extends Component {
 
@@ -34,24 +33,13 @@ class App extends Component {
 
   render() {
 
-    const { layout} = this.props;
-    const { sidebarOpen } = layout;
-    const layoutClass = classNames('wrapper',{open : sidebarOpen});
-
     return (
-      <div className={layoutClass}>
-        <Sidebar layout={layout} />
-  	    <div className="wrap">
+      <div>
           <Header  />
-          <div className="container content">
             {!this.props.children && <Home />}
             {this.props.children}
-          </div>
-        </div>
-        <label className="sidebar-toggle" onClick={this.eventToggleSidebar}></label>
-        <label className="undo-button" onClick={this.eventUndo}>&lt;</label>
-        <label className="redo-button" onClick={this.eventRedo}>&gt;</label>
       </div>
+        
     );
   }
 }

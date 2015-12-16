@@ -2,11 +2,12 @@ import { bindActionCreators } from 'redux';
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import DataStory from '../components/DataStory';
+import Home from '../components/Home';
 import * as StoryActions from '../actions/datastory';
 
 //Data that needs to be called before rendering the component
 //This is used for server side rending via the fetchComponentDataBeforeRending() method
-DataStory.need = [
+Home.need = [
   StoryActions.fetchStories
 ]
 
@@ -34,4 +35,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(StoryActions, dispatch);
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(DataStory);
+export default connect(mapStateToProps,mapDispatchToProps)(Home);
