@@ -12,5 +12,5 @@
 ######################
 /node_modules/
 npm-debug.log
-/public/static/bower_components/
-/config/config.json
+api/public/static/bower_components/
+api/config/config.json
