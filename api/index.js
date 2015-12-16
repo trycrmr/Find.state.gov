@@ -17,11 +17,11 @@ options = {
         var model = require("./models");
         model.init(config.get('database'));
         model.getModel().sequelize.sync().then(function () {
-            console.log('===> 💾  Database Synced -- Success');
+            console.log('API ===> 💾  Database Synced -- Success');
             // Make sure to call next to move on
             next(null, config);
         }).catch(function (err) {
-            console.log('===> 🆘 💾  Database Setup Error: ' + err.message);
+            console.log('API ===> 🆘 💾  Database Setup Error: ' + err.message);
         }); 
     }
 };
@@ -37,9 +37,9 @@ app.use(express.static(__dirname + '/public/static'));
 app.on('start', function () {    
     var env = app.kraken.get('env:env') || "development";
     if ( env === "production" ) {
-    	console.log('===> 🔆  Using Production Environment');
+    	console.log('API ===> 🌐  Using Production Environment');
     } else {
-        console.log('===> 🚧  Using Development Environment');
+        console.log('API ===> 🚧  Using Development Environment');
     } 
-    console.log('===> ✅  API Server is ready to serve requests.');   
+    console.log('API ===> ✅  API Server is ready to serve requests.');   
 });

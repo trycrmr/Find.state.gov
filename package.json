@@ -4,7 +4,7 @@
   "description": "F Interagency Network Databank (FIND)",
   "author": "Office of eDiplomacy - Department of State",
   "scripts": {
-    "dev": "NODE_ENV=development concurrent --kill-others \"node src/server/index.js\" \"nodemon api/server.js\" --progress --colors --profile ",
+    "dev": "NODE_ENV=development concurrent --kill-others \"nodemon api/server.js\" \"node src/server/index.js\" --progress --colors --profile ",
     "build": "npm run clean && NODE_ENV=production webpack -p --progress --colors --profile"
   },
   "dependencies": {
