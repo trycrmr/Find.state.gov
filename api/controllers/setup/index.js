@@ -2,7 +2,7 @@
  * Setup API Endpoint
  *
  * Pull base data such as Categories and indicators
- * @author Michael Ramos 
+ * @author Michael Ramos, Leroy Bryant
  */
 'use strict';
 
@@ -31,6 +31,8 @@ module.exports = function (router) {
       		res.send(data);
       	});
 	});  
+
+
 
 	/**
 	 * @GET localhost/setup/country
@@ -67,5 +69,19 @@ module.exports = function (router) {
         }
         res.json(data);
     });
+
+/**
+     * @GET localhost/setup/region
+     */
+    router.get('/region/:region', function (req, res) {
+        
+        var region = req.params.region;
+
+        model.sequelize.query("select distinct \"" + region + "\" from public.\"Countries\"", { type: model.sequelize.QueryTypes.SELECT
+        }).then(function(data) {
+        
+            res.json(data);
+        })
+    }); 
 
 };
