@@ -11,7 +11,7 @@ var DataModel = require('../../lib/data');
 module.exports = function (router) {
 
 	/**
-	 * @GET localhost/visualize
+	 * @GET localhost/visualize/data
 	 */
     router.get('/data', function (req, res) {
 
@@ -24,6 +24,17 @@ module.exports = function (router) {
 			}	
 			ds.closeConnection();		
 		});
-	});        
+	});
+
+	/**
+	 * @GET localhost/visualize/setup
+	 */
+    router.get('/setup', function (req, res) {
+    	var jres = {
+    		"setup": "This is the setup json object"
+    	}
+
+    	res.json(jres);
+	});      
 
 };

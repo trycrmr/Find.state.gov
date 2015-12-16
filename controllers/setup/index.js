@@ -51,9 +51,18 @@ module.exports = function (router) {
         console.log('getting DS request');
         var data = {
             "datastories":[
-              {"title": "Data Story 1","content": "aefolqwejvsavdfqweqfnlfnjwnan"},
-              {"title": "Data Story 2","content": "sfwWFgsawqefnWQDFnqfwecfqwec3"},
-              {"title": "Data Story 3","content": "wqefqfwwqweqfferasfdaneFasdfn"}
+              {
+                "title": "Under-five mortality rate is declining around the world",
+                "content": "The rate of children that die before their 5th birthday has been cut in half in the last 25 years."
+              },
+              {
+                "title": "If you are over 15 years old and reading this, then you are part of the 85% of the literate adult world.",
+                "content": "The global adult literacy rate has increased by about 10% since 1990, and more people are literate than ever before."
+              },
+              {
+                "title": "Dramatic increases in Mobile subscriptions in sub-Saharan Africa",
+                "content": "146 million mobile accounts created in the last 15 years within sub-Saharan Africa shows the ubiquitous growth of mobile technology in developing countries."
+              }
             ]
         }
         res.json(data);
