@@ -11,25 +11,8 @@ class App extends Component {
 
   constructor(props){
     super(props);
-    this.eventToggleSidebar = this.eventToggleSidebar.bind(this)
-    this.eventUndo = this.eventUndo.bind(this)
-    this.eventRedo = this.eventRedo.bind(this)
   }
 
-  eventToggleSidebar(e) {
-    e.preventDefault();
-    this.props.toggleSidebar(!this.props.layout.sidebarOpen);
-  }
-
-  eventUndo(e) {
-    e.preventDefault();
-    this.props.undo();
-  }
-
-  eventRedo(e) {
-    e.preventDefault();
-    this.props.redo();
-  }
 
   render() {
 

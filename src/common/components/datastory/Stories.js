@@ -4,7 +4,7 @@ export default class Stories extends Component {
   render () {
     return (
       
-      <div class="row data-story-set">
+      <div className="row">
         {this.props.stories.map((story, i) =>
             <div key={i} className="col-md-4 data-story-box">
               <div className="col-md-12 data-story">

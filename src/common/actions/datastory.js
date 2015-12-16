@@ -27,7 +27,6 @@ function fetchStories() {
     dispatch(requestStories());
 
     // Return a promise to wait for
-    // (this is not required by thunk middleware, but it is convenient for us)
     return fetch('http://localhost:3000/setup/datastories')
       .then(response => response.json())
       .then(json => {
