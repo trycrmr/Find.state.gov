@@ -25,8 +25,11 @@ class DataStory extends Component {
           <h3>Empty</h3>
         }
         {stories.length > 0 &&
-          <div style={{ opacity: !loaded ? 0.5 : 1 }}>
-            <Stories stories={stories} />
+          <div className="data-story-container">
+            <div className="container">
+              <h1 className="data-story-head"> Data Stories </h1>
+                <Stories stories={stories} />
+            </div>
           </div>
         }
       </div>

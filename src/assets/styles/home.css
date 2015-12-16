@@ -1,13 +1,18 @@
+body {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
 .home-main { 
   background: url(../img/bg.jpg) no-repeat center center; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   height: 100vh;
   width: 100vw;
-  position: fixed;
+  top: 0;
+  z-index: -1;
+  position: absolute;
 }
 
 .head-container {
@@ -25,7 +30,7 @@
 .input-group button {
   color: #981b1e;
 }
-  
+
 .data-story-container {
   width: 100%;
   background-color: rgba(40,40,40, .9);

@@ -3,12 +3,15 @@ import React, { PropTypes, Component } from 'react';
 export default class Stories extends Component {
   render () {
     return (
-      <div>
+      
+      <div class="row data-story-set">
         {this.props.stories.map((story, i) =>
-          <span key={i}>
-            <h3>{story.title}</h3>
-            <p>{story.content}</p>
-          </span>
+            <div key={i} className="col-md-4 data-story-box">
+              <div className="col-md-12 data-story">
+                <h4 className="data-story-title">{story.title}</h4><hr/>
+                <p className="data-story-text">{story.content}</p>
+              </div>
+            </div>
         )}
       </div>
     );
