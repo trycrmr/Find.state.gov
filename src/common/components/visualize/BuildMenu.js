@@ -1,10 +1,14 @@
 import React, { PropTypes, Component } from 'react';
 import { Modal } from 'react-bootstrap';
 
+import Category from './Category';
+import Country from './Country';
+
 export default class BuildMenu extends Component {
-    
-    constructor(props) {
-        super(props);
+
+
+    componentWillMount() {
+        this.props.fetchSetupIfNeeded();
     }
 
     close() {
@@ -16,7 +20,6 @@ export default class BuildMenu extends Component {
         if(showModal) return <span />;
         return (
             
-
             <Modal show={true} onHide={this.props.modalToggle} >  
             <div className="modal-content">
               <div className="modal-header">
@@ -26,40 +29,22 @@ export default class BuildMenu extends Component {
                 <div className="row viz-column-set">
                     
                     <div className="col-md-4 viz-column-box">
-                      <div className="viz-column">
-                          <header className="viz-col-head"><h4>Choose Indicator(s)</h4><hr/></header>
-                          <dl className="category-list">
-                            <dt>Category</dt>
-                            <dd><span className="glyphicon glyphicon-chevron-right">&nbsp;</span>Indicator 1</dd>
-                            <dd><span className="glyphicon glyphicon-chevron-right">&nbsp;</span>Indicator 2</dd>
-                            <dd><span className="glyphicon glyphicon-chevron-right">&nbsp;</span>Indicator 3</dd>
-                            <dd><span className="glyphicon glyphicon-chevron-right">&nbsp;</span>Indicator 4</dd>
-                            <dt>Category</dt>
-                            <dt>Category</dt>
-                          </dl>
-                      </div>
+                        <div className="viz-column">
+                            <Category  setup={setup}  />
+                        </div>
                     </div>
 
                     <div className="col-md-4 viz-column-box">
-                      <div className="viz-column">
-                        <header className="viz-col-head"><h4>Choose Countries</h4><hr/></header>
-                        <input className="filter-country" placeholder="Quick Search"/>
-                        <ul className="country-list">
-                          <li><span className="glyphicon glyphicon-th-list">&nbsp;</span>Afghanastan</li>
-                          <li><span className="glyphicon glyphicon-th-list">&nbsp;</span>Iraq</li>
-                          <li><span className="glyphicon glyphicon-th-list">&nbsp;</span>Qatar</li>
-                          <li><span className="glyphicon glyphicon-th-list">&nbsp;</span>Turkey</li>
-                          <li><span className="glyphicon glyphicon-th-list">&nbsp;</span>Syria</li>
-                          <li><span className="glyphicon glyphicon-th-list">&nbsp;</span>Russia</li>
-                          <li><span className="glyphicon glyphicon-th-list">&nbsp;</span>United States</li>
-                        </ul>
-                      </div>
+                        <div className="viz-column">
+                            <Country setup={setup}  />
+                        </div>
                     </div>
 
                     <div className="col-md-4 viz-column-box">
                       <div className="viz-column">
                         <header className="viz-col-head"><h4>Choose Graph</h4><hr/></header>
                         <table className="chart-list">
+                        <tbody>
                           <tr>
                             <td><span onclick="loadViz('bar')" className="barcon chartcon"></span><br/>Bar</td>
                             <td><span onclick="loadViz('line')" className="linecon chartcon"></span><br/>Line</td>
@@ -75,6 +60,7 @@ export default class BuildMenu extends Component {
                           <tr>
                             <td className="soon"><span className="treecon chartcon"></span><br/>Tree (Coming Soon)</td>
                           </tr>
+                        </tbody>
                         </table>
                       </div>
                     </div>
