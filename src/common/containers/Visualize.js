@@ -23,20 +23,23 @@ function mapStateToProps(state) {
     dataLoaded,
     setup,
     setupSelected,
-    data
+    data,
+    showModal
   } = visualizeReducer || {
     setupLoaded: false,
     dataLoaded: false,
     setup: {},
     setupSelected: {},
-    data: {}
+    data: {},
+    showModal: false
   };
   return {
     setupLoaded,
     dataLoaded,
     setup,
     setupSelected,
-    data
+    data,
+    showModal
   };
 }
 

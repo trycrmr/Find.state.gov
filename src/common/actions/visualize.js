@@ -5,6 +5,7 @@ export const GET_SETUP = 'GET_SETUP';
 export const GET_SETUP_SUCCESS = 'GET_SETUP_SUCCESS';
 export const GET_DATA = 'GET_DATA';
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
+export const MODAL_TOGGLE = 'MODAL_TOGGLE';
 
 // Build our actions
 function requestSetup() {
@@ -35,6 +36,13 @@ function receiveData(json) {
   };
 }
 
+function toggleModal(curr) {
+  return {
+    type: MODAL_TOGGLE,
+    showModal: !curr
+  };
+}
+
 // Build action creaters that return a function instead of the
 // actions above (thanks to redux-thunk middleware):
 
@@ -48,8 +56,6 @@ function fetchSetup() {
       .then(response => response.json())
       .then(json => {
         var array = json;
-        console.log("============================================");
-        console.log(json);
         dispatch(receiveSetup(array))
       });
   };
@@ -101,5 +107,12 @@ export function fetchDataIfNeeded() {
       // not loaded, request from api
       return dispatch(fetchData());
     }
+  };
+}
+
+// No need to call the external API if data is already in memory:
+export function modalToggle(curr) {
+  return (dispatch, getState) => {
+    return dispatch(toggleModal(curr));
   };
 }

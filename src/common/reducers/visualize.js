@@ -1,6 +1,7 @@
 import { 
   GET_SETUP, GET_SETUP_SUCCESS,
-  GET_DATA, GET_DATA_SUCCESS
+  GET_DATA, GET_DATA_SUCCESS,
+  MODAL_TOGGLE
 } from '../actions/visualize';
 
 // Build our Reducer with a default state of an empty array:
@@ -9,7 +10,8 @@ const initialState = {
   dataLoaded: false,
   setup: {},
   setupSelected: {},
-  data: {}
+  data: {},
+  showModal: false
 };
 
 export default function visualizeReducer(state = initialState, action) {
@@ -39,6 +41,11 @@ export default function visualizeReducer(state = initialState, action) {
       dataLoaded: true,
       lastUpdated: Date.now(),
       data: action.data
+    };
+  case MODAL_TOGGLE:
+    return {
+      ...state,
+      showModal: action.showModal
     };
   default:
     return state;
