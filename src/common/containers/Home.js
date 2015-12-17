@@ -12,23 +12,23 @@ Home.need = [
 ]
 
 function mapStateToProps(state) {
-  // deconstruct from state
-  let { storiesReducer } = state;
+    
+    let { storiesReducer } = state;
 
-  storiesReducer = storiesReducer.present;
+    storiesReducer = storiesReducer.present;
 
-  // deconstruct from datastories
-  const {
-    loaded,
-    stories
-  } = storiesReducer || {
-    loaded: false,
-    stories: []
-  };
-  return {
-    loaded,
-    stories
-  };
+    // deconstruct from datastories
+    const {
+        loaded,
+        stories
+    } = storiesReducer || {
+        loaded: false,
+        stories: []
+    };
+        return {
+        loaded,
+        stories
+    };
 }
 
 function mapDispatchToProps(dispatch) {

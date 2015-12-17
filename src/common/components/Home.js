@@ -7,7 +7,6 @@ class Home extends Component {
     return (
       <div>
         <div className="home-main"></div>
-      
         <div className="head-container">
           <div className="container">
             <h1 className="data-story-head"> Find It. Visualize It. Share It.</h1>
@@ -17,10 +16,8 @@ class Home extends Component {
               </div>
           </div>
         </div>
-  			
         <DataStory {...this.props}/>
       </div>
-			
     );
   }
 }

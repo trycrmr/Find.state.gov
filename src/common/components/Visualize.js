@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 import BuildMenu from './visualize/BuildMenu';
 
 
@@ -9,13 +8,10 @@ class Visualize extends Component {
         super(props);
     }
 
-    // this.props will be the extracted datastory object
     componentWillMount() {
         this.props.fetchSetupIfNeeded();
-        //this.props.modalToggle();
     }
 
-   
     render() {
         return (
 
@@ -27,11 +23,8 @@ class Visualize extends Component {
                         <button onClick={this.props.modalToggle} type="button" className="btn btn-lg" >Build a Visualization</button>
                     </span>
                 </div>
-
-            <BuildMenu {...this.props} />
-
-            </div>
-            	
+                <BuildMenu {...this.props} />
+            </div>      	
         );
     }
 }

@@ -31,8 +31,33 @@ module.exports = function (router) {
 	 */
     router.get('/setup', function (req, res) {
     	var jres = {
-    		"setup": "This is the setup json object"
-    	}
+			"setup": {
+				"categories": [
+					{
+						"title": "Blah Blah",
+						"indicators": [
+							{"name": "one"}, {"name": "two"}, {"name": "three"}
+						]
+					}, {
+						"title": "Hey Man Get IT",
+						"indicators": [
+							{"name": "one"}, {"name": "two"}, {"name": "three"}
+						]
+					}, {
+						"title": "eDip WHAT",
+						"indicators": [
+							{"name": "one"}, {"name": "two"}, {"name": "three"}
+						]
+					}
+				],
+				"countries": [
+					{"name": "Iraq"},
+					{"name": "Afghan"},
+					{"name": "Saudi"},
+					{"name": "Turks"}
+				]
+			}
+		}
 
     	res.json(jres);
 	});      

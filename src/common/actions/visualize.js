@@ -55,8 +55,7 @@ function fetchSetup() {
     return fetch('http://localhost:3000/visualize/setup')
       .then(response => response.json())
       .then(json => {
-        var array = json;
-        dispatch(receiveSetup(array))
+        dispatch(receiveSetup(json))
       });
   };
 }
