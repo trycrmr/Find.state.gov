@@ -19,4 +19,4 @@ npm run dev
 
 ## Explanation
 
-We have a seperation of concerns here. The API (`/api/*`) and the UI (`/src/*`). Both are separate node services. The UI is react/redux and rendered on the server for Universal JavaScript.
+We have a seperation of concerns here. The API (`/api/*`) and the UI (`/src/*`). Both are separate node services. The api is Express and extended with Kraken. The UI is React/Redux and rendered on the server for Universal JavaScript.
