@@ -48,6 +48,8 @@ function fetchSetup() {
       .then(response => response.json())
       .then(json => {
         var array = json;
+        console.log("============================================");
+        console.log(json);
         dispatch(receiveSetup(array))
       });
   };

@@ -16,3 +16,7 @@ npm install
 ```bash
 npm run dev
 ```
+
+## Explanation
+
+We have a seperation of concerns here. The API (`/api/*`) and the UI (`/src/*`). Both are separate node services. The UI is react/redux and rendered on the server for Universal JavaScript.
