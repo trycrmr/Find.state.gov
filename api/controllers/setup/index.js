@@ -36,7 +36,7 @@ module.exports = function (router) {
    * @GET localhost/setup/indicatorbycategory
    */
   router.get('/indicatorbycategory', function (req, res) {
-        model.sequelize.query("SELECT public.\"Categories\".\"Category_Name\", public.\"Indicators\".\"Indicator_Name\" FROM public.\"Category_Junction\"" + 
+        model.sequelize.query("SELECT public.\"Categories\".\"Category_Name\", public.\"Categories\".\"Sub_Category_Name\", public.\"Indicators\".\"Indicator_Name\" FROM public.\"Category_Junction\"" + 
                               "JOIN public.\"Indicators\" ON public.\"Category_Junction\".\"Indicator_ID\" = public.\"Indicators\".\"Indicator_ID\"" +  
                               "JOIN public.\"Categories\" ON public.\"Category_Junction\".\"Category_ID\" = public.\"Categories\".\"Category_ID\""
         , { type: model.sequelize.QueryTypes.SELECT
