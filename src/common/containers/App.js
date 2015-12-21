@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import classNames from 'classnames';
-import * as LayoutActions from '../actions/layout';
 import Home from '../components/Home'
 import Header from '../components/layout/Header'
 
@@ -25,14 +24,5 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    layout : state.layout.present
-  };
-}
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(LayoutActions,dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

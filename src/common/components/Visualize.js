@@ -20,7 +20,7 @@ class Visualize extends Component {
                     <div className="loading"></div>
                     <span className="msg">
                         <h3>No data loaded</h3>
-                        <button onClick={this.props.modalToggle} type="button" className="btn btn-lg" >Build a Visualization</button>
+                        <button onClick={this.props.displayModal} type="button" className="btn btn-lg" >Build a Visualization</button>
                     </span>
                 </div>
                 <BuildMenu {...this.props} />

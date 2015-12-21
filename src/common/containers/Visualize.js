@@ -13,9 +13,9 @@ Visualize.need = [
 
 function mapStateToProps(state) {
   // deconstruct from state
-  let { visualizeReducer } = state;
+  let { visualize } = state;
 
-  visualizeReducer = visualizeReducer.present;
+  visualize = visualize.present;
 
   // deconstruct from visualize
   const {
@@ -25,7 +25,7 @@ function mapStateToProps(state) {
     setupSelected,
     data,
     showModal
-  } = visualizeReducer || {
+  } = visualize || {
     setupLoaded: false,
     dataLoaded: false,
     setup: {},

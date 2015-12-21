@@ -2,6 +2,10 @@ import React, { PropTypes, Component } from 'react';
 
 export default class Country extends Component {
 
+    selectOne(cty) {
+        this.props.selectCountry(cty.name);
+    }
+
     render () {   
         if(!this.props.setup.setup) return <span>Loading</span>;
         const {countries} = this.props.setup.setup
@@ -11,7 +15,7 @@ export default class Country extends Component {
                 <input className="filter-country" placeholder="Quick Search"/>
                 <ul className="country-list">
                     {countries.map((cty, i) =>                  
-                       <li key={i}><span className="glyphicon glyphicon-th-list">&nbsp;</span>{cty.name}</li>
+                       <li onClick={this.selectOne.bind(this, cty)} key={i}><span className="glyphicon glyphicon-th-list">&nbsp;</span>{cty.name}</li>
                     )} 
                 </ul>  
             </div>            

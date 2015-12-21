@@ -6,21 +6,18 @@ import Country from './Country';
 
 export default class BuildMenu extends Component {
 
-
     componentWillMount() {
         this.props.fetchSetupIfNeeded();
     }
 
-    close() {
-        this.props.modalToggle();
-    }
-
     render () {
         const { setup, showModal } = this.props;
-        if(showModal) return <span />;
+        if(showModal) {
+          return <span />;
+        }
         return (
             
-            <Modal show={true} onHide={this.props.modalToggle} >  
+            <Modal show={true} onHide={this.props.displayModal} >  
             <div className="modal-content">
               <div className="modal-header">
                 <h4 className="modal-title" >Visualization Options</h4>
@@ -30,13 +27,13 @@ export default class BuildMenu extends Component {
                     
                     <div className="col-md-4 viz-column-box">
                         <div className="viz-column">
-                            <Category  setup={setup}  />
+                            <Category  {...this.props}  />
                         </div>
                     </div>
 
                     <div className="col-md-4 viz-column-box">
                         <div className="viz-column">
-                            <Country setup={setup}  />
+                            <Country {...this.props}  />
                         </div>
                     </div>
 

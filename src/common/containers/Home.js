@@ -13,15 +13,15 @@ Home.need = [
 
 function mapStateToProps(state) {
     
-    let { storiesReducer } = state;
+    let { datastories } = state;
 
-    storiesReducer = storiesReducer.present;
+    datastories = datastories.present;
 
     // deconstruct from datastories
     const {
         loaded,
         stories
-    } = storiesReducer || {
+    } = datastories || {
         loaded: false,
         stories: []
     };

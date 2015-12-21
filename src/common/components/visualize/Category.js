@@ -2,11 +2,15 @@ import React, { PropTypes, Component } from 'react';
 
 class Indicator extends Component {
 
+    selectOne(ind) {
+        this.props.selectIndicator(ind.name);
+    }
+
     render () {
         return (
             <div>
                 {this.props.indicators.map((ind, i) =>   
-                   <dd key={i}> <span className="glyphicon glyphicon-chevron-right">&nbsp;</span>{ind.name}</dd>
+                   <dd onClick={this.selectOne.bind(this, ind)} key={i}> <span className="glyphicon glyphicon-chevron-right">&nbsp;</span>{ind.name}</dd>
                 )} 
             </div>
               
@@ -26,7 +30,7 @@ export default class Category extends Component {
                     {categories.map((cat, i) =>
                         <span>
                             <dt key={i}>{cat.title}</dt>
-                            <Indicator indicators={cat.indicators} />
+                            <Indicator {...this.props} indicators={cat.indicators} />
                         </span>
                              
                     )}
