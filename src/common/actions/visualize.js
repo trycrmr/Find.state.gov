@@ -26,7 +26,7 @@ function addSelect(value, setType) {
     return {
         type: SELECT_SETUP,
         setType: setType,
-        value: value
+        name: value
     };
 }
 
@@ -47,8 +47,8 @@ export function displayModal() {
 
 export function selectIndicator(indicator) {
   return (dispatch, getState) => {
-    var list = getState().visualize.present.setupSelected;
-    var pos = list.map(function(e) { return e.value }).indexOf(indicator)
+    var list = getState().visualize.present.setupSelected.indicators;
+    var pos = list.map(function(e) { return e.name }).indexOf(indicator)
     console.log(pos)
     if ( pos != -1 ) {
         // remove from state
@@ -62,8 +62,8 @@ export function selectIndicator(indicator) {
 
 export function selectCountry(country) {
   return (dispatch, getState) => {
-    var list = getState().visualize.present.setupSelected;
-    var pos = list.map(function(e) { return e.value }).indexOf(country)
+    var list = getState().visualize.present.setupSelected.countries;
+    var pos = list.map(function(e) { return e.name }).indexOf(country)
     console.log(pos)
     if ( pos != -1 ) {
         // remove from state

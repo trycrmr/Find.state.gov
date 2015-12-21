@@ -10,13 +10,16 @@ const initialState = {
   dataLoaded: false, // got data from server
   categories: [],  // the loading of the menu
   countries: [],
-  setupSelected: [], // user setup choices 
-  currentSetup: {}, // setup used to draw current viz
+  setupSelected: {
+    indicators: [],
+    countries: [],
+    chart: ''
+  }, // user setup choices 
   data: {}, // data used to draw current viz
   showModal: false // used for toggling the vizualization modal
 };
 
-export default function visualizeReducer(state = initialState, action) {
+export default function Visualize(state = initialState, action) {
   switch (action.type) {
   case GET_SETUP:
     return {
@@ -34,21 +37,26 @@ export default function visualizeReducer(state = initialState, action) {
     };
   case SELECT_SETUP:
     var newSelect = state.setupSelected
-    newSelect.push({
-        setType: action.setType,
-        value: action.value
-    })
+    if ( action.setType === 'indicators') {
+      newSelect.indicators.push({
+          name: action.name
+      })
+    }
+    if ( action.setType === 'countries') {
+      newSelect.countries.push({
+          name: action.name
+      })
+    }
+    if ( action.setType === 'chart') {
+      newSelect.chart = action.name
+    }
     return {
       ...state,
       setupSelected: newSelect
     };
   case DESELECT_SETUP:
-    newSelect = state.setupSelected
-    var pos = newSelect.map(function(e) { return e.value }).indexOf(action.value)
-    newSelect.splice(pos, 1)
     return {
-      ...state,
-      setupSelected: newSelect
+      state
     };
   case GET_DATA:
     return {

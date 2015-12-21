@@ -7,10 +7,17 @@ class Indicator extends Component {
     }
 
     render () {
+        const {indicators} = this.props
         return (
             <div>
-                {this.props.indicators.map((ind, i) =>   
-                   <dd onClick={this.selectOne.bind(this, ind)} key={i}> <span className="glyphicon glyphicon-chevron-right">&nbsp;</span>{ind.name}</dd>
+                {indicators.map((ind, i) =>   
+                   <dd 
+                    onClick={this.selectOne.bind(this, ind)} 
+                    key={i}
+                    style={{
+                        backgroundColor: ind.selected ? 'blue' : 'none'
+                    }}> 
+                    <span className="glyphicon glyphicon-chevron-right">&nbsp;</span>{ind.name}</dd>
                 )} 
             </div>
               
