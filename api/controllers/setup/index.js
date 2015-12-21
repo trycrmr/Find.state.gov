@@ -26,7 +26,7 @@ module.exports = function (router) {
 	 */
 	router.get('/indicator', function (req, res) {
       	model.Indicator.findAll({
-      		attributes:['Indicator_Name']
+      		attributes:['Indicator_ID','Indicator_Name','Indicator_URL','Indicator_Data_URL','Direct_Indicator_Source','Original_Indicator_Source','Update_Cycle','Units','updatedAt']
       	}).then(function(data) {
       		res.send(data);
       	});

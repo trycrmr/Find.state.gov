@@ -1,5 +1,60 @@
 $(document).ready(function() {
 	
+
+	var populateCombo = function() {
+	  var $indicators = $('#indicators');
+	  
+	 
+	    //request the JSON data and parse into the select element
+	    $.getJSON('http://localhost:3000/setup/indicator', function(data){
+	 
+	      //clear the current content of the select
+	      $indicators.html('');
+	 
+	      //iterate over the data and append a select option
+	      $.each(data, function(key, val){ 
+	        $indicators.append('<option id="' + val.Indicator_ID + '">' + val.Indicator_Name + '</option>');
+	      })
+	    //console.log(data);
+	    });
+	};
+
+	populateCombo();
+
+	$( "#indicators" ).change(function() {
+	  //alert( "Handler for .change() called." );
+	  //alert($( "#indicators" ).val());
+	  $.getJSON('http://localhost:3000/setup/indicatorbycategory', function(data){
+
+	  	$.each(data, function(key, val){ 
+	  		if($( "#indicators" ).val()==val.Indicator_Name){
+		        $("#category").append('<option id="' + val.Category_Name + '">' + val.Category_Name + '</option>');
+		        $("#subcategory").append('<option id="' + val.Sub_Category_Name + '">' + val.Sub_Category_Name + '</option>');
+	    	}
+	    	//console.log(val.Indicator_Data_URL);
+	     })
+
+	  });
+
+	  $.getJSON('http://localhost:3000/setup/indicator', function(data){
+
+	  	$.each(data, function(key, val){ 
+	  		if($( "#indicators" ).val()==val.Indicator_Name){
+		        $("#url").val(val.Indicator_URL);
+		    	$("#data_url").val(val.Indicator_Data_URL);
+		    	$("#dsource").val(val.Direct_Indicator_Source);
+		    	$("#osource").val(val.Original_Indicator_Source);
+		    	$("#units").val(val.Units);
+		    	$("#frequency").val(val.Update_Cycle);
+		    	$("#last").val(val.updatedAt);
+	    	}
+	    	//console.log(val.Indicator_Data_URL);
+	     })
+
+	  });
+
+	});
+
 	/* Utilities */
 	/*
 	If a string matches a string in an array of 
