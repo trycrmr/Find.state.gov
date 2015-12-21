@@ -1,5 +1,25 @@
 $(document).ready(function() {
 	
+	$('#modal-find-existing').on('hidden.bs.modal', function(){
+    	//$(this).find('modal-find-existing')[0].reset();
+    	//alert('hi');
+    	//$('#modal-find-existing').formValidation('resetForm', true);
+    	$('#modal-find-existing option[value=""]').attr('selected','true');
+    	$('select[multiple]').empty();
+    	//$("#url").val('');
+    	$(':text').val('');
+    	$("#url").val('');
+    	$("#data_url").val('');
+		
+		//$(':url').val('');
+		$('select[multiple]').attr('disabled',true);
+		$(':text').attr('disabled',true);
+		$("#url").attr('disabled',true);
+		$("#data_url").attr('disabled',true);
+		$("#last").attr('disabled',true);
+    	//$('#modal-find-existing').find('input:text, input:password, select, textarea').reset();
+	});
+
 
 	var populateCombo = function() {
 	  var $indicators = $('#indicators');
@@ -9,7 +29,7 @@ $(document).ready(function() {
 	    $.getJSON('http://localhost:3000/setup/indicator', function(data){
 	 
 	      //clear the current content of the select
-	      $indicators.html('');
+	      //$indicators.html('');
 	 
 	      //iterate over the data and append a select option
 	      $.each(data, function(key, val){ 
@@ -54,6 +74,8 @@ $(document).ready(function() {
 	  });
 
 	});
+
+	
 
 	/* Utilities */
 	/*
