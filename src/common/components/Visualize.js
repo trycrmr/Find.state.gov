@@ -23,7 +23,7 @@ class Visualize extends Component {
                         <button onClick={this.props.displayModal} type="button" className="btn btn-lg" >Build a Visualization</button>
                     </span>
                 </div>
-                <BuildMenu {...this.props} />
+                <BuildMenu showModal={this.props.showModal} {...this.props} />
             </div>      	
         );
     }

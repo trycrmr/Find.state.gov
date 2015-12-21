@@ -30,11 +30,12 @@ function addSelect(value, setType) {
     };
 }
 
-function removeSelect(value, setType) {
+function removeSelect(value, setType, index) {
     return {
         type: DESELECT_SETUP,
         setType: setType,
-        value: value
+        value: value,
+        index: index
     };
 }
 
@@ -46,33 +47,25 @@ export function displayModal() {
 }
 
 export function selectIndicator(indicator) {
-  return (dispatch, getState) => {
-    var list = getState().visualize.present.setupSelected.indicators;
-    var pos = list.map(function(e) { return e.name }).indexOf(indicator)
-    console.log(pos)
-    if ( pos != -1 ) {
-        // remove from state
-        return dispatch(removeSelect(indicator, "indicators"));
-    } else {
-        // add to state
-        return dispatch(addSelect(indicator, "indicators"));
+    return (dispatch, getState) => {
+        var index = getState().visualize.present.selectedIndicators.indexOf(indicator)
+        if ( index === -1 ) {
+            return dispatch(addSelect(indicator, "indicators"));
+        } else {
+            return dispatch(removeSelect(indicator, "indicators", index));
+        }
     }
-  }
 }
 
 export function selectCountry(country) {
-  return (dispatch, getState) => {
-    var list = getState().visualize.present.setupSelected.countries;
-    var pos = list.map(function(e) { return e.name }).indexOf(country)
-    console.log(pos)
-    if ( pos != -1 ) {
-        // remove from state
-        return dispatch(removeSelect(country, "countries"));
-    } else {
-        // add to state
-        return dispatch(addSelect(country, "countries"));
+    return (dispatch, getState) => {
+        var index = getState().visualize.present.selectedCountries.indexOf(country)
+        if ( index === -1 ) {
+            return dispatch(addSelect(country, "countries"));
+        } else {
+            return dispatch(removeSelect(country, "countries", index));
+        }
     }
-  }
 }
 
 export function selectChart(chart) {

@@ -8,6 +8,7 @@ class Indicator extends Component {
 
     render () {
         const {indicators} = this.props
+        
         return (
             <div>
                 {indicators.map((ind, i) =>   
@@ -15,7 +16,7 @@ class Indicator extends Component {
                     onClick={this.selectOne.bind(this, ind)} 
                     key={i}
                     style={{
-                        backgroundColor: ind.selected ? 'blue' : 'none'
+                        backgroundColor: this.props.selectedIndicators.indexOf(ind.name) != -1 ? 'blue' : 'white'
                     }}> 
                     <span className="glyphicon glyphicon-chevron-right">&nbsp;</span>{ind.name}</dd>
                 )} 

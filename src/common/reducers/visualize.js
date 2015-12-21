@@ -10,11 +10,8 @@ const initialState = {
   dataLoaded: false, // got data from server
   categories: [],  // the loading of the menu
   countries: [],
-  setupSelected: {
-    indicators: [],
-    countries: [],
-    chart: ''
-  }, // user setup choices 
+  selectedIndicators: [],
+  selectedCountries: [], // user setup choices 
   data: {}, // data used to draw current viz
   showModal: false // used for toggling the vizualization modal
 };
@@ -23,45 +20,60 @@ export default function Visualize(state = initialState, action) {
   switch (action.type) {
   case GET_SETUP:
     return {
-      ...state,
-      setupLoading: true
+        ...state,
+        setupLoading: true
     };
   case GET_SETUP_SUCCESS:
     return {
-      ...state,
-      setupLoading: false,
-      setupLoaded: true,
-      lastUpdated: Date.now(),
-      countries: action.setup.countries,
-      categories: action.setup.categories
+        ...state,
+        setupLoading: false,
+        setupLoaded: true,
+        lastUpdated: Date.now(),
+        countries: action.setup.countries,
+        categories: action.setup.categories
     };
   case SELECT_SETUP:
-    var newSelect = state.setupSelected
     if ( action.setType === 'indicators') {
-      newSelect.indicators.push({
-          name: action.name
-      })
+        return {
+            ...state,
+            selectedIndicators: state.selectedIndicators.concat( action.name )
+        };
     }
     if ( action.setType === 'countries') {
-      newSelect.countries.push({
-          name: action.name
-      })
+        return {
+            ...state,
+            selectedCountries: state.selectedCountries.concat( action.name )
+        };
     }
     if ( action.setType === 'chart') {
-      newSelect.chart = action.name
+        return {
+            ...state,
+            selectedChart: action.name
+        };
     }
-    return {
-      ...state,
-      setupSelected: newSelect
-    };
+    return state;
   case DESELECT_SETUP:
-    return {
-      state
-    };
+    if ( action.setType === 'indicators') {
+        var inds = state.selectedIndicators.slice()
+        inds.splice(action.index, 1)
+        return {
+            ...state,
+            selectedIndicators: inds
+        };
+    }
+    if ( action.setType === 'countries') {
+        var ctys = state.selectedCountries.slice()
+        ctys.splice(action.index, 1)
+        return {
+            ...state,
+            selectedCountries: ctys
+        };
+    }
+    return state;
   case GET_DATA:
     return {
-      ...state,
-      dataLoading: true
+        ...state,
+        dataLoading: true
     };
   case GET_DATA_SUCCESS:
     return {

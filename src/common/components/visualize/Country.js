@@ -15,7 +15,13 @@ export default class Country extends Component {
                 <input className="filter-country" placeholder="Quick Search"/>
                 <ul className="country-list">
                     {countries.map((cty, i) =>                  
-                       <li onClick={this.selectOne.bind(this, cty)} key={i}><span className="glyphicon glyphicon-th-list">&nbsp;</span>{cty.name}</li>
+                        <li 
+                        style={{
+                        backgroundColor: this.props.selectedCountries.indexOf(cty.name) != -1 ? 'blue' : 'white'
+                        }}
+                        onClick={this.selectOne.bind(this, cty)} 
+                        key={i}><span 
+                        className="glyphicon glyphicon-th-list">&nbsp;</span>{cty.name}</li>
                     )} 
                 </ul>  
             </div>            

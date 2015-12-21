@@ -33,19 +33,19 @@ module.exports = function (router) {
     	var jres = {
 				"categories": [
 					{
-						"title": "Blah Blah",
+						"title": "Economic Growth",
 						"indicators": [
-							{"name": "one"}, {"name": "two"}, {"name": "three"}
+							{"name": "Example 1"}, {"name": "Example 2"}, {"name": "Example 3"}
 						]
 					}, {
-						"title": "Hey Man Get IT",
+						"title": "IT Developers",
 						"indicators": [
-							{"name": "one"}, {"name": "two"}, {"name": "three"}
+							{"name": "First Example"}, {"name": "Second Example"}, {"name": "Third Example"}
 						]
 					}, {
-						"title": "eDip WHAT",
+						"title": "Office of eDiplomacy",
 						"indicators": [
-							{"name": "one"}, {"name": "two"}, {"name": "three"}
+							{"name": "Final one"}, {"name": "Final two"}, {"name": "Final three"}
 						]
 					}
 				],
