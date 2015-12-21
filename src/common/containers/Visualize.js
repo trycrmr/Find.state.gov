@@ -21,14 +21,16 @@ function mapStateToProps(state) {
   const {
     setupLoaded,
     dataLoaded,
-    setup,
+    categories,
+    countries,
     setupSelected,
     data,
     showModal
   } = visualize || {
     setupLoaded: false,
     dataLoaded: false,
-    setup: {},
+    categories: [],
+    countries: [],
     setupSelected: {},
     data: {},
     showModal: false
@@ -36,8 +38,9 @@ function mapStateToProps(state) {
   return {
     setupLoaded,
     dataLoaded,
-    setup,
     setupSelected,
+    categories,
+    countries,
     data,
     showModal
   };

@@ -6,10 +6,6 @@ import Country from './Country';
 
 export default class BuildMenu extends Component {
 
-    componentWillMount() {
-        this.props.fetchSetupIfNeeded();
-    }
-
     render () {
         const { setup, showModal } = this.props;
         if(showModal) {
@@ -72,6 +68,5 @@ export default class BuildMenu extends Component {
 }
 
 BuildMenu.propTypes = {
-  setup: PropTypes.object.isRequired,
   showModal: PropTypes.bool.isRequired
 };

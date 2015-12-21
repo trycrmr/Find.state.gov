@@ -7,8 +7,8 @@ export default class Country extends Component {
     }
 
     render () {   
-        if(!this.props.setup.setup) return <span>Loading</span>;
-        const {countries} = this.props.setup.setup
+        if(!this.props.countries) return <span>Loading</span>;
+        const {countries} = this.props
         return (
             <div>
                 <header className="viz-col-head"><h4>Choose Countries</h4><hr/></header>
@@ -24,5 +24,5 @@ export default class Country extends Component {
 }
 
 Country.propTypes = {
-    setup: PropTypes.object
+    countries: PropTypes.array
 };

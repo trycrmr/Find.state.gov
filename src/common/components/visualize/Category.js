@@ -21,15 +21,15 @@ class Indicator extends Component {
 export default class Category extends Component {
     
     render () {      
-        if(!this.props.setup.setup) return <span>Loading</span>;
-        const {categories} = this.props.setup.setup     
+        if(!this.props.categories) return <span>Loading</span>;
+        const {categories} = this.props   
         return (
             <div >
                 <header className="viz-col-head"><h4>Choose Indicator(s)</h4><hr/></header>
                 <dl className="category-list">
                     {categories.map((cat, i) =>
-                        <span>
-                            <dt key={i}>{cat.title}</dt>
+                        <span key={i}>
+                            <dt>{cat.title}</dt>
                             <Indicator {...this.props} indicators={cat.indicators} />
                         </span>
                              
@@ -45,5 +45,5 @@ Indicator.PropTypes = {
 }
 
 Category.propTypes = {
-    setup: PropTypes.object
+    categories: PropTypes.array
 };

@@ -8,7 +8,8 @@ import {
 const initialState = {
   setupLoaded: false,  // got setup from server
   dataLoaded: false, // got data from server
-  setup: {},  // the loading of the menu
+  categories: [],  // the loading of the menu
+  countries: [],
   setupSelected: [], // user setup choices 
   currentSetup: {}, // setup used to draw current viz
   data: {}, // data used to draw current viz
@@ -28,7 +29,8 @@ export default function visualizeReducer(state = initialState, action) {
       setupLoading: false,
       setupLoaded: true,
       lastUpdated: Date.now(),
-      setup: action.setup
+      countries: action.setup.countries,
+      categories: action.setup.categories
     };
   case SELECT_SETUP:
     var newSelect = state.setupSelected

@@ -31,7 +31,6 @@ module.exports = function (router) {
 	 */
     router.get('/setup', function (req, res) {
     	var jres = {
-			"setup": {
 				"categories": [
 					{
 						"title": "Blah Blah",
@@ -56,7 +55,6 @@ module.exports = function (router) {
 					{"name": "Saudi"},
 					{"name": "Turks"}
 				]
-			}
 		}
 
     	res.json(jres);

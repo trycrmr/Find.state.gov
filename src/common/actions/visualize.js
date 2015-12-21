@@ -121,8 +121,7 @@ function fetchSetup() {
 export function fetchSetupIfNeeded() {
   return (dispatch, getState) => {
     // No need to call the external API if data is already in memory:
-    console.log(getState());
-    if ( getState().setup && getState().setup.loaded ) {
+    if ( getState().visualize.present.setupLoaded ) {
       // Let the calling code know there's nothing to wait for.
       return Promise.resolve();
     } else {
