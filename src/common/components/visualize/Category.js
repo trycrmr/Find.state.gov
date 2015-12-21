@@ -15,9 +15,9 @@ class Indicator extends Component {
                    <dd 
                     onClick={this.selectOne.bind(this, ind)} 
                     key={i}
-                    style={{
-                        backgroundColor: this.props.selectedIndicators.indexOf(ind.name) != -1 ? 'blue' : 'white'
-                    }}> 
+                    className={
+                        this.props.selectedIndicators.indexOf(ind.name) != -1 ? 'menu-selected' : ''
+                    }> 
                     <span className="glyphicon glyphicon-chevron-right">&nbsp;</span>{ind.name}</dd>
                 )} 
             </div>

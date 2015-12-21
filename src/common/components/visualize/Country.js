@@ -16,9 +16,9 @@ export default class Country extends Component {
                 <ul className="country-list">
                     {countries.map((cty, i) =>                  
                         <li 
-                        style={{
-                        backgroundColor: this.props.selectedCountries.indexOf(cty.name) != -1 ? 'blue' : 'white'
-                        }}
+                        className={
+                            this.props.selectedCountries.indexOf(cty.name) != -1 ? 'menu-selected' : ''
+                        }
                         onClick={this.selectOne.bind(this, cty)} 
                         key={i}><span 
                         className="glyphicon glyphicon-th-list">&nbsp;</span>{cty.name}</li>
