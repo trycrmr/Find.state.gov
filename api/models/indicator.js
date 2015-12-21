@@ -62,6 +62,10 @@ module.exports = function(sequelize, DataTypes) {
                 through: 'Collection_Junction',
                 foreignKey: 'Indicator_ID'
             });
+            Indicator.belongsToMany(models.Data_View, {
+                through: 'Dataview_Junction',
+                foreignKey: 'Indicator_ID'
+            });
           }
         }   
   });
