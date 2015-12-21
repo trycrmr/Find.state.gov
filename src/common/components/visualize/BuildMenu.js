@@ -21,7 +21,7 @@ export default class BuildMenu extends Component {
                     <div className="modal-header">
                         <h4 className="modal-title" >Visualization Options</h4>
                     </div>
-                    <Selected {...this.props} />
+                    <span className='pulse-button'>build</span>
                     <div className="modal-body">
                         <div className="row viz-column-set">
                             <div className="col-md-4 viz-column-box">

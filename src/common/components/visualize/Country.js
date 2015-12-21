@@ -11,7 +11,7 @@ export default class Country extends Component {
         const {countries} = this.props
         return (
             <div>
-                <header className="viz-col-head"><h4>Choose Countries</h4><hr/></header>
+                <header className="viz-col-head"><h4>Choose Country</h4><hr/></header>
                 <input className="filter-country" placeholder="Quick Search"/>
                 <ul className="country-list">
                     {countries.map((cty, i) =>                  
