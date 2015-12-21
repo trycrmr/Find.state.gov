@@ -11,7 +11,8 @@ const initialState = {
   categories: [],  // the loading of the menu
   countries: [],
   selectedIndicators: [],
-  selectedCountries: [], // user setup choices 
+  selectedCountries: [],
+  selectedChart: '', // user setup choices 
   data: {}, // data used to draw current viz
   showModal: false // used for toggling the vizualization modal
 };
