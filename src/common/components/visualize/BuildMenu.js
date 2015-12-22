@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 
-import { Modal } from 'react-bootstrap';
+import { Modal, Alert } from 'react-bootstrap';
 import Selected from './Selected';
 import CategoryMenu from './Category';
 import CountryMenu from './Country';
@@ -22,12 +22,11 @@ export default class BuildMenu extends Component {
                         <h4 className="modal-title" >Visualization Options</h4>
                     </div>
                     <span 
-                    className={
-                        this.props.buildReady != true ? 'build-button nopulse' : 'build-button pulsing'
-                    }
-                    onClick={
-                        this.props.buildReady != true ? return : this.build()
-                    }> build</span>
+                        className={
+                            this.props.buildReady != true ? 'build-button nopulse' : 'build-button pulsing'
+                        }
+                        onClick={this.props.requestDataForBuild}> build
+                    </span>
                     <div className="modal-body">
                         <div className="row viz-column-set">
                             <div className="col-md-4 viz-column-box">

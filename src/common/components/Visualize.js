@@ -19,7 +19,7 @@ class Visualize extends Component {
                 <div id="content" className="viz-content">
                     <div className="loading"></div>
                     <span className="msg">
-                        <h3>No data loaded</h3>
+                        <h3>No build chosen</h3>
                         <button onClick={this.props.displayModal} type="button" className="btn btn-lg" >Build a Visualization</button>
                     </span>
                 </div>

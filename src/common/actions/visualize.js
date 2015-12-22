@@ -199,32 +199,54 @@ function receiveData(json) {
 }
 
 // action functionality
-function fetchData() {
+function fetchData(ind, cty, cht ) {
   // thunk middleware knows how to handle functions
   return function (dispatch) {
     dispatch(requestData());
 
     // Return a promise to wait for
-    return fetch('http://localhost:3000/visualize/data')
-      .then(response => response.json())
-      .then(json => {
-        var array = json;
-        dispatch(receiveData(array))
-      });
+    return fetch('http://localhost:3000/visualize/data', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                indicators: ind,
+                countries: cty,
+                chart: cht
+            })
+        })
+        .then(response => response.json())
+        .then(json => {
+            //var array = json;
+            console.log(json);
+            //dispatch(receiveData(array))
+        });
   };
+}
+
+export function requestDataForBuild() {
+    return (dispatch, getState) => {
+        // No need to call the external API if data is already in memory:
+        const { selectedIndicators,
+                selectedCountries,
+                selectedChart } = getState().visualize.present
+        return dispatch(fetchData(selectedIndicators, selectedCountries, selectedChart));
+    }
 }
 
 // action creators
 export function fetchDataIfNeeded() {
-  return (dispatch, getState) => {
-    // No need to call the external API if data is already in memory:
-    if ( getState().data && getState().data.loaded ) {
-      // Let the calling code know there's nothing to wait for.
-      return Promise.resolve();
-    } else {
-      return dispatch(fetchData());
+    return (dispatch, getState) => {
+        // No need to call the external API if data is already in memory:
+        if ( getState().data && getState().data.loaded ) {
+          // Let the calling code know there's nothing to wait for.
+          return Promise.resolve();
+        } else {
+          return dispatch(fetchData());
+        }
     }
-  };
 }
 
 

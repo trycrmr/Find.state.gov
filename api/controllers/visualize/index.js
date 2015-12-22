@@ -6,15 +6,33 @@
  */
 'use strict';
 
-var DataModel = require('../../lib/data');
+var DataModel = require('../../lib/Data_Test');
 
 module.exports = function (router) {
 
 	/**
 	 * @GET localhost/visualize/data
 	 */
-    router.get('/data', function (req, res) {
+    router.post('/data', function (req, res) {
+    	//console.log('GOT DATA REQUEST')
+    	//console.log(req.body);
+    	var ds = new DataModel(req, res, function(resdata){
+			if (! ds){
+				errorHandling.handle("There was an error", res);
+			}
+			else{
+				res.send(resdata);
+			}	
+			ds.closeConnection();		
+		});
+	});
 
+	/**
+	 * @GET localhost/visualize/data
+	 */
+    router.post('/', function (req, res) {
+    	//console.log('GOT DATA REQUEST')
+    	//console.log(req.body);
     	var ds = new DataModel(req, res, function(resdata){
 			if (! ds){
 				errorHandling.handle("There was an error", res);
@@ -35,25 +53,26 @@ module.exports = function (router) {
 					{
 						"title": "Economic Growth",
 						"indicators": [
-							{"name": "Example 1"}, {"name": "Example 2"}, {"name": "Example 3"}
+							{"name": "Access to electricity"}, {"name": "Access to Land"}, {"name": "Adults using mobile money in the past year"}
 						]
 					}, {
 						"title": "IT Developers",
 						"indicators": [
-							{"name": "First Example"}, {"name": "Second Example"}, {"name": "Third Example"}
+							{"name": "GDP Growth"}, {"name": "GDP per capita, PPP"}, {"name": "General government revenue"}
 						]
 					}, {
 						"title": "Office of eDiplomacy",
 						"indicators": [
-							{"name": "Final one"}, {"name": "Final two"}, {"name": "Final three"}
+							{"name": "Employees, agriculture, male"}, {"name": "Employees, industry, female"}, {"name": "Unemployment, total"}
 						]
 					}
 				],
 				"countries": [
 					{"name": "Iraq"},
-					{"name": "Afghan"},
-					{"name": "Saudi"},
-					{"name": "Turks"}
+					{"name": "Brazil"},
+					{"name": "France"},
+					{"name": "China"},
+					{"name": "Angola"}
 				]
 		}
 

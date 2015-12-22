@@ -57,7 +57,7 @@
      * because of how express parses route strings.
      */
     "csrf": {
-      "enabled": true,
+      "enabled": false,
       "priority": 111,
       "route": "/((?!ingest))*",
       "module": {
