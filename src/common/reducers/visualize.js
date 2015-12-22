@@ -1,7 +1,8 @@
 import { 
   GET_SETUP, GET_SETUP_SUCCESS, SELECT_SETUP, DESELECT_SETUP,
   GET_DATA, GET_DATA_SUCCESS,
-  MODAL_TOGGLE
+  MODAL_TOGGLE,
+  ENABLE_BUILD
 } from '../actions/visualize';
 
 // Build our Reducer with a default state of an empty array:
@@ -14,7 +15,8 @@ const initialState = {
   selectedCountries: [],
   selectedChart: '', // user setup choices 
   data: {}, // data used to draw current viz
-  showModal: false // used for toggling the vizualization modal
+  showModal: false, // used for toggling the vizualization modal
+  buildReady: false
 };
 
 export default function Visualize(state = initialState, action) {
@@ -35,6 +37,7 @@ export default function Visualize(state = initialState, action) {
     };
   case SELECT_SETUP:
     if ( action.setType === 'indicators') {
+
         return {
             ...state,
             selectedIndicators: state.selectedIndicators.concat( action.name )
@@ -88,6 +91,11 @@ export default function Visualize(state = initialState, action) {
     return {
       ...state,
       showModal: action.showModal
+    };
+  case ENABLE_BUILD:
+    return {
+      ...state,
+      buildReady: action.value
     };
   default:
     return state;

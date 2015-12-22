@@ -87,7 +87,7 @@
 }
 .menu-selected {
   background-color: #dce4ef;
-  border: 3px dotted #323a45;
+  border: 1px dotted #323a45;
 }
 .category-list dt {
   padding-left: 5px;
@@ -251,7 +251,7 @@ color: #981b1e;
   }
   50% {
     -moz-transform: scale(1);
-    box-shadow: 0 0 0 50px rgba(90, 153, 212, 0);
+    box-shadow: 0 0 0 30px rgba(90, 153, 212, 0);
   }
   100% { 
     -moz-transform: scale(.9);

@@ -27,7 +27,8 @@ function mapStateToProps(state) {
     selectedCountries,
     selectedChart,
     data,
-    showModal
+    showModal,
+    buildReady
   } = visualize || {
     setupLoaded: false,
     dataLoaded: false,
@@ -37,7 +38,8 @@ function mapStateToProps(state) {
     selectedCountries: [],
     selectedChart: '',
     data: {},
-    showModal: false
+    showModal: false,
+    buildReady: false
   };
   return {
     setupLoaded,
@@ -48,7 +50,8 @@ function mapStateToProps(state) {
     categories,
     countries,
     data,
-    showModal
+    showModal,
+    buildReady
   };
 }
 
