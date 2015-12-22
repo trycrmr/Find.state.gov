@@ -33,7 +33,7 @@ export default class Category extends Component {
         const {categories} = this.props   
         return (
             <div >
-                <header className="viz-col-head"><h4>Choose Indicator(s)</h4><hr/></header>
+                <header className="viz-col-head"><h4>Choose Indicators</h4><hr/></header>
                 <dl className="category-list">
                     {categories.map((cat, i) =>
                         <span key={i}>

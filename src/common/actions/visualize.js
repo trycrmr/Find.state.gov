@@ -8,6 +8,7 @@ export const DESELECT_SETUP = 'DESELECT_SETUP';
 export const GET_DATA = 'GET_DATA';
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
 export const MODAL_TOGGLE = 'MODAL_TOGGLE';
+export const ENABLE_BUILD = 'ENABLE_BUILD';
 
 
 /*************************
@@ -39,6 +40,56 @@ function removeSelect(value, setType, index) {
     };
 }
 
+function buildGate(pass) {
+  return {
+    type: ENABLE_BUILD,
+    value: pass
+  }
+}
+
+let build_rules = {
+  charts: {
+    bar: {
+      min_indicators: 1,
+      min_countries: 1,
+      max_indicators: 1,
+      max_countries: 100
+    },
+    line: {
+      min_indicators: 1,
+      min_countries: 1,
+      max_indicators: 4,
+      max_countries: 100
+    }
+  }
+}
+
+function checkBuildReady (state) {
+    let { 
+    selectedIndicators, 
+    selectedCountries, 
+    selectedChart
+    } = state.visualize.present;
+
+    // basic reqs
+    if ( selectedChart === '' || !selectedChart )
+        return false
+    if ( selectedIndicators === [] || !selectedIndicators )
+        return false
+    if ( selectedCountries === [] || !selectedCountries )
+        return false
+    // chart specifics
+    if (selectedIndicators.length < build_rules.charts[selectedChart].min_indicators) 
+        return false
+    if (selectedIndicators.length > build_rules.charts[selectedChart].max_indicators)
+        return false
+    if (selectedCountries.length < build_rules.charts[selectedChart].min_countries)
+        return false
+    if (selectedCountries.length > build_rules.charts[selectedChart].max_countries)
+        return false
+    return true
+}
+
 // action creators
 export function displayModal() {
   return (dispatch, getState) => {
@@ -50,10 +101,12 @@ export function selectIndicator(indicator) {
     return (dispatch, getState) => {
         var index = getState().visualize.present.selectedIndicators.indexOf(indicator)
         if ( index === -1 ) {
-            return dispatch(addSelect(indicator, "indicators"));
+            dispatch(addSelect(indicator, "indicators"));
         } else {
-            return dispatch(removeSelect(indicator, "indicators", index));
+            dispatch(removeSelect(indicator, "indicators", index));
         }
+
+        dispatch(buildGate(checkBuildReady(getState())))
     }
 }
 
@@ -61,10 +114,12 @@ export function selectCountry(country) {
     return (dispatch, getState) => {
         var index = getState().visualize.present.selectedCountries.indexOf(country)
         if ( index === -1 ) {
-            return dispatch(addSelect(country, "countries"));
+            dispatch(addSelect(country, "countries"));
         } else {
-            return dispatch(removeSelect(country, "countries", index));
+            dispatch(removeSelect(country, "countries", index));
         }
+
+        dispatch(buildGate(checkBuildReady(getState())))
     }
 }
 
@@ -72,7 +127,8 @@ export function selectChart(chart) {
     return (dispatch, getState) => {
         // there can be only one chart
         // in the reducer make sure you just replace it
-        return dispatch(addSelect(chart, "chart"));
+        dispatch(addSelect(chart, "chart"));
+        dispatch(buildGate(checkBuildReady(getState())))
     }
 }
 
