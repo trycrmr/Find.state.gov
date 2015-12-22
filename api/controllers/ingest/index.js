@@ -50,5 +50,20 @@ module.exports = function (router) {
         console.log(thisPostsFormData);
     
     });
+
+    /**
+     * @POST localhost/ingest
+     */
+    router.post('/update', function (req, res) {
+        
+        // TODO handle form data
+        // parse req, validate, connect to DB, run sql statements
+
+        var thisPostsFormData = req.body; 
+        res.send('<a href="/">back</a><p><pre>' + JSON.stringify(thisPostsFormData) + '</pre></p>');
+        console.log(req.body);
+        console.log(thisPostsFormData);
+    
+    });
         
 };
