@@ -24,6 +24,9 @@ export default class BuildMenu extends Component {
                     <span 
                     className={
                         this.props.buildReady != true ? 'build-button nopulse' : 'build-button pulsing'
+                    }
+                    onClick={
+                        this.props.buildReady != true ? return : this.build()
                     }> build</span>
                     <div className="modal-body">
                         <div className="row viz-column-set">
