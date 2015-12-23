@@ -193,8 +193,7 @@ function requestData() {
 function receiveData(json) {
   return {
     type: GET_DATA_SUCCESS,
-    data: json,
-    receivedAt: Date.now()
+    data: json
   };
 }
 
@@ -219,9 +218,7 @@ function fetchData(ind, cty, cht ) {
         })
         .then(response => response.json())
         .then(json => {
-            //var array = json;
-            console.log(json);
-            //dispatch(receiveData(array))
+            dispatch(receiveData(json))
         });
   };
 }
