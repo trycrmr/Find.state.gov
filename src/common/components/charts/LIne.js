@@ -27,6 +27,16 @@ export default class LineChart extends Component {
               {x: new Date(2005, 1, 1), y: 105},
               {x: new Date(2011, 1, 1), y: 200},
               {x: new Date(2015, 1, 1), y: 460}
+            ],
+            [
+              {x: new Date(1982, 1, 1), y: 300},
+              {x: new Date(1987, 1, 1), y: 421},
+              {x: new Date(1993, 1, 1), y: 345},
+              {x: new Date(1997, 1, 1), y: 300},
+              {x: new Date(2001, 1, 1), y: 109},
+              {x: new Date(2005, 1, 1), y: 532},
+              {x: new Date(2011, 1, 1), y: 401},
+              {x: new Date(2015, 1, 1), y: 389}
             ]
         ]
         const colors = [
