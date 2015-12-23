@@ -100,19 +100,18 @@
   </div>-->
 
   <!--The modal with the form on it-->
-  <div class="modal fade" id="modal-find-new">
+  <!--<div class="modal fade" id="modal-find-new">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <!--Close button in top right-->
+          
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <!--Header text-->
+          
           <h3>New Indicator</h3>
         </div>
 
         <div class="modal-body">
-          <!--Form-->
-          <!--<form method="post" action="/new-indicator-data">-->
+          
           <form method="post" action="/ingest">
             <div class="form-group">
               <p>new</p>
@@ -165,10 +164,63 @@
               <label for="file">file</label>
               <input type="file" name="file" class="form-control" placeholder="file">
             </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          
+          <a href="#" class="btn" type="close" data-dismiss="modal">Close</a>
+        </div>
+
+      </div>
+    </div>
+  </div>  -->
+
+  <div class="modal fade" id="modal-find-new">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!--Close button in top right-->
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <!--Header text-->
+          <h3>New Indicator</h3>
+        </div>
+
+        <div class="modal-body">
+          <!--Form-->
+          <form method="post" action="/ingest/insert">
+            <div class="form-group">
+              <label for="indicators">Indicator Name</label>              
+              <input type="text" name="indicators" id="indicators" class="form-control" placeholder="text">
+              <label for="category">Category</label>              
+              <select name="category" id="category" multiple class="form-control">
+              </select>
+              <label for="subcategory">Subcategory</label>              
+              <select name="subcategory" id="subcategory" multiple class="form-control">
+              </select>
+              <label for="url">Indicator URL</label>
+              <input type="url" name="url" id="url" class="form-control" placeholder="url">
+              <label for="data_url">Indicator Data URL</label>
+              <input type="url" name="data_url" id="data_url" class="form-control" placeholder="url">
+              <label for="dsource">Direct Indicator Source</label>
+              <input type="text" name="dsource" id="dsource" class="form-control" placeholder="text">
+              <label for="osource">Original Indicator Source</label>
+              <input type="text" name="osource" id="osource" class="form-control" placeholder="text">
+              <label for="units">Units</label>
+              <input type="text" name="units" id="units" class="form-control" placeholder="text">
+              <label for="frequency">Update Frequency</label>
+              <input type="text" name="frequency" id="frequency" class="form-control" placeholder="text">
+              <label for="last">Last Update</label>
+              <input type="date" name="last" id="last" class="form-control" placeholder="date">
+              <label for="data_file">Upload Data</label>
+              <input type="file" id="data_file" name="data_file" class="form-control" placeholder="file">                                    
+            </div>
             <!--Submit button-->
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
+
         <div class="modal-footer">
           <!--Another close button in the footer-->
           <a href="#" class="btn" type="close" data-dismiss="modal">Close</a>
@@ -176,7 +228,9 @@
 
       </div>
     </div>
-  </div>  <!--The modal with the form on it-->
+  </div> 
+
+  <!--The modal with the form on it-->
   <div class="modal fade" id="modal-find-existing">
     <div class="modal-dialog">
       <div class="modal-content">

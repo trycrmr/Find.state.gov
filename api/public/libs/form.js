@@ -11,6 +11,7 @@ $(document).ready(function() {
     	$("#url").val('');
     	$("#data_url").val('');
 		
+		
 		//$(':url').val('');
 		$('select[multiple]').attr('disabled',true);
 		$(':text').attr('disabled',true);
@@ -30,6 +31,7 @@ $(document).ready(function() {
 	 
 	      //clear the current content of the select
 	      //$indicators.html('');
+	      //data.sort(sort_by('Indicator_Name', true, function(a){return a.toUpperCase()}));
 	 
 	      //iterate over the data and append a select option
 	      $.each(data, function(key, val){ 
