@@ -13,12 +13,13 @@ class Indicator extends Component {
             <div>
                 {indicators.map((ind, i) =>   
                    <dd 
-                    onClick={this.selectOne.bind(this, ind)} 
-                    key={i}
-                    className={
-                        this.props.selectedIndicators.indexOf(ind.name) != -1 ? 'menu-selected' : ''
-                    }> 
-                    <span className="glyphicon glyphicon-chevron-right">&nbsp;</span>{ind.name}</dd>
+                        onClick={this.selectOne.bind(this, ind)} 
+                        key={i}
+                        className={
+                            this.props.selectedIndicators.indexOf(ind.name) != -1 ? 'menu-selected' : ''
+                        }> <p>
+                        <span className="glyphicon glyphicon-chevron-right">&nbsp;</span>{ind.name}</p>
+                    </dd>
                 )} 
             </div>
               
@@ -36,10 +37,10 @@ export default class Category extends Component {
                 <header className="viz-col-head"><h4>Choose Indicators</h4><hr/></header>
                 <dl className="category-list">
                     {categories.map((cat, i) =>
-                        <span key={i}>
+                        <div key={i}>
                             <dt>{cat.title}</dt>
                             <Indicator {...this.props} indicators={cat.indicators} />
-                        </span>
+                        </div>
                              
                     )}
                 </dl>

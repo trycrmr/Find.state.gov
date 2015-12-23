@@ -72,126 +72,70 @@ var Data = function(request, response, rescallback) {
      *
      */
     this.parseParams = function(request, _callback) {
-        
-        var indicators_arg = request.query['indicators'];
-        
-        if (! indicators_arg) {
+
+        self.indicators = request.body.indicators
+
+        if ( !self.indicators || self.indicators === [] ) {
             errorHandling.handle("No data to fetch, no indicators argument", self.response);
             console.log("No data to fetch, no indicators argument");
             return null;
         }
-
-        self.indicators = indicators_arg.split("|");
-
+        
         self.indicators_tables = {}
-        _.each(self.indicators, function(elem, index) {
+        
+        var dbArray = []
+
+        self.indicators.map(function(i) {
+            dbArray.push(i.split(' ').join('_').toLowerCase())
+        })
+
+
+        _.each(dbArray, function(elem, index) {
             self.indicators_tables[elem] = elem + "__denorm"
         });
 
-        if (self.indicators.length > 5) {
+        if ( self.indicators.length > 5 ) {
             console.log("Can only join up to 5 indicators");
             return null;
         }   
 
-        var dateparam = request.query['daterange'];
-       
-        if (dateparam) {
-            var datesplit = dateparam.split("-")
-            if (datesplit.length == 1){
-                self.daterange['start'] = parseInt(datesplit[0]);
-            } else if( datesplit.length == 2) {
-                self.daterange['start'] = parseInt(datesplit[0]);
-                if (self.daterange['start']) {
-                    self.daterange['end'] = parseInt(datesplit[1])
-                }
+        //TODO MAKE DYNAMIC
+        self.daterange = { 
+            start: 1992, 
+            end: 2010 
+        }
+
+        //TODO MAKE DYNAMIC
+        self.format = 'json'
+
+        var countries = []
+        request.body.countries.map(function(c){
+           countries.push(c.toLowerCase())
+        });
+        
+        //TODO MAKE DYNAMIC
+        self.cut = {
+            geometry__country_level0: {
+                name: countries
             }
         }
 
-        var tempformat = request.query['format'];
-        
-        if (tempformat) {
-            if (FORMATOPTS[tempformat.toLowerCase()]) {
-                self.format = tempformat.toLowerCase()
-            } else {
-                self.format = 'json'
-            }
+        //TODO MAKE DYNAMIC
+        self.drilldown = { 
+            geometry__country_level0: [ 'name' ],
+            geometry__time: [ 'time' ] 
+        }
+        //self.nulls = undefined;
+
+        self.clusterparams = { 
+            cluster: 'jenks',
+            numclusters: 4 
         }
 
-
-        var tempcuts = request.query['cut'];
-        
-
-        
-        if (tempcuts) {
-
-            var cutsplit = tempcuts.split("|")
-
-            
-
-            _.each(cutsplit, function(tempcut, index) {
-                var basenamesplit = tempcut.split(":")
-                var name = basenamesplit[0]
-                var values = basenamesplit[1].split(';')
-
-                var cutter = name.split("@");
-                
-                if (cutter.length > 1) {
-                    if (self.cut[cutter[0]]) {
-                        self.cut[cutter[0]][cutter[1]] = values;
-                    } else {
-                        self.cut[cutter[0]] = {};
-                        self.cut[cutter[0]][cutter[1]] = values;
-                    }
-                } else {
-                    if (self.cut[cutter[0]]) {
-                        self.cut[cutter[0]][DEFAULTDRILLDOWN[cutter[0]]] = values;
-                    } else {
-                        var tempobj= DEFAULTDRILLDOWN[cutter[0]];
-                        self.cut[cutter[0]] = { tempobj : values };
-                    }
-                }
-                
-            });  
-            
-        }
-
-        var tempdrilldown = request.query["drilldown"];
-        
-        if (tempdrilldown) {
-
-            var drilldownsplit = tempdrilldown.split("|");
-
-            _.each(drilldownsplit, function(tempdrill) {
-                var dd = tempdrill.split("@");
-                if (dd.length > 1) {
-                    if (self.drilldown[dd[0]]) {
-                        self.drilldown[dd[0]].push(dd[1])
-                    } else {
-                        self.drilldown[dd[0]] = [dd[1]];
-                    }
-                } else {
-                    if (self.drilldown[dd[0]]) {
-                        self.drilldown[dd[0]].push(DEFAULTDRILLDOWN[dd[0]]);
-                    } else {
-                        self.drilldown[dd[0]] = [DEFAULTDRILLDOWN[dd[0]]];
-                    }
-                }
-            });
-
-        
-
-        }
-
-        self.nulls = request.query['nulls']; 
-
-        self.clusterparams = {
-            "cluster": request.query["cluster"],
-            "numclusters": parseInt(request.query["numclusters"])
-        }
-
-        console.log("========")
-        console.log(self.clusterparams);
-        console.log("========")
+        // {
+        //     "cluster": request.query["cluster"],
+        //     "numclusters": parseInt(request.query["numclusters"])
+        // }
 
         return self.buildQuery();
     };

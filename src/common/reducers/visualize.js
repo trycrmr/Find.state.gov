@@ -84,7 +84,7 @@ export default function Visualize(state = initialState, action) {
       ...state,
       dataLoading: false,
       dataLoaded: true,
-      lastUpdated: Date.now(),
+      showModal: true,
       data: action.data
     };
   case MODAL_TOGGLE:

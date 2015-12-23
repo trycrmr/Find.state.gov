@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <html>
 <title>D3 Bar Chart Test for FInd</title>
 
@@ -57,6 +56,7 @@ line {
   text-align: center;
   color:#3d3d3d;
 }
+
 </style>
 
 <body>
@@ -70,11 +70,13 @@ line {
       <g class="y axis"></g>
     </g>
   </svg>
+
 </div>
 </body>
 
 <script src="js/lib/d3jsv3.js"></script>
 <script>
+
 function barChart(year){
   var maxWidth = 900, rightPadding = 80;
   var xScale, yScale, xAxisComponent, yAxisComponent;
@@ -267,107 +269,107 @@ function barChart(year){
 var year = "2012";
 barChart(year);
 
-/*
-var maxWidth = 900, rightPadding = 70;
-var xScale, yScale, xAxisComponent, yAxisComponent;
-var numBars = 26, yMax = 100;
-var data = [];
-
-var container = d3.select('svg g.chart-wrapper'),
-  barGroup = container.select('.bars')
-  xAxis = container.select('.x.axis')
-  yAxis = container.select('.y.axis');
-
-function intToChar(i) {
-  return String.fromCharCode(i + 65);
-}
-
-
-function randomData(data) {
-  for(var i = 0; i < numBars; i++)
-    data[i] = Math.random() * yMax;
-  return data;
-}
-
-function initChart() {
-  var width = 400, height = 300;
-
-  data = randomData(data);
-  console.log(data);
-
-  // Initialise scales
-  xScale = d3.scale.ordinal()
-    .domain(data.map(function(d, i) {return intToChar(i);}))
-    .rangeBands([0, width], 0.04);
-
-  yScale = d3.scale.linear()
-    .domain([0, yMax])
-    .range([height, 0]);
-
-  // Build the x-axis
-  xAxisComponent = d3.svg.axis()
-    .scale(xScale)
-    .orient('bottom');
-
-  xAxis.attr('transform', 'translate(0,'+height+')');
-
-  // Build the y-axis
-  yAxisComponent = d3.svg.axis()
-    .scale(yScale)
-    .orient('left');
-
-  yAxis.call(yAxisComponent);
-}
-
-function initEvents() {
-  // Set up event handler for resizes
-  W.addListener(update);
-
-  // Update data button
-  d3.select('#update').on('click', function() {
-    data = randomData(data);
-    update();
-  });
-}
-
-function update() {
-  updateScales();
-  updateAxes();
-  updateBars();
-}
-
-function updateScales() {
-  var width = d3.min([W.getViewportWidth(), maxWidth]) - rightPadding;
-  xScale.rangeBands([0, width], 0.04);
-}
-
-function updateAxes() {
-  xAxis.transition().call(xAxisComponent);
-}
-
-function updateBars() {
-  var u = barGroup
-    .selectAll('rect')
-    .data(data);
-
-  u.enter()
-    .append('rect');
-
-  u.exit()
-    .remove();
-
-  u.transition()
-    .attr('x', function(d, i) {return xScale(intToChar(i));})
-    .attr('width', xScale.rangeBand())
-    .attr('y', function(d) {return yScale(d);})
-    .attr('height', function(d) {console.log("test"); return yScale(0) - yScale(d);});
-}
-
-
-initChart();
-update();
-
-initEvents();
-*/
+/*   
+ -var maxWidth = 900, rightPadding = 70;    
+ -var xScale, yScale, xAxisComponent, yAxisComponent;   
+ -var numBars = 26, yMax = 100;   
+ -var data = [];    
+ -    
+ -var container = d3.select('svg g.chart-wrapper'),   
+ -  barGroup = container.select('.bars')    
+ -  xAxis = container.select('.x.axis')   
+ -  yAxis = container.select('.y.axis');    
+ -    
+ -function intToChar(i) {   
+ -  return String.fromCharCode(i + 65);   
+ -}   
+ -    
+ -    
+ -function randomData(data) {   
+ -  for(var i = 0; i < numBars; i++)    
+ -    data[i] = Math.random() * yMax;   
+ -  return data;    
+ -}   
+ -    
+ -function initChart() {    
+ -  var width = 400, height = 300;    
+ -    
+ -  data = randomData(data);    
+ -  console.log(data);    
+ -    
+ -  // Initialise scales    
+ -  xScale = d3.scale.ordinal()   
+ -    .domain(data.map(function(d, i) {return intToChar(i);}))    
+ -    .rangeBands([0, width], 0.04);    
+ -    
+ -  yScale = d3.scale.linear()    
+ -    .domain([0, yMax])    
+ -    .range([height, 0]);    
+ -    
+ -  // Build the x-axis   
+ -  xAxisComponent = d3.svg.axis()    
+ -    .scale(xScale)    
+ -    .orient('bottom');    
+ -    
+ -  xAxis.attr('transform', 'translate(0,'+height+')');   
+ -    
+ -  // Build the y-axis   
+ -  yAxisComponent = d3.svg.axis()    
+ -    .scale(yScale)    
+ -    .orient('left');    
+ -    
+ -  yAxis.call(yAxisComponent);   
+ -}   
+ -    
+ -function initEvents() {   
+ -  // Set up event handler for resizes   
+ -  W.addListener(update);    
+ -    
+ -  // Update data button   
+ -  d3.select('#update').on('click', function() {   
+ -    data = randomData(data);    
+ -    update();   
+ -  });   
+ -}   
+ -    
+ -function update() {   
+ -  updateScales();   
+ -  updateAxes();   
+ -  updateBars();   
+ -}   
+ -    
+ -function updateScales() {   
+ -  var width = d3.min([W.getViewportWidth(), maxWidth]) - rightPadding;    
+ -  xScale.rangeBands([0, width], 0.04);    
+ -}   
+ -    
+ -function updateAxes() {   
+ -  xAxis.transition().call(xAxisComponent);    
+ -}   
+ -    
+ -function updateBars() {   
+ -  var u = barGroup    
+ -    .selectAll('rect')    
+ -    .data(data);    
+ -    
+ -  u.enter()   
+ -    .append('rect');    
+ -    
+ -  u.exit()    
+ -    .remove();    
+ -    
+ -  u.transition()    
+ -    .attr('x', function(d, i) {return xScale(intToChar(i));})   
+ -    .attr('width', xScale.rangeBand())    
+ -    .attr('y', function(d) {return yScale(d);})   
+ -    .attr('height', function(d) {console.log("test"); return yScale(0) - yScale(d);});    
+ -}   
+ -    
+ -    
+ -initChart();    
+ -update();   
+ -    
+ -initEvents();   
+ -*/
 
 </script>
