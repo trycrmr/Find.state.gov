@@ -311,7 +311,7 @@ var Data = function(request, response, rescallback) {
     };
 
     /**
-     *
+     * This is the object sent back to the user
      *
      */
     this.getJson= function(result){

@@ -1,5 +1,5 @@
 body {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-family: "Source Sans Pro", "Lucida Grande", sans-serif;
 }
 
 .home-main { 
@@ -46,12 +46,11 @@ body {
   height: 220px;
 }
 .data-story-box div:hover {
-  opacity: .5;
+  opacity: .8;
 }
 .data-story {
   background-color: #ffffff; 
   border: 3px solid #205493;
-  box-shadow:3px 3px 3px black;
   height: 100%;
   cursor: pointer;
 }
