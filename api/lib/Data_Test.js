@@ -39,6 +39,7 @@ var Data = function(request, response, rescallback) {
     this.rescallback = rescallback;
     this.params = {};
     this.indicators = [];
+    this.dbArray = [];
     this.daterange= {"start":null,"end":null};
     this.format='json';
     this.agg = {};
@@ -83,14 +84,14 @@ var Data = function(request, response, rescallback) {
         
         self.indicators_tables = {}
         
-        var dbArray = []
+        //var dbArray = []
 
         self.indicators.map(function(i) {
-            dbArray.push(i.split(' ').join('_').toLowerCase())
+            self.dbArray.push(i.split(' ').join('_').toLowerCase())
         })
 
 
-        _.each(dbArray, function(elem, index) {
+        _.each(self.dbArray, function(elem, index) {
             self.indicators_tables[elem] = elem + "__denorm"
         });
 
@@ -255,13 +256,46 @@ var Data = function(request, response, rescallback) {
     };
 
     /**
-     *
+     * This is the object sent back to the user
      *
      */
     this.getJson= function(result){
 
+        // response object to send to client
         var response = {};
-        response['cells'] = result['rows'];
+        
+        // parse the json
+        var res_countries = [];
+        var res_numbers = [];
+        var iterator = 0;
+
+        // TODO explain the map functionality
+        var ind = self.dbArray[0] + '__avg'
+        console.log(ind);
+        result['rows'].map(function(row){
+            var pos = res_countries.indexOf(row.geo__name)
+            if ( pos != -1 ){    
+                res_numbers[pos].push({x:row.time, y:row[ind]})
+            } else {
+                res_countries.push(row.geo__name)
+                res_numbers.push([{x: row.time, y:row[ind] }])
+            }
+            ++iterator;
+        })
+
+
+        response['cells'] = result['rows']; // old
+
+        // prepare the response object with chartable data
+        response['data_set'] = {
+            countries: res_countries,
+            numbers: res_numbers
+        } 
+
+
+
+
+
         response['attributes'] = _.map(self.drilldown, function(d){
             return d[0];
         });

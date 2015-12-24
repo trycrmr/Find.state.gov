@@ -1,8 +1,8 @@
 .navbar-default {
   background-color: #205493;
-  border-color: #aeb0b5;
-  box-shadow:5px 5px 5px black;
   z-index: 1000;
+  border-radius: 0px;
+  border: none;
   margin-bottom: 0px;
 }
 .navbar-default .navbar-brand {

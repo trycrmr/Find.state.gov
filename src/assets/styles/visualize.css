@@ -12,7 +12,14 @@
   top: 55%;
 }
 .msg button{
-  color: #205493;
+  color: white;
+  background-color: #205493;
+  text-align: center;
+  border-radius: 0.3em;
+}
+.msg button:hover{
+  color: white;
+  background-color: #0071bc;
 }
 
 .loading {
@@ -25,7 +32,7 @@
   width: 80px;
   height: 80px;
   border-radius: 100%;
-  border: 10px solid #205493;
+  border: 10px solid  #205493;
 }
 .loading:after {
   content: '';
@@ -51,6 +58,7 @@
 }
 
 /* Modal */
+
 .modal-dialog  {
   width: 80%;
 }
@@ -71,7 +79,6 @@
   height: 600px;
   background-color: white;
   overflow: scroll;
-  box-shadow:5px 5px 5px grey;
 }
 .viz-col-head {
   background-color: none;
@@ -87,7 +94,6 @@
 }
 .menu-selected {
   background-color: #dce4ef;
-  border: 1px dotted #323a45;
 }
 .category-list dt {
   padding-left: 5px;
@@ -95,7 +101,7 @@
   line-height: 30px;
   color: #981b1e;
   background-color: whitesmoke;
-  height: 20px;
+  min-height: 20px;
   margin-bottom: 10px;
   cursor: pointer;
 }
@@ -214,6 +220,11 @@ color: #981b1e;
   text-align: center;  
   color: white;
   border: none;
+  border-radius: .3em;
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  width:80%;
 }
 .nopulse {
   background-color: lightgrey;
@@ -223,27 +234,27 @@ color: #981b1e;
   cursor: pointer;
   background-color: #205493;
   box-shadow: 0 0 0 0 rgba(90, 153, 212, 0.5);
-  animation: pulse 1.5s infinite;
+  animation: pulse 1s;
 }
 .pulsing:hover {
-  animation: none;
+  background-color: #0071bc;
 }
 @-webkit-keyframes pulse {
   0% {
-    -ms-transform: scale(0.9);
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-  70% {
     -ms-transform: scale(1);
     -webkit-transform: scale(1);
     transform: scale(1);
+  }
+  70% {
+    -ms-transform: scale(.9);
+    -webkit-transform: scale(.9);
+    transform: scale(.9);
     box-shadow: 0 0 0 20px rgba(90, 153, 212, 0);
   }
   100% {
-    -ms-transform: scale(0.9);
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
     box-shadow: 0 0 0 0 rgba(90, 153, 212, 0);
   }
 }
