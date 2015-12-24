@@ -1,3 +1,6 @@
+<!-- Ingest Form
+Terry Creamer, Leroy Bryant -->
+
 <html>
 <head>
 
@@ -209,6 +212,8 @@
               <input type="text" name="osource" id="osource" class="form-control" placeholder="text">
               <label for="units">Units</label>
               <input type="text" name="units" id="units" class="form-control" placeholder="text">
+              <label for="definition">Indicator Definition</label>
+              <textarea name="definition" id="definition" class="form-control" rows="3" ></textarea>
               <label for="frequency">Update Frequency</label>
               <input type="text" name="frequency" id="frequency" class="form-control" placeholder="text">
               <label for="last">Last Update</label>
@@ -245,32 +250,34 @@
           <!--Form-->
           <form method="post" action="/ingest/update">
             <div class="form-group">
-              <label for="indicators">Indicators</label>              
-              <select name="indicators" id="indicators" class="form-control">
+              <label for="indicators_ex">Indicators</label>              
+              <select name="indicators_ex" id="indicators_ex" class="form-control">
                 <option value="" selected disabled>Please select</option>
               </select>
-              <label for="category">Category</label>              
-              <select name="category" id="category" multiple class="form-control">
+              <label for="category_ex">Category</label>              
+              <select name="category_ex" id="category_ex" multiple class="form-control" disabled>
               </select>
-              <label for="subcategory">Subcategory</label>              
-              <select name="subcategory" id="subcategory" multiple class="form-control">
+              <label for="subcategory_ex">Subcategory</label>              
+              <select name="subcategory_ex" id="subcategory_ex" multiple class="form-control" disabled>
               </select>
               <label for="url">Indicator URL</label>
-              <input type="url" name="url" id="url" class="form-control" placeholder="url">
-              <label for="data_url">Indicator Data URL</label>
-              <input type="url" name="data_url" id="data_url" class="form-control" placeholder="url">
+              <input type="url" name="url_ex" id="url_ex" class="form-control" disabled>
+              <label for="data_url_ex">Indicator Data URL</label>
+              <input type="url" name="data_url_ex" id="data_url_ex" class="form-control" disabled>
               <label for="dsource">Direct Indicator Source</label>
-              <input type="text" name="dsource" id="dsource" class="form-control" placeholder="text">
-              <label for="osource">Original Indicator Source</label>
-              <input type="text" name="osource" id="osource" class="form-control" placeholder="text">
-              <label for="units">Units</label>
-              <input type="text" name="units" id="units" class="form-control" placeholder="text">
-              <label for="frequency">Update Frequency</label>
-              <input type="text" name="frequency" id="frequency" class="form-control" placeholder="text">
-              <label for="last">Last Update</label>
-              <input type="date" name="last" id="last" class="form-control" placeholder="date">
-              <label for="data_file">Upload Data</label>
-              <input type="file" id="data_file" name="data_file" class="form-control" placeholder="file">                                    
+              <input type="text" name="dsource_ex" id="dsource_ex" class="form-control" disabled>
+              <label for="osource_ex">Original Indicator Source</label>
+              <input type="text" name="osource_ex" id="osource_ex" class="form-control" disabled>
+              <label for="units_ex">Units</label>
+              <input type="text" name="units_ex" id="units_ex" class="form-control" disabled>
+              <label for="definition_ex">Indicator Definition</label>
+              <textarea name="definition_ex" id="definition_ex" class="form-control" rows="3" disabled></textarea>
+              <label for="frequency_ex">Update Frequency</label>
+              <input type="text" name="frequency_ex" id="frequency_ex" class="form-control" disabled>
+              <label for="last_ex">Last Update</label>
+              <input type="date" name="last_ex" id="last_ex" class="form-control" disabled>
+              <label for="data_file_ex">Upload Data</label>
+              <input type="file" id="data_file_ex" name="data_file_ex" class="form-control" disabled>                                    
             </div>
             <!--Submit button-->
             <button type="submit" class="btn btn-primary">Submit</button>

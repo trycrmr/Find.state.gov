@@ -15,15 +15,16 @@ $(document).ready(function() {
 		//$(':url').val('');
 		$('select[multiple]').attr('disabled',true);
 		$(':text').attr('disabled',true);
-		$("#url").attr('disabled',true);
-		$("#data_url").attr('disabled',true);
-		$("#last").attr('disabled',true);
+		$("#url_ex").attr('disabled',true);
+		$("#data_url_ex").attr('disabled',true);
+		$("#last_ex").attr('disabled',true);
+		$("#definition_ex").attr('disabled',true);
     	//$('#modal-find-existing').find('input:text, input:password, select, textarea').reset();
 	});
 
 
 	var populateCombo = function() {
-	  var $indicators = $('#indicators');
+	  var $indicators = $('#indicators_ex');
 	  
 	 
 	    //request the JSON data and parse into the select element
@@ -36,6 +37,7 @@ $(document).ready(function() {
 	      //iterate over the data and append a select option
 	      $.each(data, function(key, val){ 
 	        $indicators.append('<option id="' + val.Indicator_ID + '">' + val.Indicator_Name + '</option>');
+	        //console.log(val.Indicator_ID)
 	      })
 	    //console.log(data);
 	    });
@@ -43,32 +45,111 @@ $(document).ready(function() {
 
 	populateCombo();
 
-	$( "#indicators" ).change(function() {
-	  //alert( "Handler for .change() called." );
-	  //alert($( "#indicators" ).val());
+	$( "#indicators_ex" ).change(function() {
+	  
+	  $('select[multiple]').attr('disabled',false);
+	  $('select[multiple]').empty();
+	  $(':text').attr('disabled',false);
+	  $("#url_ex").attr('disabled',false);
+	  $("#data_url_ex").attr('disabled',false);
+	  //$("#last_ex").attr('disabled',false);
+	  $("#definition_ex").attr('disabled',false);
+	  $("#data_file_ex").attr('disabled',false);
+
+	  var categories=[];
+	  var subcategories=[];
+
+	  $.getJSON('http://localhost:3000/setup/category', function(data){
+	  		$.each(data, function(key, val){ 
+
+	  			if(val.Category_Name.length>0){
+	  				categories.push(val.Category_Name);
+		        	$("#category_ex").append('<option id="' + val.Category_Name + '">' + val.Category_Name + '</option>');
+		        }
+		        if(val.Sub_Category_Name.length>0){
+	  				subcategories.push(val.Sub_Category_Name);
+		        	$("#subcategory_ex").append('<option id="' + val.Sub_Category_Name + '">' + val.Sub_Category_Name + '</option>');
+		        }
+	  		});
+	  });
+
 	  $.getJSON('http://localhost:3000/setup/indicatorbycategory', function(data){
 
+	  	//var catoptions = $("#category_ex option");
+	  	//var suboptions = $("#subcategory_ex option");
+
+	  	//debugger;
+
+	  	/*for(var i =0;i<data.length;i++)
+	  	{
+	  		if($( "#indicators_ex" ).val()==data[i].Indicator_Name){
+	  			if(data[i].Category_Name.length>0)
+	  			{
+
+	  			}
+	  		}
+	  	}*/
+
 	  	$.each(data, function(key, val){ 
-	  		if($( "#indicators" ).val()==val.Indicator_Name){
-		        $("#category").append('<option id="' + val.Category_Name + '">' + val.Category_Name + '</option>');
-		        $("#subcategory").append('<option id="' + val.Sub_Category_Name + '">' + val.Sub_Category_Name + '</option>');
-	    	}
-	    	//console.log(val.Indicator_Data_URL);
-	     })
+
+	  		if($( "#indicators_ex" ).val()==val.Indicator_Name){
+	  			if(val.Category_Name.length>0){
+	  				var index = categories.indexOf(val.Category_Name);
+	  				$("#category_ex option")[index].selected = true;
+	  			}
+		        	//$("#category_ex").append('<option  selected id="' + val.Category_Name + '">' + val.Category_Name + '</option>');
+		        	//$("#category_ex option[value='" + val.Category_Name + "']").attr("selected", true);
+		        //if(val.Sub_Category_Name.length>0)
+		        	//$("#subcategory_ex").append('<option selected id="' + val.Sub_Category_Name + '">' + val.Sub_Category_Name + '</option>');
+		        	//$("#subcategory_ex option[value='" + val.Sub_Category_Name + "']").prop("selected", true);
+	    	
+	    	if(val.Sub_Category_Name.length>0){
+	  				var index = subcategories.indexOf(val.Sub_Category_Name);
+	  				$("#subcategory_ex option")[index].selected = true;
+	  			}
+	  		}
+	    	/*else{
+	    		if(val.Category_Name.length>0 && catoptions.indexOf(val.Category_Name)==-1)
+		        	$("#category_ex").append('<option id="' + val.Category_Name + '">' + val.Category_Name + '</option>');
+		        if(val.Sub_Category_Name.length>0 && suboptions.indexOf(val.Sub_Category_Name)==-1)
+		        	$("#subcategory_ex").append('<option id="' + val.Sub_Category_Name + '">' + val.Sub_Category_Name + '</option>');
+	    	}*/
+	    	
+	     });
+		//$("#category_ex").({'refresh': true});
+		//$("#subcategory_ex").({'refresh': true});
+	  	//debugger;
 
 	  });
 
+	  var formatDate = function(oldDate){
+	  	oldDate = oldDate.split('T');
+	  	var newDate = oldDate[0];
+	  	return newDate;
+
+	  }
+
 	  $.getJSON('http://localhost:3000/setup/indicator', function(data){
 
+	  	$('select[multiple]').attr('disabled',false);
+		$(':text').attr('disabled',false);
+		$("#url_ex").attr('disabled',false);
+		$("#data_url_ex").attr('disabled',false);
+		//$("#last_ex").attr('disabled',false);
+		$("#definition_ex").attr('disabled',false);
+
 	  	$.each(data, function(key, val){ 
-	  		if($( "#indicators" ).val()==val.Indicator_Name){
-		        $("#url").val(val.Indicator_URL);
-		    	$("#data_url").val(val.Indicator_Data_URL);
-		    	$("#dsource").val(val.Direct_Indicator_Source);
-		    	$("#osource").val(val.Original_Indicator_Source);
-		    	$("#units").val(val.Units);
-		    	$("#frequency").val(val.Update_Cycle);
-		    	$("#last").val(val.updatedAt);
+	  		if($( "#indicators_ex" ).val()==val.Indicator_Name){
+		        $("#url_ex").val(val.Indicator_URL);
+		    	$("#data_url_ex").val(val.Indicator_Data_URL);
+		    	$("#dsource_ex").val(val.Direct_Indicator_Source);
+		    	$("#osource_ex").val(val.Original_Indicator_Source);
+		    	$("#units_ex").val(val.Units);
+		    	$("#frequency_ex").val(val.Update_Cycle);
+
+		    	var formattedDate = formatDate(val.updatedAt);
+		    	$("#last_ex").val(formattedDate);
+		    	$("#definition_ex").val(val.Indicator_Definition);
 	    	}
 	    	//console.log(val.Indicator_Data_URL);
 	     })
