@@ -13,7 +13,6 @@ import { Provider } from 'react-redux';
 import createLocation from 'history/lib/createLocation';
 
 import configureStore from '../common/store/configureStore';
-import { getUser } from '../common/api/user';
 import routes from '../common/routes';
 import packagejson from '../../package.json';
 
@@ -53,37 +52,31 @@ app.get('/*', function (req, res) {
 
   const location = createLocation(req.url);
 
-  getUser(user => {
+ 
 
-      if(!user) {
-        return res.status(401).end('Not Authorised');
-      }
-
-      match({ routes, location }, (err, redirectLocation, renderProps) => {
-        if(err) {
-          console.error(err);
-          return res.status(500).end('Internal server error');
-        }
-
-        if(!renderProps)
-          return res.status(404).end('Not found');
-
-        const store = configureStore({user : user});
-
-        const InitialView = (
-          <Provider store={store}>
-              <RoutingContext {...renderProps} />
-          </Provider>
-        );
-
-        const componentHTML = ReactDOMServer.renderToString(InitialView);
-        const initialState = store.getState();
-        res.status(200).end(renderFullPage(componentHTML,initialState));  
-      });
-
+  match({ routes, location }, (err, redirectLocation, renderProps) => {
+    if(err) {
+      console.error(err);
+      return res.status(500).end('Internal server error');
     }
-  )
 
+    if(!renderProps)
+      return res.status(404).end('Not found');
+
+    const store = configureStore();
+
+    const InitialView = (
+      <Provider store={store}>
+          <RoutingContext {...renderProps} />
+      </Provider>
+    );
+
+    const componentHTML = ReactDOMServer.renderToString(InitialView);
+    const initialState = store.getState();
+    res.status(200).end(renderFullPage(componentHTML,initialState));  
+  });
+
+  
 });
 
 const server = app.listen(3001, function () {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import BuildMenu from './visualize/BuildMenu';
-//import LineChart from './charts/Line'
+import LineChart from './charts/Line'
 
 
 class Visualize extends Component {
@@ -26,6 +26,9 @@ class Visualize extends Component {
                         <button onClick={this.props.displayModal} type="button" className="btn btn-lg" >Build a Visualization</button>
                     </span>
                     </div>
+                }
+                {this.props.dataLoaded === true && this.props.selectedChart === 'line' &&
+                    <LineChart data={this.props.data} />
                 }
                 
                 </div>
