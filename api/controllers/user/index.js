@@ -17,6 +17,14 @@ module.exports = function (router) {
     router.get('/', function (req, res) {
     	var um = new UserModel();
     	res.send(um.getUserData());
+	});
+
+	/**
+	 * @POST localhost/setup/category
+	 */
+    router.post('/', function (req, res) {
+    	var um = new UserModel();
+    	console.log(req.body);
 	});        
 
 };

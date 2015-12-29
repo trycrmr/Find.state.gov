@@ -2,7 +2,22 @@ import React, { Component } from 'react';
 
 class Login extends Component {
 
+  login(e) {
+    e.preventDefault();
+    this.props.fetchUser(this.state.user, this.state.password)
+  }
+
+  handleChange(event) {
+    event.preventDefault()
+    var input = {
+      field: event.target.type,
+      value: event.target.value
+    }
+    this.props.userInput(input)
+  }
+
   render() {
+
     return (
       <div className="container">
           
@@ -18,16 +33,16 @@ class Login extends Component {
               <h4>Please login... (USG Only)</h4>
 
               <div className="form-group">
-                <label for="EmailAddress"><span>*</span> Email Address</label>
-                <input type="email" className="form-control" name="EmailAddress" id="EmailAddress" aria-required="true" aria-invalid="true" required />
+                <label htmlFor="EmailAddress"><span>*</span> Email Address</label>
+                <input value={this.props.email} onChange={this.handleChange.bind(this)} type="email" className="form-control" name="EmailAddress" id="EmailAddress" aria-required="true" aria-invalid="true" required />
               </div>
 
               <div className="form-group">
-                <label for="EmailAddress"><span>*</span> Password</label>
-                <input type="password" className="form-control" name="password" id="password" aria-required="true" aria-invalid="true" required />
+                <label htmlFor="EmailAddress"><span>*</span> Password</label>
+                <input value={this.props.password} onChange={this.handleChange.bind(this)} type="password" className="form-control" name="password" id="password" aria-required="true" aria-invalid="true" required />
               </div>
 
-              <button className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+              <button onClick={this.login.bind(this)} className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
             </form>
           </div> 
