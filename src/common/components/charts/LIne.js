@@ -1,8 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { VictoryChart, VictoryLine, VictoryAxis} from "victory";
 import d3Scale from 'd3-scale';
-
 import d3 from 'd3'
+
+import Legend from './Legend'
 
 export default class LineChart extends Component {
 
@@ -49,6 +50,28 @@ export default class LineChart extends Component {
             "red", "orange", "magenta",
             "gold", "blue", "purple"
         ];
+
+        const { countries, numbers } = this.props.data
+
+        // this scale is used for chart axis
+        var dateScale = {}
+        numbers.map(function(set){
+            if ( !dateScale.min || dateScale.min > set[0].x)
+                dateScale.min = set[0].x
+            if ( !dateScale.max || dateScale.max < set[set.length - 1].x)
+                dateScale.max = set[set.length - 1].x
+        })
+        dateScale.mid = new Date(dateScale.max - (dateScale.max-dateScale.min)/2)
+        
+        // legend setup
+        var legendSetup = []
+        countries.map(function(c,i){
+            legendSetup.push({name:c,color:colors[i]})
+        });
+
+        console.log(legendSetup)
+
+
         return (
         
             <VictoryChart
@@ -56,18 +79,14 @@ export default class LineChart extends Component {
               width={800}
               scale={{
                 x: d3.time.scale()
-              }}>
+              }}
+              domainPadding={{x:20}}>
+              
               <VictoryAxis
-                label="Decades"
-                tickValues={[
-                  new Date(1980, 1, 1),
-                  new Date(2000, 1, 1),
-                  new Date(2020, 1, 1)
-                ]}
                 tickFormat={(x) => x.getFullYear()}
                 />
 
-                {this.props.data.numbers.map((dset, i) =>
+                {numbers.map((dset, i) =>
                   // creates a line for each country data
                     <VictoryLine 
                         key={i} 
@@ -75,6 +94,7 @@ export default class LineChart extends Component {
                         style={{ data: {stroke:colors[i]} }}
                     />
                 )}
+                <Legend setup={legendSetup} />
             </VictoryChart>
         )
     }

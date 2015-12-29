@@ -1,8 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { VictoryChart, VictoryBar, VictoryAxis} from "victory";
 import d3Scale from 'd3-scale';
-
 import d3 from 'd3'
+
+import Legend from './Legend'
 
 export default class BarChart extends Component {
 
@@ -10,7 +11,7 @@ export default class BarChart extends Component {
         
         // STATIC TESTS
         const test_data = {
-            countries: ['China','Brazil', 'Mexico'],
+            countries: ['Iraq','China', 'Brazil'],
             numbers: [
                 [
                   {x: new Date(1980, 1, 1), y: 125},
@@ -55,11 +56,18 @@ export default class BarChart extends Component {
                 ]
             ],
         }
-        
+
         const colors = [
             "red", "orange", "magenta",
             "gold", "blue", "purple"
         ];
+
+        var legendSetup = []
+        test_data.countries.map(function(c,i){
+            legendSetup.push({name:c,color:colors[i]})
+        });
+        
+        
         return (
         
             <VictoryChart 
@@ -76,7 +84,7 @@ export default class BarChart extends Component {
                     />
                 )}
                 
-                
+                <Legend setup={legendSetup} />
             </VictoryChart>
         )
     }
