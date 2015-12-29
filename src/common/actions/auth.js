@@ -1,26 +1,25 @@
 import fetch from 'isomorphic-fetch';
 
-// Create our Action Types:
-export const GET_STORIES = 'GET_STORIES';
-export const GET_STORIES_SUCCESS = 'GET_STORIES_SUCCESS';
 
-// Build our actions
-function requestStories() {
+export const GET_USER = 'GET_USER';
+
+export function requestUser(value) {
   return {
-    type: GET_STORIES
+    type: GET_USER,
+    payload: value
   };
 }
 
-function receiveStories(json) {
+function receiveUser(json) {
   return {
-    type: GET_STORIES_SUCCESS,
-    stories: json
+    type: GET_USER_SUCCESS,
+    user: json
   };
 }
 
 // Build action creaters that return a function instead of the
 // actions above (thanks to redux-thunk middleware):
-function fetchStories() {
+function fetchUser() {
   // thunk middleware knows how to handle functions
   return function (dispatch) {
     dispatch(requestStories());
@@ -29,25 +28,21 @@ function fetchStories() {
     return fetch('http://localhost:3000/setup/datastories')
       .then(response => response.json())
       .then(json => {
-        var array = json.datastories;
-        dispatch(receiveStories(array))
+        dispatch(receiveUser(json))
       });
   };
 }
 
-export function isLoaded(globalState) {
-  return globalState.datastories && globalState.datastories.loaded;
-}
-
-// No need to call the external API if data is already in memory:
+// No need to call the external API if data is already in memory
+// or if user is not logged in yet
 export function fetchStoriesIfNeeded() {
   return (dispatch, getState) => {
-    if ( isLoaded(getState()) ) {
+    if ( true === true ) {
       // Let the calling code know there's nothing to wait for.
       return Promise.resolve();
     } else {
       // Dispatch a thunk from thunk!
-      return dispatch(fetchStories());
+      return dispatch(fetchUser());
     }
   };
 }

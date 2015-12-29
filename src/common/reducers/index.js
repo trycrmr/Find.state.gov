@@ -1,15 +1,14 @@
-import { combineReducers } from 'redux';
-import { routerStateReducer } from 'redux-router';
-import undoable from 'redux-undo';
+import { combineReducers } from 'redux'
+import { routerStateReducer } from 'redux-router'
+import undoable from 'redux-undo'
 
-import user from './user';
-
-import stories from './datastory';
-import visualize  from './visualize';
+import auth from './auth'
+import stories from './datastory'
+import visualize  from './visualize'
 
 
 const rootReducer = combineReducers({
-	user : user,
+	auth : auth,
 	datastories : undoable(stories),
 	visualize: undoable(visualize),
 	router : routerStateReducer

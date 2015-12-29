@@ -1,6 +1,7 @@
 .navbar-default {
   background-color: #205493;
   z-index: 1000;
+  min-height: 3.5em;
   border-radius: 0px;
   border: none;
   margin-bottom: 0px;

@@ -25,7 +25,7 @@ class Header extends Component {
 		      </ul>
 		      <ul className="nav navbar-nav pull-right">
 		        <li>
-		          <Link to="authin">Login/Register(USG Only)</Link>
+		          <Link to="auth">Login/Register(USG Only)</Link>
 		        </li>
 		   </ul>
 		    </div>

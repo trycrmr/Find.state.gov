@@ -68,6 +68,7 @@ export default class BarChart extends Component {
                 domain={{y: [0,15000]}} >
 
                 {test_data.averages.map((dset, i) =>
+                    // creates a bar for each country data
                     <VictoryBar
                         key={i} 
                         data={dset}

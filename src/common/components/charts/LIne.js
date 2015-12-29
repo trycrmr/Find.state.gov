@@ -68,6 +68,7 @@ export default class LineChart extends Component {
                 />
 
                 {this.props.data.numbers.map((dset, i) =>
+                  // creates a line for each country data
                     <VictoryLine 
                         key={i} 
                         data={dset}

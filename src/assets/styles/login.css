@@ -1,0 +1,41 @@
+header {
+  width: 100%;
+  text-align: center;
+  margin-top: 3em;
+}
+
+.content {
+  margin-left: 10%;
+  margin-top: 6em;
+}
+.form-container {
+  padding: 1.5em;
+  float: left;
+  width: 28em;
+}
+
+.content h1 {
+  float: left;
+  margin: 1.5em;
+  color: lightgrey;
+}
+.form-container h4 {
+  margin-top: 0;
+  color:  #205493;
+}
+.form-container .error {
+  color: red;
+  margin: .5em 0;
+}
+.form-container label span {
+  color: rgba(152, 27, 30, 1);
+  font-size: .8em;
+}
+.form-container button {
+  margin-top: 1em;
+  background: #205493;
+  border: none;
+}
+.form-container button:hover {
+  background: #0071bc;
+}
