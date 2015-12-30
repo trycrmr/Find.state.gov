@@ -25,18 +25,15 @@ $(document).ready(function() {
 
 	var populateCombo = function() {
 	  var $indicators = $('#indicators_ex');
-	  
+	  //var $indicator_id = $('#indicators_val_ex');
 	 
 	    //request the JSON data and parse into the select element
 	    $.getJSON('http://localhost:3000/setup/indicator', function(data){
 	 
-	      //clear the current content of the select
-	      //$indicators.html('');
-	      //data.sort(sort_by('Indicator_Name', true, function(a){return a.toUpperCase()}));
-	 
-	      //iterate over the data and append a select option
+	
 	      $.each(data, function(key, val){ 
 	        $indicators.append('<option id="' + val.Indicator_ID + '">' + val.Indicator_Name + '</option>');
+	        //$('#indicators_val_ex').append('<option id="' + val.Indicator_ID + '">' + val.Indicator_ID + '</option>');
 	        //console.log(val.Indicator_ID)
 	      })
 	    //console.log(data);
@@ -47,14 +44,19 @@ $(document).ready(function() {
 
 	$( "#indicators_ex" ).change(function() {
 	  
+	  var selectedInd = $( "#indicators_ex" )[0].selectedIndex;
+
 	  $('select[multiple]').attr('disabled',false);
 	  $('select[multiple]').empty();
 	  $(':text').attr('disabled',false);
 	  $("#url_ex").attr('disabled',false);
 	  $("#data_url_ex").attr('disabled',false);
-	  //$("#last_ex").attr('disabled',false);
 	  $("#definition_ex").attr('disabled',false);
 	  $("#data_file_ex").attr('disabled',false);
+
+
+	  //set hidden value
+	  $("#indicators_id_ex").val($( "#indicators_ex option:selected").attr('id'));
 
 	  var categories=[];
 	  var subcategories=[];
@@ -75,21 +77,6 @@ $(document).ready(function() {
 
 	  $.getJSON('http://localhost:3000/setup/indicatorbycategory', function(data){
 
-	  	//var catoptions = $("#category_ex option");
-	  	//var suboptions = $("#subcategory_ex option");
-
-	  	//debugger;
-
-	  	/*for(var i =0;i<data.length;i++)
-	  	{
-	  		if($( "#indicators_ex" ).val()==data[i].Indicator_Name){
-	  			if(data[i].Category_Name.length>0)
-	  			{
-
-	  			}
-	  		}
-	  	}*/
-
 	  	$.each(data, function(key, val){ 
 
 	  		if($( "#indicators_ex" ).val()==val.Indicator_Name){
@@ -97,28 +84,22 @@ $(document).ready(function() {
 	  				var index = categories.indexOf(val.Category_Name);
 	  				$("#category_ex option")[index].selected = true;
 	  			}
-		        	//$("#category_ex").append('<option  selected id="' + val.Category_Name + '">' + val.Category_Name + '</option>');
-		        	//$("#category_ex option[value='" + val.Category_Name + "']").attr("selected", true);
-		        //if(val.Sub_Category_Name.length>0)
-		        	//$("#subcategory_ex").append('<option selected id="' + val.Sub_Category_Name + '">' + val.Sub_Category_Name + '</option>');
-		        	//$("#subcategory_ex option[value='" + val.Sub_Category_Name + "']").prop("selected", true);
+		        	
 	    	
 	    	if(val.Sub_Category_Name.length>0){
 	  				var index = subcategories.indexOf(val.Sub_Category_Name);
 	  				$("#subcategory_ex option")[index].selected = true;
 	  			}
 	  		}
-	    	/*else{
-	    		if(val.Category_Name.length>0 && catoptions.indexOf(val.Category_Name)==-1)
-		        	$("#category_ex").append('<option id="' + val.Category_Name + '">' + val.Category_Name + '</option>');
-		        if(val.Sub_Category_Name.length>0 && suboptions.indexOf(val.Sub_Category_Name)==-1)
-		        	$("#subcategory_ex").append('<option id="' + val.Sub_Category_Name + '">' + val.Sub_Category_Name + '</option>');
-	    	}*/
+	    	
 	    	
 	     });
-		//$("#category_ex").({'refresh': true});
-		//$("#subcategory_ex").({'refresh': true});
-	  	//debugger;
+	
+
+
+	  	$.each($("#category_ex option:selected"),function(key,val){
+	  		console.log("val " + val.value);
+	  	});
 
 	  });
 
