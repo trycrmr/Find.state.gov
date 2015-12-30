@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 
 import BuildMenu from './visualize/BuildMenu'
+
 import LineChart from './charts/Line'
 import BarChart from './charts/Bar'
+
+import MapChart from './charts/Map'
+
 
 
 class Visualize extends Component {
@@ -33,6 +37,9 @@ class Visualize extends Component {
                 }
                 {this.props.dataLoaded === true && this.props.selectedChart === 'bar' &&
                     <BarChart data={this.props.data} />
+                }
+                {this.props.dataLoaded === true && this.props.selectedChart === 'map' &&
+                    <MapChart data={this.props.data} />
                 }
                 
                 </div>

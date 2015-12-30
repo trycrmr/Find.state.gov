@@ -17,6 +17,7 @@ const history = createBrowserHistory();
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState);
 const rootElement = document.getElementById('root');
+process.env.BROWSER = true;
 
 ReactDOM.render(
   <Provider store={store}>

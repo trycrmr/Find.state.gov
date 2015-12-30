@@ -37,7 +37,6 @@ export default function Visualize(state = initialState, action) {
     };
   case SELECT_SETUP:
     if ( action.setType === 'indicators') {
-
         return {
             ...state,
             selectedIndicators: state.selectedIndicators.concat( action.name )

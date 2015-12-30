@@ -1,19 +1,20 @@
 import fetch from 'isomorphic-fetch';
 
-// Create our Action Types:
-export const GET_SETUP = 'GET_SETUP';
-export const GET_SETUP_SUCCESS = 'GET_SETUP_SUCCESS';
-export const SELECT_SETUP = 'SELECT_SETUP';
-export const DESELECT_SETUP = 'DESELECT_SETUP';
-export const GET_DATA = 'GET_DATA';
-export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
-export const MODAL_TOGGLE = 'MODAL_TOGGLE';
-export const ENABLE_BUILD = 'ENABLE_BUILD';
-
+// Included in File:
+// Build Menu Actions - when selecting items for a data build
+// Setup Actions - when getting data needed to setup menu
+// Chart Data Actions - getting data need to draw charts/maps
+ 
 
 /*************************
  *   Build Menu Actions  *
  *************************/
+
+// Create our Action Types
+export const MODAL_TOGGLE = 'MODAL_TOGGLE';
+export const ENABLE_BUILD = 'ENABLE_BUILD';
+export const SELECT_SETUP = 'SELECT_SETUP';
+export const DESELECT_SETUP = 'DESELECT_SETUP';
 
  // actions to be dispatched
 function toggleModal(current) {
@@ -59,6 +60,12 @@ let build_rules = {
       min_indicators: 1,
       min_countries: 1,
       max_indicators: 4,
+      max_countries: 100
+    },
+    map: {
+      min_indicators: 1,
+      min_countries: 1,
+      max_indicators: 1,
       max_countries: 100
     }
   }
@@ -136,6 +143,10 @@ export function selectChart(chart) {
  *   Setup-Server Actions  *
  ***************************/
 
+// Create our Action Types
+export const GET_SETUP = 'GET_SETUP';
+export const GET_SETUP_SUCCESS = 'GET_SETUP_SUCCESS';
+
 // actions to be dispatched to reducer
 function requestSetup() {
   return {
@@ -182,6 +193,10 @@ export function fetchSetupIfNeeded() {
 /********************
  *   Data Actions   *
  ********************/
+
+// Create our Action Types
+export const GET_DATA = 'GET_DATA';
+export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
 
 // actions to be dispatched
 function requestData() {
@@ -261,5 +276,87 @@ export function fetchDataIfNeeded() {
     }
 }
 
+
+/********************
+ *   MAP Actions   *
+ ********************/
+
+// actions to be dispatched
+function requestData() {
+  return {
+    type: GET_DATA
+  };
+}
+
+function receiveData(json) {
+  return {
+    type: GET_DATA_SUCCESS,
+    data: json
+  };
+}
+
+// action functionality
+function fetchData(ind, cty, cht ) {
+  // thunk middleware knows how to handle functions
+  return function (dispatch) {
+    dispatch(requestData());
+
+    // Return a promise to wait for
+    return fetch('http://localhost:3000/visualize/data', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                indicators: ind,
+                countries: cty,
+                chart: cht
+            })
+        })
+        .then(response => response.json())
+        .then(json => {
+          console.log(json.data_set.numbers);
+            var dataSet = {
+              countries: json.data_set.countries,
+              numbers: new Array(json.data_set.numbers.length)
+            };
+            json.data_set.numbers.forEach(function(set, setdex) {
+              // do this to each set in the array
+              dataSet.numbers[setdex] = new Array();
+              set.forEach(function(row, rowdex){
+                // do this to each row in set
+                // take the row, make it date format, insert into new object
+                dataSet.numbers[setdex].push({x: +(new Date(row.x,1,1)), y:row.y})
+              })
+            })
+
+            dispatch(receiveData(dataSet))
+        });
+  };
+}
+
+export function requestDataForBuild() {
+    return (dispatch, getState) => {
+        // No need to call the external API if data is already in memory:
+        const { selectedIndicators,
+                selectedCountries,
+                selectedChart } = getState().visualize.present
+        return dispatch(fetchData(selectedIndicators, selectedCountries, selectedChart));
+    }
+}
+
+// action creators
+export function fetchDataIfNeeded() {
+    return (dispatch, getState) => {
+        // No need to call the external API if data is already in memory:
+        if ( getState().data && getState().data.loaded ) {
+          // Let the calling code know there's nothing to wait for.
+          return Promise.resolve();
+        } else {
+          return dispatch(fetchData());
+        }
+    }
+}
 
      
