@@ -37,7 +37,7 @@
     "sequelize": "*",
     "squel": "*",
     "underscore": "*",
-    "victory": "^0.1.0",
+    "victory": "^0.1.1",
     "ya-csv": "^0.9.4"
   },
   "devDependencies": {
