@@ -13,6 +13,8 @@
     "classnames": "^2.1.5",
     "construx": "^1.0.0",
     "construx-copier": "^1.0.0",
+    "d3": "^3.5.12",
+    "d3-scale": "^0.4.0",
     "excel-export": "~0.4.1",
     "express": "^4.12.2",
     "express-csv": "~0.6.0",
