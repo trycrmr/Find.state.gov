@@ -1,12 +1,20 @@
 import fetch from 'isomorphic-fetch';
 
-
+export const USER_INPUT = 'USER_INPUT';
 export const GET_USER = 'GET_USER';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 
-export function requestUser(value) {
+function logInput(input) {
   return {
-    type: GET_USER,
-    payload: value
+    type: USER_INPUT,
+    field: input.field,
+    value: input.value
+  };
+}
+
+function requestUser() {
+  return {
+    type: GET_USER
   };
 }
 
@@ -19,14 +27,23 @@ function receiveUser(json) {
 
 // Build action creaters that return a function instead of the
 // actions above (thanks to redux-thunk middleware):
-function fetchUser() {
+function fetchUser(email, pass) {
   // thunk middleware knows how to handle functions
   return function (dispatch) {
-    dispatch(requestStories());
+    dispatch(requestUser());
 
     // Return a promise to wait for
-    return fetch('http://localhost:3000/setup/datastories')
-      .then(response => response.json())
+    return fetch('http://localhost:3000/user', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        pass: pass
+      })
+    }).then(response => response.json())
       .then(json => {
         dispatch(receiveUser(json))
       });
@@ -35,7 +52,7 @@ function fetchUser() {
 
 // No need to call the external API if data is already in memory
 // or if user is not logged in yet
-export function fetchStoriesIfNeeded() {
+export function fetchUserIfNeeded() {
   return (dispatch, getState) => {
     if ( true === true ) {
       // Let the calling code know there's nothing to wait for.
@@ -45,4 +62,10 @@ export function fetchStoriesIfNeeded() {
       return dispatch(fetchUser());
     }
   };
+}
+
+export function userInput(input) {
+  return function (dispatch) {
+    dispatch(logInput(input));
+  }
 }

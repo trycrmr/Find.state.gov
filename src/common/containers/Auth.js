@@ -17,14 +17,23 @@ function mapStateToProps(state) {
     auth = auth.present;
 
     const {
-        isLoggedIn,
+        email,
+        password,
+        validating,
+        loggedIn,
         userData
     } = auth || {
-        isLoggedIn: false,
+        email: '',
+        password: '',
+        validating: false,
+        loggedIn: false,
         userData: {}
     };
         return {
-        isLoggedIn,
+        email,
+        password,
+        validating,
+        loggedIn,
         userData
     };
 }
