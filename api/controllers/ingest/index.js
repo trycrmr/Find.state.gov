@@ -84,13 +84,13 @@ module.exports = function (router) {
         
         });
 
-       /*model.sequelize.query("update public.\"Indicators\" set \"Indicator_URL\" = \'" + url + "\', \"Indicator_Data_URL\" = \'" + data_url + "\'," +  
+       model.sequelize.query("update public.\"Indicators\" set \"Indicator_URL\" = \'" + url + "\', \"Indicator_Data_URL\" = \'" + data_url + "\'," +  
                             "\"Direct_Indicator_Source\" = \'" + dsource + "\', \"Original_Indicator_Source\"=\'" + osource + "\',\"Units\"=\'" + units + "\'," + 
                             " \"Indicator_Definition\"=\'" + definition + "\', \"Update_Cycle\"=\'" + frequency + "\', \"updatedAt\" = now()::date " + 
                              "where \"Indicator_Name\" like \'%" + indicators_ex + "%\'").spread(function(results, metadata) {
         
             
-        });*/
+        });
 
         var categories ="";
         var subcategories = "";
