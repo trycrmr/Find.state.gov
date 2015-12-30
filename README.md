@@ -34,12 +34,12 @@ Redux will handle all of the map state/data in a tree structure. **Actions** are
 TODO: Link to code examples in the project, define actual actions
 
 ```json
-map {
-	baseGeography: {'GEOJSON_OF_MAP'},
-	selectedGeography: [
+'map' {
+	'baseGeography': {'GEOJSON_OF_MAP'},
+	'selectedGeography': [
 		{
-			name: 'Example_CountryName',
-			unit: 'Data_Associated_With_Country'
+			'name': 'Example_CountryName',
+			'unit': 'Data_Associated_With_Country'
 		}
 	]
 }
