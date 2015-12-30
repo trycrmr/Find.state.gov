@@ -29,7 +29,7 @@ EXAMPLES:
 
 ##### Map
 
-Redux will handle all of the map state/data in a tree structure. **Actions** are the only thing that can intialize a call to change the map state. **Reducers** produce the new state using the actions, without mutating the previous state. This is [Functional Programming](https://en.wikipedia.org/wiki/Functional_programming). Every possible action that can be acted on must be accounted for: ['ACTION_NAME, ACTION2_NAME']. After a new state is established React will notice, and then change the UI that corresponds on the changed state. In the case of the Map, a component designed with Leaflet will be the underlying UI that is changed. 
+Redux will handle all of the map state/data in a tree structure. **Actions** are the only thing that can intialize a call to change the map state. Actions are simply a dictionary of terms that describe what event can change the state. **Reducers** produce the new state using the actions, without mutating the previous state. This is [Functional Programming](https://en.wikipedia.org/wiki/Functional_programming). Every possible action that can be acted on must be accounted for: ['ACTION_NAME, ACTION2_NAME']. After a new state is established React will notice, and then change the UI that corresponds on the changed state. In the case of the Map, a component designed with Leaflet will be the underlying UI that is changed. 
 
 TODO: Link to code examples in the project, define actual actions
 
