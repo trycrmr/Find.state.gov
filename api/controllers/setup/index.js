@@ -83,7 +83,7 @@ module.exports = function (router) {
         res.json(data);
     });
 
-/**
+    /**
      * @GET localhost/setup/region
      */
     router.get('/region/:region', function (req, res) {
@@ -95,6 +95,14 @@ module.exports = function (router) {
         
             res.json(data);
         })
+    }); 
+
+    /**
+     * @GET localhost/setup/geoJson
+     */
+    router.get('/geoJson', function (req, res) {
+      var file = '/Users/ramboramos/eDip/Find.state.gov/api/public/geo/sovereignt_None.geoJson'
+        res.sendFile(file);
     }); 
 
 };
