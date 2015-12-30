@@ -25,18 +25,15 @@ $(document).ready(function() {
 
 	var populateCombo = function() {
 	  var $indicators = $('#indicators_ex');
-	  
+	  //var $indicator_id = $('#indicators_val_ex');
 	 
 	    //request the JSON data and parse into the select element
 	    $.getJSON('http://localhost:3000/setup/indicator', function(data){
 	 
-	      //clear the current content of the select
-	      //$indicators.html('');
-	      //data.sort(sort_by('Indicator_Name', true, function(a){return a.toUpperCase()}));
-	 
-	      //iterate over the data and append a select option
+	
 	      $.each(data, function(key, val){ 
 	        $indicators.append('<option id="' + val.Indicator_ID + '">' + val.Indicator_Name + '</option>');
+	        //$('#indicators_val_ex').append('<option id="' + val.Indicator_ID + '">' + val.Indicator_ID + '</option>');
 	        //console.log(val.Indicator_ID)
 	      })
 	    //console.log(data);
@@ -47,6 +44,8 @@ $(document).ready(function() {
 
 	$( "#indicators_ex" ).change(function() {
 	  
+	  var selectedInd = $( "#indicators_ex" )[0].selectedIndex;
+
 	  $('select[multiple]').attr('disabled',false);
 	  $('select[multiple]').empty();
 	  $(':text').attr('disabled',false);
@@ -55,6 +54,8 @@ $(document).ready(function() {
 	  //$("#last_ex").attr('disabled',false);
 	  $("#definition_ex").attr('disabled',false);
 	  $("#data_file_ex").attr('disabled',false);
+
+	  $("#indicators_id_ex").val($( "#indicators_ex option:selected").attr('id'));
 
 	  var categories=[];
 	  var subcategories=[];
@@ -118,7 +119,12 @@ $(document).ready(function() {
 	     });
 		//$("#category_ex").({'refresh': true});
 		//$("#subcategory_ex").({'refresh': true});
-	  	//debugger;
+	  	
+
+
+	  	$.each($("#category_ex option:selected"),function(key,val){
+	  		console.log("val " + val.value);
+	  	});
 
 	  });
 
