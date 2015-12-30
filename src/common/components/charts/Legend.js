@@ -9,7 +9,7 @@ export default class Legend extends Component {
         return (
         	<g>
         		{this.props.setup.map((item, i) =>
-        			<text x={startX} y={startY + i*20} font-size="55" fill={item.color}>{item.name}</text>
+        			<text key={i} x={startX} y={startY + i*20} fontSize="18" fill={item.color}>{item.name}</text>
         		)}
         	</g>
         )
@@ -17,5 +17,5 @@ export default class Legend extends Component {
 }
 
 Legend.propTypes = {
-    setup: PropTypes.array.isRequiered
+    setup: PropTypes.array.isRequired
 }
