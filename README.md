@@ -17,6 +17,30 @@ npm install
 npm run dev
 ```
 
-## Explanation
+## Usage
+
+#### Structure
 
 We have a seperation of concerns here. The API (`/api/*`) and the UI (`/src/*`). Both are separate node services. The api is Express and extended with Kraken. The UI is React/Redux and rendered on the server for Universal JavaScript.
+
+#### React/Redux
+
+EXAMPLES:
+
+##### Map
+
+Redux handles all of the map state/data in a tree structure. **Actions** are the only thing that can intialize a call to change the map state. Actions are simply a dictionary of terms that describe what event can change the state. **Reducers** produce the new state using the actions, without mutating the previous state. This is [Functional Programming](https://en.wikipedia.org/wiki/Functional_programming). Every possible action that can be acted on must be accounted for: ['ACTION_NAME, ACTION2_NAME']. After a new state is established, React will take notice and then change the UI that corresponds on the changed state. In the case of the Map, a React **Component** designed with Leaflet will be the underlying UI that is changed/rerendered. 
+
+TODO: Link to code examples in the project, define actual actions
+
+```javascript
+map {
+	baseGeography: {'GEOJSON_OF_MAP'},
+	selectedGeography: [
+		{
+			name: 'Example_CountryName',
+			unit: 'Data_Associated_With_Country'
+		}
+	]
+}
+```
