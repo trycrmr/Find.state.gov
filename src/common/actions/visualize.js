@@ -229,7 +229,7 @@ function fetchData(ind, cty, cht ) {
               set.forEach(function(row, rowdex){
                 // do this to each row in set
                 // take the row, make it date format, insert into new object
-                dataSet.numbers[setdex].push({x: new Date(row.x,1,1), y:row.y})
+                dataSet.numbers[setdex].push({x: +(new Date(row.x,1,1)), y:row.y})
               })
             })
 

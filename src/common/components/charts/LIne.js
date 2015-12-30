@@ -69,33 +69,37 @@ export default class LineChart extends Component {
             legendSetup.push({name:c,color:colors[i]})
         });
 
-        console.log(legendSetup)
-
-
-        return (
         
-            <VictoryChart
-              height={600}
-              width={800}
-              scale={{
-                x: d3.time.scale()
-              }}
-              domainPadding={{x:20}}>
-              
-              <VictoryAxis
-                tickFormat={(x) => x.getFullYear()}
-                />
-
-                {numbers.map((dset, i) =>
-                  // creates a line for each country data
-                    <VictoryLine 
-                        key={i} 
-                        data={dset}
-                        style={{ data: {stroke:colors[i]} }}
+        return (
+            <div>
+            {!this.props.dataLoaded || this.props.data === {} &&
+                <h3>Loading...</h3>
+            } 
+            {this.props.dataLoaded === true || this.props.data != {} &&
+                <VictoryChart
+                  height={600}
+                  width={800}
+                  scale={{
+                    x: d3.time.scale()
+                  }}
+                  domainPadding={{x:20}}>
+                  
+                  <VictoryAxis
+                    tickFormat={(x) => x.getFullYear()}
                     />
-                )}
-                <Legend setup={legendSetup} />
-            </VictoryChart>
+
+                    {numbers.map((dset, i) =>
+                      // creates a line for each country data
+                        <VictoryLine 
+                            key={i} 
+                            data={dset}
+                            style={{ data: {stroke:colors[i]} }}
+                        />
+                    )}
+                    <Legend setup={legendSetup} />
+                </VictoryChart>
+            }
+            </div>
         )
     }
 }
