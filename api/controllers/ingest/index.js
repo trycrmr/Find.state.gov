@@ -12,7 +12,7 @@ import IndicatorModel from '../../models/indicator';
 import DataModel from '../../models/data';
 var model = require("../../models").getModel();
 var csv = require('ya-csv');
-var _ = require('underscore');
+var _ = require('lodash');
 
 module.exports = function (router) {
 
@@ -56,6 +56,31 @@ module.exports = function (router) {
     
     });
 
+
+    /**
+     * @POST localhost/ingest/insert
+     */
+    router.post('/insert', function (req, res) {
+            
+
+        res.send('<a href="/ingest">back</a><p><pre>' + JSON.stringify(req.body) + '</pre></p><p>' + JSON.stringify(req.body.data_file) + '</p>');
+
+        var url = req.body.url;
+        var data_url = req.body.data_url;
+        var dsource = req.body.dsource;
+        var osource = req.body.osource;
+        var units = req.body.units;
+        var definition = req.body.definition;
+        var frequency = req.body.frequency;
+        var indicators = req.body.indicators;
+        var category = req.body.category;
+        var subcategory = req.body.subcategory;
+        var indicators_id = req.body.indicators_id;
+    
+    });
+
+
+
     /**
      * @POST localhost/ingest/udpate
      */
@@ -86,7 +111,7 @@ module.exports = function (router) {
 
        model.sequelize.query("update public.\"Indicators\" set \"Indicator_URL\" = \'" + url + "\', \"Indicator_Data_URL\" = \'" + data_url + "\'," +  
                             "\"Direct_Indicator_Source\" = \'" + dsource + "\', \"Original_Indicator_Source\"=\'" + osource + "\',\"Units\"=\'" + units + "\'," + 
-                            " \"Indicator_Definition\"=\'" + definition + "\', \"Update_Cycle\"=\'" + frequency + "\', \"updatedAt\" = now()::date " + 
+                            " \"Indicator_Definition\"=\'" + definition + "\', \"Update_Cycle\"=\'" + frequency + "\', \"updatedAtupdatedAt\" = now()::date " + 
                              "where \"Indicator_Name\" like \'%" + indicators_ex + "%\'").spread(function(results, metadata) {
         
             

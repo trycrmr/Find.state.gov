@@ -1,29 +1,29 @@
 $(document).ready(function() {
 	
 	$('#modal-find-existing').on('hidden.bs.modal', function(){
-    	//$(this).find('modal-find-existing')[0].reset();
-    	//alert('hi');
-    	//$('#modal-find-existing').formValidation('resetForm', true);
+    	
     	$('#modal-find-existing option[value=""]').attr('selected','true');
     	$('select[multiple]').empty();
-    	//$("#url").val('');
     	$(':text').val('');
-    	$("#url").val('');
-    	$("#data_url").val('');
-		
-		
-		//$(':url').val('');
-		$('select[multiple]').attr('disabled',true);
-		$(':text').attr('disabled',true);
+    	$("#url_ex").val('');
+    	$("#data_url_ex").val('');
+		//$('select[multiple]').attr('disabled',true);
+		//$(':text').attr('disabled',true);
+		$("#category_ex").attr('disabled',true);
+		$("#subcategory_ex").attr('disabled',true);
+		$("#dsource_ex").attr('disabled',true);
+		$("#osource_ex").attr('disabled',true);
+		$("#units_ex").attr('disabled',true);
 		$("#url_ex").attr('disabled',true);
+		$("#frequency_ex").attr('disabled',true);
 		$("#data_url_ex").attr('disabled',true);
 		$("#last_ex").attr('disabled',true);
 		$("#definition_ex").attr('disabled',true);
-    	//$('#modal-find-existing').find('input:text, input:password, select, textarea').reset();
+    	
 	});
 
 
-	var populateCombo = function() {
+	var populateExistingIndicators = function() {
 	  var $indicators = $('#indicators_ex');
 	  //var $indicator_id = $('#indicators_val_ex');
 	 
@@ -40,7 +40,25 @@ $(document).ready(function() {
 	    });
 	};
 
-	populateCombo();
+	var populateNewCategories = function(){
+
+		$.getJSON('http://localhost:3000/setup/category', function(data){
+	  		$.each(data, function(key, val){ 
+
+	  			if(val.Category_Name.length>0){
+	  				//categories.push(val.Category_Name);
+		        	$("#category").append('<option id="' + val.Category_Name + '">' + val.Category_Name + '</option>');
+		        }
+		        if(val.Sub_Category_Name.length>0){
+	  				//subcategories.push(val.Sub_Category_Name);
+		        	$("#subcategory").append('<option id="' + val.Sub_Category_Name + '">' + val.Sub_Category_Name + '</option>');
+		        }
+	  		});
+	  });
+	};
+
+	populateExistingIndicators();
+	populateNewCategories();
 
 	$( "#indicators_ex" ).change(function() {
 	  
