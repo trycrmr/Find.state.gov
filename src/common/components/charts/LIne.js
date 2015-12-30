@@ -101,5 +101,5 @@ export default class LineChart extends Component {
 }
 
 LineChart.propTypes = {
-    data: PropTypes.object.isRequiered
+    data: PropTypes.object.isRequired 
 }

@@ -91,5 +91,5 @@ export default class BarChart extends Component {
 }
 
 BarChart.propTypes = {
-    data: PropTypes.object.isRequiered
+    data: PropTypes.object.isRequired 
 }

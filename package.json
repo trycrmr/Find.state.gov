@@ -13,10 +13,11 @@
     "classnames": "^2.1.5",
     "construx": "^1.0.0",
     "construx-copier": "^1.0.0",
+    "d3": "^3.5.12",
     "excel-export": "~0.4.1",
     "express": "^4.12.2",
     "express-csv": "~0.6.0",
-    "history": "1.13.0",
+    "history": "1.17.0",
     "isomorphic-fetch": "^2.2.0",
     "jquery": "^2.1.4",
     "kraken-js": "^1.0.3",
@@ -37,7 +38,7 @@
     "sequelize": "*",
     "squel": "*",
     "underscore": "*",
-    "victory": "^0.1.0",
+    "victory": "*",
     "ya-csv": "^0.9.4"
   },
   "devDependencies": {

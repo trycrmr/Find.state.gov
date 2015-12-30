@@ -27,13 +27,14 @@ export default class ChartMenu extends Component {
                         this.props.selectedChart.indexOf("scatter") != -1 ? 'menu-selected' : ''
                         }><span onClick={this.selectOne.bind(this, "scatter")} className="scattercon chartcon"></span><br/>Scatter</td>
                         <td className={
-                        this.props.selectedChart.indexOf("bubble") != -1 ? 'menu-selected' : ''
-                        }><span onClick={this.selectOne.bind(this, "bubble")} className="bubblecon chartcon"></span><br/>Bubble</td>
+                        this.props.selectedChart.indexOf("map") != -1 ? 'menu-selected' : ''
+                        }><span onClick={this.selectOne.bind(this, "map")} className="mapcon chartcon"></span><br/>Map</td>
                       </tr>
                       <tr>
                         <td className={
-                        this.props.selectedChart.indexOf("map") != -1 ? 'menu-selected' : ''
-                        }><span onClick={this.selectOne.bind(this, "map")} className="mapcon chartcon"></span><br/>Map</td>
+                        this.props.selectedChart.indexOf("bubble") != -1 ? 'menu-selected' : ''
+                        }><span onClick={this.selectOne.bind(this, "bubble")} className="bubblecon chartcon"></span><br/>Bubble</td>
+                        
                         <td className="soon"><span className="radarcon chartcon"></span><br/>Radar (Coming Soon)</td>
                       </tr>
                       <tr>
