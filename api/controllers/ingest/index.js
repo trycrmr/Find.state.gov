@@ -12,7 +12,7 @@ import IndicatorModel from '../../models/indicator';
 import DataModel from '../../models/data';
 var model = require("../../models").getModel();
 var csv = require('ya-csv');
-var _ = require('underscore');
+var _ = require('lodash');
 
 module.exports = function (router) {
 
@@ -111,7 +111,7 @@ module.exports = function (router) {
 
        model.sequelize.query("update public.\"Indicators\" set \"Indicator_URL\" = \'" + url + "\', \"Indicator_Data_URL\" = \'" + data_url + "\'," +  
                             "\"Direct_Indicator_Source\" = \'" + dsource + "\', \"Original_Indicator_Source\"=\'" + osource + "\',\"Units\"=\'" + units + "\'," + 
-                            " \"Indicator_Definition\"=\'" + definition + "\', \"Update_Cycle\"=\'" + frequency + "\', \"updatedAt\" = now()::date " + 
+                            " \"Indicator_Definition\"=\'" + definition + "\', \"Update_Cycle\"=\'" + frequency + "\', \"updatedAtupdatedAt\" = now()::date " + 
                              "where \"Indicator_Name\" like \'%" + indicators_ex + "%\'").spread(function(results, metadata) {
         
             

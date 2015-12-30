@@ -37,7 +37,6 @@
     "request": "*",
     "sequelize": "*",
     "squel": "*",
-    "underscore": "*",
     "victory": "*",
     "ya-csv": "^0.9.4"
   },
