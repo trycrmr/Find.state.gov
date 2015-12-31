@@ -1,16 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
-export const USER_INPUT = 'USER_INPUT';
 export const GET_USER = 'GET_USER';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
-
-function logInput(input) {
-  return {
-    type: USER_INPUT,
-    field: input.field,
-    value: input.value
-  };
-}
 
 function requestUser() {
   return {
@@ -62,10 +53,4 @@ export function fetchUserIfNeeded() {
       return dispatch(fetchUser());
     }
   };
-}
-
-export function userInput(input) {
-  return function (dispatch) {
-    dispatch(logInput(input));
-  }
 }
