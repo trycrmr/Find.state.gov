@@ -13,9 +13,6 @@ export default class MapChart extends Component {
     
     }
 
-    
-    
-
     render() {
 
         
@@ -27,7 +24,6 @@ export default class MapChart extends Component {
             else {
                 
                 const position = [51.505, -0.09];
-                console.log(this.state.geoObj)
 
                 var countries = ['Brazil', 'China', 'Iraq','Iran','Canada']
                 var averages = [20,5,12,2,9]
@@ -46,7 +42,6 @@ export default class MapChart extends Component {
                
                 var getColor = function(f) {
                     var index = countries.indexOf(f.properties.sovereignt)
-                    console.log(averages[index])
                     if( index != -1) {
                         return chloropleth(averages[index],maxAvg)
                     }
@@ -68,7 +63,7 @@ export default class MapChart extends Component {
 
                 return(
 
-                      <Map center={position} zoom={5}>                        
+                      <Map center={position} zoom={3}>                        
                         <GeoJson 
                             data={this.state.geoObj} 
                             style={style}
