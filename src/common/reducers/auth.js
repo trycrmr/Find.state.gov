@@ -10,19 +10,6 @@ const initialState = {
 
 export default function UserReducer(state = initialState, action) {
   switch (action.type) {
-  case USER_INPUT:
-  if(action.field === 'email') {
-    return {
-      ...state,
-      email: action.value
-    };
-  }
-  if(action.input.field === 'password') {
-    return {
-      ...state,
-      password: action.input
-    };
-  }
   case GET_USER:
     return {
       ...state,

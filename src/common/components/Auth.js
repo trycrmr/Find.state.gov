@@ -2,21 +2,50 @@ import React, { Component } from 'react';
 
 class Login extends Component {
 
-  login(e) {
-    e.preventDefault();
-    this.props.fetchUser(this.state.user, this.state.password)
+  componentWillMount() {
+    this.setState({
+      email: '',
+      password: '',
+      reg_email: '',
+      reg_pass: '',
+      reg_name: ''
+    });
   }
 
-  handleChange(event) {
-    event.preventDefault()
-    var input = {
-      field: event.target.type,
-      value: event.target.value
+  login(e) {
+    e.preventDefault();
+    //this.props.fetchUser(this.state.user, this.state.password)
+    console.log(this.state.password)
+    console.log(this.state.email)
+  }
+
+   handleChange(event) {
+    switch(event.target.name) {
+      case 'email':
+        this.setState({email: event.target.value});
+        break;
+      case 'password':
+        this.setState({password: event.target.value})
+        break;
+      case 'reg_email':
+        this.setState({reg_email: event.target.value})
+        break;
+      case 'reg_pass':
+        this.setState({reg_pass: event.target.value})
+        break;
+      case 'reg_name':
+        this.setState({reg_name: event.target.value})
+        break;
+      default:
+       
     }
-    this.props.userInput(input)
+    console.log(this.state)
   }
 
   render() {
+
+    const { email, password,
+            reg_email, reg_pass, reg_name} = this.state
 
     return (
       <div className="container">
@@ -33,16 +62,16 @@ class Login extends Component {
               <h4>Please login... (USG Only)</h4>
 
               <div className="form-group">
-                <label htmlFor="EmailAddress"><span>*</span> Email Address</label>
-                <input value={this.props.email} onChange={this.handleChange.bind(this)} type="email" className="form-control" name="EmailAddress" id="EmailAddress" aria-required="true" aria-invalid="true" required />
+                <label htmlFor="email"><span>*</span> Email Address</label>
+                <input value={email} onChange={this.handleChange.bind(this)} placeholder="Email" type="email" className="form-control" name="email" id="EmailAddress" aria-required="true" aria-invalid="true" required />
               </div>
 
               <div className="form-group">
-                <label htmlFor="EmailAddress"><span>*</span> Password</label>
-                <input value={this.props.password} onChange={this.handleChange.bind(this)} type="password" className="form-control" name="password" id="password" aria-required="true" aria-invalid="true" required />
+                <label htmlFor="password"><span>*</span> Password</label>
+                <input value={password}  onChange={this.handleChange.bind(this)} placeholder="Password" type="password" className="form-control" name="password" id="password" aria-required="true" aria-invalid="true" required />
               </div>
 
-              <button onClick={this.login.bind(this)} className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+              <button  onClick={this.login.bind(this)} className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
             </form>
           </div> 
@@ -53,21 +82,21 @@ class Login extends Component {
               <h4>Create an Account... (USG Only)</h4>
 
               <div className="form-group">
-                <label htmlFor="EmailAddress"><span>*</span> Email Address</label>
-                <input type="email" className="form-control" name="EmailAddress" id="EmailAddress" aria-required="true" aria-invalid="true" required />
+                <label htmlFor="reg_email"><span>*</span> Email Address</label>
+                <input value={reg_email} onChange={this.handleChange.bind(this)} type="email" className="form-control" name="reg_email" id="EmailAddress" aria-required="true" aria-invalid="true" required />
               </div>
 
               <div className="form-group">
-                <label htmlFor="Password"><span>*</span> Password</label>
-                <input type="password" className="form-control" name="password" id="password" aria-required="true" aria-invalid="true" required />
+                <label htmlFor="reg_pass"><span>*</span> Password</label>
+                <input value={reg_pass} onChange={this.handleChange.bind(this)} type="password" className="form-control" name="reg_pass" id="password" aria-required="true" aria-invalid="true" required />
               </div>
 
               <div className="form-group">
-                <label htmlFor="Name"><span>*</span> First and Last Name</label>
-                <input type="text" className="form-control" name="name" id="name" aria-required="true" aria-invalid="true" required />
+                <label htmlFor="reg_name"><span>*</span> First and Last Name</label>
+                <input value={reg_name} onChange={this.handleChange.bind(this)} type="text" className="form-control" name="reg_name" id="name" aria-required="true" aria-invalid="true" required />
               </div>
 
-              <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+              <button onClick={this.login.bind(this)} className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 
             </form>
           </div> 
@@ -75,6 +104,7 @@ class Login extends Component {
         </div>
       </div>
     );
+
   }
 }
 
