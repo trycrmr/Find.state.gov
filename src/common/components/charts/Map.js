@@ -36,11 +36,11 @@ export default class MapChart extends Component {
 
                 return(
 
-                    //<Map> 
+                    //<Map > 
                         // <GeoJson data={statesData} />
                     // </Map>
 
-                      <Map center={position} zoom={13}>
+                      <Map center={position} zoom={5}>
                         <TileLayer
                           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -50,6 +50,7 @@ export default class MapChart extends Component {
                             <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
                           </Popup>
                         </Marker>
+                        <GeoJson data={this.state.geoObj} />
                       </Map>
                     
                 ) 
