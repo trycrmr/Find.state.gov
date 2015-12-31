@@ -62,8 +62,8 @@ module.exports = function (router) {
      */
     router.post('/insert', function (req, res) {
             
-
-        res.send('<a href="/ingest">back</a><p><pre>' + JSON.stringify(req.body) + '</pre></p><p>' + JSON.stringify(req.body.data_file) + '</p>');
+        res.send('<a href="/ingest">back</a></br></br>Indicator Added');
+        //res.send('<a href="/ingest">back</a><p><pre>' + JSON.stringify(req.body) + '</pre></p><p>' + JSON.stringify(req.body.data_file) + '</p>');
 
         var url = req.body.url;
         var data_url = req.body.data_url;
@@ -90,7 +90,8 @@ module.exports = function (router) {
         // parse req, validate, connect to DB, run sql statements
 
         //var thisPostsFormData = req.body; 
-        res.send('<a href="/ingest">back</a><p><pre>' + JSON.stringify(req.body) + '</pre></p><p>' + JSON.stringify(req.body.data_file) + '</p>');
+        //res.send('<a href="/ingest">back</a><p><pre>' + JSON.stringify(req.body) + '</pre></p><p>' + JSON.stringify(req.body.data_file_ex) + '</p>');
+        res.send('<a href="/ingest">back</a></br></br>Indicator Edited');
 
         var url = req.body.url_ex;
         var data_url = req.body.data_url_ex;
