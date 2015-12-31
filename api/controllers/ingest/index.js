@@ -76,6 +76,13 @@ module.exports = function (router) {
         var category = req.body.category;
         var subcategory = req.body.subcategory;
         var indicators_id = req.body.indicators_id;
+
+        model.sequelize.query("insert into public.\"Indicators\" (\"Indicator_Name\", \"Indicator_URL\", \"Indicator_Data_URL\", \"Direct_Indicator_Source\"," +
+                            "\"Original_Indicator_Source\", \"Units\", \"Indicator_Definition\", \"Update_Cycle\", \"updatedAt\",\"createdAt\") values ('" + indicators + 
+                            "', " + "\'" +url + "\', \'" + data_url + "\', \'" + dsource + "\', \'" + osource+ "\', \'"+units +"\',\'"+definition+"\',\'"+frequency+
+                            "\', now(),now())").spread(function(results, metadata) {
+        
+        });
     
     });
 
