@@ -17,6 +17,12 @@ const history = createBrowserHistory();
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState);
 const rootElement = document.getElementById('root');
+
+/**
+ * IMPORTANT
+ * if you need to run code on the client use this variable
+ * example: process.env.BROWSER ? //client-code : //server-code
+ */
 process.env.BROWSER = true;
 
 ReactDOM.render(

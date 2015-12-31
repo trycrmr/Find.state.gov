@@ -15,8 +15,9 @@ export default class MapChart extends Component {
 
     render() {
 
-        
-        if(process.env.BROWSER) {
+        // leaflet can only run in browser so important to make sure this only runs there
+        // see src/client/index for declaration
+        if( process.env.BROWSER ) {
             var { GeoJson, Map, Marker, Popup, TileLayer } = require('react-leaflet');
             if(this.state.geoObj === null) {
                return <h1>Loading ...</h1>
@@ -62,14 +63,12 @@ export default class MapChart extends Component {
                 }
 
                 return(
-
                       <Map center={position} zoom={3}>                        
                         <GeoJson 
                             data={this.state.geoObj} 
                             style={style}
                         />
                       </Map>
-                    
                 ) 
             }
         }
