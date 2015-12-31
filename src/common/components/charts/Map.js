@@ -1,22 +1,15 @@
 import React, { PropTypes, Component } from 'react';
-import SovMap from '../../../assets/sovereignt.js'
 
 export default class MapChart extends Component {
 
     // this gets called initially 
     componentWillMount() {
-        // $.get('http://localhost:3000/setup/geoJson', function(result) {
-        //     var geoJsonObj = result
-        //     this.setState({
-        //         geoObj: JSON.parse(geoJsonObj)
-        //     });
-        // }.bind(this));
-
-        var geoJsonObj = result
-        
-        this.setState({
-            geoObj: JSON.parse(geoJsonObj)
-        });
+        $.get('http://localhost:3000/setup/geoJson', function(result) {
+            var geoJsonObj = result
+            this.setState({
+                geoObj: JSON.parse(geoJsonObj)
+            });
+        }.bind(this));
     
     }
 
@@ -39,7 +32,7 @@ export default class MapChart extends Component {
                 var chlorapleth = ['']
 
                 function chloropleth(d, rangeTop) {
-                    return d > rangeTop ? '#800026' :
+                    return d >= rangeTop ? '#800026' :
                            d > rangeTop * .8  ? '#BD0026' :
                            d > rangeTop * .65  ? '#E31A1C' :
                            d > rangeTop * .5  ? '#FC4E2A' :
@@ -52,8 +45,7 @@ export default class MapChart extends Component {
                     var index = countries.indexOf(f.properties.sovereignt)
                     if( index != -1) {
                         return chloropleth(averages[index],maxAvg)
-                    }
-                        
+                    }   
                     else
                         return "grey"
                 }
@@ -64,7 +56,6 @@ export default class MapChart extends Component {
                         weight: 2,
                         opacity: 1,
                         color: 'white',
-                        dashArray: '3',
                         fillOpacity: 0.7
                     };
                 }
