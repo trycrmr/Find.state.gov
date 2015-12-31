@@ -41,15 +41,8 @@ export default class MapChart extends Component {
                     // </Map>
 
                       <Map center={position} zoom={5}>
-                        <TileLayer
-                          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        />
-                        <Marker position={position}>
-                          <Popup>
-                            <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-                          </Popup>
-                        </Marker>
+                        
+                        
                         <GeoJson data={this.state.geoObj} />
                       </Map>
                     
