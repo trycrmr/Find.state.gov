@@ -33,6 +33,25 @@ export default class MapChart extends Component {
                 const position = [51.505, -0.09];
                 console.log(this.state.geoObj)
 
+                var countries = ['United States', 'China']
+               
+                var getColor = function(f) {
+                    if(countries.indexOf(f.properties.sovereignt) != -1)
+                        return "blue"
+                    else
+                        return "grey"
+                }
+
+                function style(feature) {
+                    return {
+                        fillColor: getColor(feature),
+                        weight: 2,
+                        opacity: 1,
+                        color: 'white',
+                        dashArray: '3',
+                        fillOpacity: 0.7
+                    };
+                }
 
                 return(
 
@@ -43,7 +62,10 @@ export default class MapChart extends Component {
                       <Map center={position} zoom={5}>
                         
                         
-                        <GeoJson data={this.state.geoObj} />
+                        <GeoJson 
+                            data={this.state.geoObj} 
+                            style={style}
+                        />
                       </Map>
                     
                 ) 

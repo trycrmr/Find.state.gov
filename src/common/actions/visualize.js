@@ -316,19 +316,22 @@ function fetchData(ind, cty, cht ) {
         })
         .then(response => response.json())
         .then(json => {
-          console.log(json.data_set.numbers);
             var dataSet = {
               countries: json.data_set.countries,
-              numbers: new Array(json.data_set.numbers.length)
+              numbers: new Array(json.data_set.numbers.length),
+              averages: new Array(json.data_set.numbers.length)
             };
             json.data_set.numbers.forEach(function(set, setdex) {
               // do this to each set in the array
-              dataSet.numbers[setdex] = new Array();
+              dataSet.numbers[setdex] = new Array()
+              dataSet.averages[setdex] = 0
               set.forEach(function(row, rowdex){
                 // do this to each row in set
                 // take the row, make it date format, insert into new object
                 dataSet.numbers[setdex].push({x: +(new Date(row.x,1,1)), y:row.y})
+                dataSet.averages[setdex] += row.y
               })
+              dataSet.averages[setdex] = dataSet.averages[setdex] / dataSet.numbers[setdex].length
             })
 
             dispatch(receiveData(dataSet))
