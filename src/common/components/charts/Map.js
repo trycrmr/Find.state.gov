@@ -6,6 +6,7 @@ export default class MapChart extends Component {
     componentWillMount() {
         $.get('http://localhost:3000/setup/geoJson', function(result) {
             var geoJsonObj = result
+            console.log('got result')
             this.setState({
                 geoObj: JSON.parse(geoJsonObj)
             });
@@ -19,7 +20,8 @@ export default class MapChart extends Component {
         // see src/client/index for declaration
         if( process.env.BROWSER ) {
             var { GeoJson, Map, Marker, Popup, TileLayer } = require('react-leaflet');
-            if(this.state.geoObj === null) {
+            
+            if(this.state == null) {
                return <h1>Loading ...</h1>
             }
             else {
