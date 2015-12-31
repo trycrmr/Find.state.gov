@@ -83,6 +83,53 @@ module.exports = function (router) {
                             "\', now(),now())").spread(function(results, metadata) {
         
         });
+
+        var categories ="";
+        var subcategories = "";
+
+        if(typeof(category)==='string'){
+            categories+="\"Category_Name\" like \'" + category + "\' or "
+        }
+        else{
+
+            _.each(category,function(index, value){
+                categories+="\"Category_Name\" like \'" + index + "\' or "
+            });
+
+        }
+    
+
+        if(subcategory.length<1)
+            categories=categories.slice(0,-3);
+
+
+        if(typeof(subcategory)==='string'){
+            subcategories+="\"Sub_Category_Name\" like \'" + subcategory + "\' or "
+        }
+        else{
+
+            _.each(subcategory,function(index, value){
+                subcategories+="\"Sub_Category_Name\" like \'" + index + "\' or "
+            });
+
+        }
+
+        subcategories=subcategories.slice(0,-3);
+
+
+        var query = "select \"Category_ID\" from public.\"Categories\" where " + categories + " " + subcategories;
+        model.sequelize.query(query , { type: model.sequelize.QueryTypes.SELECT
+        }).then(function(categoryIDs) {
+            console.log(categoryIDs);
+
+            _.each(categoryIDs,function(index, value){
+                model.sequelize.query("insert into public.\"Category_Junction\" (\"createdAt\", \"updatedAt\",\"Indicator_ID\", \"Category_ID\")" +
+                    " values (now(),now(), (select \"Indicator_ID\" from public.\"Indicators\" where \"Indicator_Name\" like \'" + indicators + "\') ," + index.Category_ID + ")" 
+                        ).then(function(results, metadata) {
+            
+                        })
+            });
+        });
     
     });
 
@@ -139,16 +186,9 @@ module.exports = function (router) {
 
         }
     
-        console.log("**********" + category_ex.length);
-        console.log(categories);
-        console.log("*******************" + typeof(category_ex))
 
         if(subcategory_ex.length<1)
             categories=categories.slice(0,-3);
-
-        console.log("**********" + category_ex.length);
-        console.log(categories);
-        console.log("*******************" + typeof(category_ex))
 
         if(typeof(subcategory_ex)==='string'){
             subcategories+="\"Sub_Category_Name\" like \'" + subcategory_ex + "\' or "
