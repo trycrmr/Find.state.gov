@@ -1,15 +1,22 @@
 import React, { PropTypes, Component } from 'react';
+import SovMap from '../../../assets/sovereignt.js'
 
 export default class MapChart extends Component {
 
     // this gets called initially 
     componentWillMount() {
-        $.get('http://localhost:3000/setup/geoJson', function(result) {
-            var geoJsonObj = result
-            this.setState({
-                geoObj: JSON.parse(geoJsonObj)
-            });
-        }.bind(this));
+        // $.get('http://localhost:3000/setup/geoJson', function(result) {
+        //     var geoJsonObj = result
+        //     this.setState({
+        //         geoObj: JSON.parse(geoJsonObj)
+        //     });
+        // }.bind(this));
+
+        var geoJsonObj = result
+        
+        this.setState({
+            geoObj: JSON.parse(geoJsonObj)
+        });
     
     }
 
