@@ -6,6 +6,7 @@ export default class MapChart extends Component {
     componentWillMount() {
         $.get('http://localhost:3000/setup/geoJson', function(result) {
             var geoJsonObj = result
+            console.log('got result')
             this.setState({
                 geoObj: JSON.parse(geoJsonObj)
             });
@@ -19,7 +20,8 @@ export default class MapChart extends Component {
         // see src/client/index for declaration
         if( process.env.BROWSER ) {
             var { GeoJson, Map, Marker, Popup, TileLayer } = require('react-leaflet');
-            if(this.state.geoObj === null) {
+            
+            if(this.state == null) {
                return <h1>Loading ...</h1>
             }
             else {
@@ -32,7 +34,7 @@ export default class MapChart extends Component {
                 var chlorapleth = ['']
 
                 function chloropleth(d, rangeTop) {
-                    return d > rangeTop ? '#800026' :
+                    return d >= rangeTop ? '#800026' :
                            d > rangeTop * .8  ? '#BD0026' :
                            d > rangeTop * .65  ? '#E31A1C' :
                            d > rangeTop * .5  ? '#FC4E2A' :
@@ -45,8 +47,7 @@ export default class MapChart extends Component {
                     var index = countries.indexOf(f.properties.sovereignt)
                     if( index != -1) {
                         return chloropleth(averages[index],maxAvg)
-                    }
-                        
+                    }   
                     else
                         return "grey"
                 }
@@ -57,7 +58,6 @@ export default class MapChart extends Component {
                         weight: 2,
                         opacity: 1,
                         color: 'white',
-                        dashArray: '3',
                         fillOpacity: 0.7
                     };
                 }
