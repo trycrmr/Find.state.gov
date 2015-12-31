@@ -25,19 +25,32 @@ export default class MapChart extends Component {
                return <h1>Loading ...</h1>
             }
             else {
-                // this.state.geoObj is now accessable
-                // temporarily just uses sovereignt
-
-                // TODO ALL FUNCTIONALITY HERE
                 
                 const position = [51.505, -0.09];
                 console.log(this.state.geoObj)
 
-                var countries = ['United States', 'China']
+                var countries = ['Brazil', 'China', 'Iraq','Iran','Canada']
+                var averages = [20,5,12,2,9]
+                var maxAvg = [20]
+                var chlorapleth = ['']
+
+                function chloropleth(d, rangeTop) {
+                    return d > rangeTop ? '#800026' :
+                           d > rangeTop * .8  ? '#BD0026' :
+                           d > rangeTop * .65  ? '#E31A1C' :
+                           d > rangeTop * .5  ? '#FC4E2A' :
+                           d > rangeTop * .35  ? '#FD8D3C' :
+                           d > rangeTop * .2  ? '#FEB24C' :
+                           '#FED976' 
+                }
                
                 var getColor = function(f) {
-                    if(countries.indexOf(f.properties.sovereignt) != -1)
-                        return "blue"
+                    var index = countries.indexOf(f.properties.sovereignt)
+                    console.log(averages[index])
+                    if( index != -1) {
+                        return chloropleth(averages[index],maxAvg)
+                    }
+                        
                     else
                         return "grey"
                 }
@@ -55,13 +68,7 @@ export default class MapChart extends Component {
 
                 return(
 
-                    //<Map > 
-                        // <GeoJson data={statesData} />
-                    // </Map>
-
-                      <Map center={position} zoom={5}>
-                        
-                        
+                      <Map center={position} zoom={5}>                        
                         <GeoJson 
                             data={this.state.geoObj} 
                             style={style}
