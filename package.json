@@ -25,6 +25,8 @@
     "leaflet": "^0.7.7",
     "lodash": "*",
     "moment": "*",
+    "njwt": "^0.2.3",
+    "node-uuid": "^1.4.7",
     "pg": "*",
     "react": "*",
     "react-bootstrap": "*",

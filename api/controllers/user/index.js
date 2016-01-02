@@ -4,10 +4,13 @@
  * Pull base data such as Categories and indicators
  * @author Michael Ramos 
  */
-
 'use strict';
 
 //import UserModel from '../../lib/user';
+
+// global key used for jwt signing
+var uuid = require('node-uuid');
+var secretKey = uuid.v4();
 
 module.exports = function (router) {
 
@@ -22,8 +25,9 @@ module.exports = function (router) {
 	/**
 	 * @POST localhost/setup/category
 	 */
-    router.post('/', function (req, res) {
-    	var um = new UserModel();
+    router.post('/validate', function (req, res) {
+    	//var um = new UserModel();
+    	console.log("=========USER VALIDATE==========")
     	console.log(req.body);
 	});        
 

@@ -40,7 +40,7 @@ class Login extends Component {
     e.preventDefault();
     // methods will extract parts they need from this local 
     // state and to put into the global state
-    this.props.LoginUser(this.state)
+    this.props.loginUser(this.state)
   }
 
   register(e) {

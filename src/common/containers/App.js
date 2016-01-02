@@ -18,19 +18,21 @@ class App extends Component {
     super(props);
   }
 
+
   componentDidMount() {
     // when the component mounts, we want to run a method and see
     // if there's any user token logged in
-    fetchUserIfNeeded()
+    //fetchUserIfNeeded()
   }
 
   render() {
+    
     return (
       <div>
-        {!this.props.auth.present.loggedIn &&
+        {!this.props.children.auth &&
           <Header  />
         }
-        {this.props.auth.present.loggedIn &&
+        {this.props.children.auth &&
           <Header user={true} />
         }
         
