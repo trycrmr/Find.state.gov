@@ -12,6 +12,7 @@ import error404 from "./components/404"
 import HomeView from "./containers/Home"
 import VisualizeView from "./containers/Visualize"
 import AuthView from "./containers/Auth"
+import DashView from "./containers/Dashboard"
 
 
 export default (
@@ -19,6 +20,7 @@ export default (
       <Route path="home" component={HomeView} />
       <Route path="visualize" component={VisualizeView} />
       <Route path="auth" component={AuthView} />
+      <Route path="dashboard" component={DashView} />
       <Route path="*" component={error404}/>
   </Route>
 );

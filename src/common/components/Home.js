@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DataStory from '../components/DataStory';
 
 class Home extends Component {
-
+  
   render() {
     return (
       <div>

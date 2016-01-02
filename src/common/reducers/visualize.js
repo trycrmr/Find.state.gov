@@ -19,7 +19,7 @@ const initialState = {
   buildReady: false
 };
 
-export default function Visualize(state = initialState, action) {
+export default function visualize(state = initialState, action) {
   switch (action.type) {
   case GET_SETUP:
     return {

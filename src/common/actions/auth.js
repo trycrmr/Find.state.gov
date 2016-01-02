@@ -1,56 +1,102 @@
 import fetch from 'isomorphic-fetch';
 
-export const GET_USER = 'GET_USER';
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const VALIDATE_USER = 'VALIDATE_USER';
+export const VALIDATE_USER_COMPLETE = 'VALIDATE_USER_COMPLETE';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const LOGOUT_USER_COMPLETE = 'LOGOUT_USER_COMPLETE';
 
-function requestUser() {
+function requestValidation() {
   return {
-    type: GET_USER
+    type: VALIDATE_USER
   };
 }
 
-function receiveUser(json) {
+function receiveValidation(json) {
   return {
-    type: GET_USER_SUCCESS,
-    user: json
+    type: VALIDATE_USER_COMPLETE,
+    token: json.jwt
   };
 }
 
-// Build action creaters that return a function instead of the
+// Build action creaters (export funcs) that return a function instead of the
 // actions above (thanks to redux-thunk middleware):
-function fetchUser(email, pass) {
+
+function setSessionToken(json) {
+  if (json || json.token != null ) {
+    localStorage.setItem('token', json.token);
+  }
+}
+
+function fetchUser(token) {
   // thunk middleware knows how to handle functions
   return function (dispatch) {
-    dispatch(requestUser());
+    dispatch(requestValidation());
+
+    let savedToken = localStorage.getItem('token');
+    if (savedToken !== token) {
+    // if the jwt passed in and the jwt in localStorage don't match, then we redirect them to the manual login page to reprompt for password
+    // TODO: AUTO LOGIN FAILURE, CLEAR JWT AND USER STATE
+    } else {
+      // Return a promise to wait for
+      return fetch('http://localhost:3000/user/validate', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          token: token
+        })
+      })
+      .then(response => response.json())
+      .then(json => {
+        setSessionToken(json)
+        dispatch(receiveValidation(json))
+      });
+    }
+  };
+}
+
+export function fetchUserIfNeeded() {
+  return (dispatch, getState) => {
+
+    // session token
+    let token = localStorage.getItem('token');
+    
+    // if no session exits, then there is no user
+    if ( !token ) {
+      // no user token, not logged in
+      return Promise.resolve();
+    } else if(getState().auth.present.loggedIn) {
+      // there is a token and stored user state
+      return Promise.resolve();
+    } else {
+      // theres a token but no user state
+      return dispatch(fetchUser(token));
+    }
+  };
+}
+
+export function loginUser(input) {
+  // thunk middleware knows how to handle functions
+  return function (dispatch) {
+    dispatch(requestValidation());
 
     // Return a promise to wait for
-    return fetch('http://localhost:3000/user', {
+    return fetch('http://localhost:3000/user/validate', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: email,
-        pass: pass
+        email: input.email,
+        password: input.password
       })
     }).then(response => response.json())
       .then(json => {
-        dispatch(receiveUser(json))
+        setSessionToken(json)
+        dispatch(receiveValidation(json))
       });
-  };
-}
-
-// No need to call the external API if data is already in memory
-// or if user is not logged in yet
-export function fetchUserIfNeeded() {
-  return (dispatch, getState) => {
-    if ( true === true ) {
-      // Let the calling code know there's nothing to wait for.
-      return Promise.resolve();
-    } else {
-      // Dispatch a thunk from thunk!
-      return dispatch(fetchUser());
-    }
   };
 }

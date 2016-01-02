@@ -35,4 +35,8 @@ class Header extends Component {
   }
 }
 
+Header.propTypes = {
+  user: PropTypes.bool
+};
+
 export default Header;

@@ -1,27 +1,27 @@
 import { 
-  GET_STORIES, GET_STORIES_SUCCESS
-} from '../actions/datastory';
+  GET_USER_DATA, RECIEVE_USER_DATA
+} from '../actions/dashboard';
 
 // Build our Reducer with a default state of an empty array:
 const initialState = {
   loaded: false,
-  stories: []
+  loading: false,
+  userData: {}
 };
 
-export default function datastory(state = initialState, action) {
+export default function dashboard(state = initialState, action) {
   switch (action.type) {
-  case GET_STORIES:
+  case GET_USER_DATA:
     return {
       ...state,
       loading: true
     };
-  case GET_STORIES_SUCCESS:
+  case RECIEVE_USER_DATA:
     return {
       ...state,
       loading: false,
       loaded: true,
-      lastUpdated: Date.now(),
-      stories: action.stories
+      userData: action.userData
     };
   default:
     return state;

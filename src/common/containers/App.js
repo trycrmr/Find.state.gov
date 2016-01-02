@@ -3,8 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+
+// needed base components
 import Home from '../components/Home'
 import Header from '../components/layout/Header'
+
+// needed auth action for all
+import { fetchUserIfNeeded } from '../actions/auth'
 
 
 class App extends Component {
@@ -13,12 +18,25 @@ class App extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    // when the component mounts, we want to run a method and see
+    // if there's any user token logged in
+    fetchUserIfNeeded()
+  }
+
   render() {
     return (
       <div>
+        {!this.props.auth.present.loggedIn &&
           <Header  />
-            {!this.props.children && <Home />}
-            {this.props.children}
+        }
+        {this.props.auth.present.loggedIn &&
+          <Header user={true} />
+        }
+        
+        {!this.props.children && <Home />}
+          {this.props.children}
+        }
       </div>
         
     );

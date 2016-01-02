@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 import Auth from '../components/Auth'
 import * as AuthActions from '../actions/auth'
 
-//Data that needs to be called before rendering the component
-//This is used for server side rending via the fetchComponentDataBeforeRending() method
+// Data that needs to be called before rendering the component
+// This is used for server side rending via the fetchComponentDataBeforeRending() method
 Auth.need = [
-  AuthActions.fetchUserIfNeeded
+  AuthActions.fetchUserIfNeeded,
+  AuthActions.loginUser
 ]
 
 function mapStateToProps(state) {
@@ -17,24 +18,21 @@ function mapStateToProps(state) {
     auth = auth.present;
 
     const {
-        email,
-        password,
         validating,
+        loggingOut,
         loggedIn,
-        userData
+        token
     } = auth || {
-        email: '',
-        password: '',
         validating: false,
+        loggingOut: false,
         loggedIn: false,
-        userData: {}
+        token: null
     };
-        return {
-        email,
-        password,
+    return {
         validating,
+        loggingOut,
         loggedIn,
-        userData
+        token
     };
 }
 

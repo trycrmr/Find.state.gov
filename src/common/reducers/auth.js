@@ -1,26 +1,42 @@
 import { 
-	USER_INPUT, GET_USER, GET_USER_SUCCESS
+  VALIDATE_USER, VALIDATE_USER_COMPLETE,
+  LOGOUT_USER, LOGOUT_USER_COMPLETE
 } from '../actions/auth';
 
 // Build our Reducer with a default state of an empty array:
 const initialState = {
+  validating: false,
+  loggingOut: false,
   loggedIn: false,
-  user: {}
+  token: {}
 };
 
-export default function UserReducer(state = initialState, action) {
+export default function auth(state = initialState, action) {
   switch (action.type) {
-  case GET_USER:
+  case VALIDATE_USER:
     return {
       ...state,
       validating: true
     };
-  case GET_USER_SUCCESS:
+  case VALIDATE_USER_COMPLETE:
     return {
       ...state,
       validating: false,
       loggedIn: true,
-      stories: action.stories
+      token: action.token
+    };
+  case LOGOUT_USER:
+    return {
+      ...state,
+      loggingOut: true,
+    };
+  case LOGOUT_USER_COMPLETE:
+    return {
+      ...state,
+      validating: false,
+      loggingOut: false,
+      loggedIn: false,
+      token: null
     };
   default:
     return state;

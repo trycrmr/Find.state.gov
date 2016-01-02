@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 class Login extends Component {
 
+  // React initial method
   componentWillMount() {
+    // Create a local state for forms
     this.setState({
       email: '',
       password: '',
@@ -12,14 +14,8 @@ class Login extends Component {
     });
   }
 
-  login(e) {
-    e.preventDefault();
-    //this.props.fetchUser(this.state.user, this.state.password)
-    console.log(this.state.password)
-    console.log(this.state.email)
-  }
-
-   handleChange(event) {
+  // handles form input changes and local state
+  handleChange(event) {
     switch(event.target.name) {
       case 'email':
         this.setState({email: event.target.value});
@@ -36,16 +32,28 @@ class Login extends Component {
       case 'reg_name':
         this.setState({reg_name: event.target.value})
         break;
-      default:
-       
+      default:      
     }
-    console.log(this.state)
+  }
+
+  login(e) {
+    e.preventDefault();
+    // methods will extract parts they need from this local 
+    // state and to put into the global state
+    this.props.LoginUser(this.state)
+  }
+
+  register(e) {
+    // TODO:
+    // this.props.RegisterUser(this.state)
   }
 
   render() {
 
-    const { email, password,
-            reg_email, reg_pass, reg_name} = this.state
+    const { 
+      email, password,
+      reg_email, reg_pass, reg_name
+    } = this.state
 
     return (
       <div className="container">
