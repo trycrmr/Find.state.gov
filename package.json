@@ -18,6 +18,7 @@
     "excel-export": "~0.4.1",
     "express": "^4.12.2",
     "express-csv": "~0.6.0",
+    "fast-csv":"*",
     "history": "1.17.0",
     "isomorphic-fetch": "^2.2.0",
     "jquery": "^2.1.4",
@@ -41,8 +42,7 @@
     "sequelize": "*",
     "squel": "*",
     "underscore": "*",
-    "victory": "^0.1.1",
-    "ya-csv": "^0.9.4"
+    "victory": "^0.1.1"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",
