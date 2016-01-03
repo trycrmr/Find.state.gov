@@ -11,8 +11,8 @@ import CategoryModel from '../../models/category';
 import IndicatorModel from '../../models/indicator';
 import DataModel from '../../models/data';
 var model = require("../../models").getModel();
-var csv = require('ya-csv');
 var _ = require('lodash');
+var csv = require("fast-csv");
 
 module.exports = function (router) {
 
@@ -35,9 +35,7 @@ module.exports = function (router) {
 		// TODO handle form data
 		// parse req, validate, connect to DB, run sql statements
 
-        var thisPostsFormData = req.body; 
-        res.send('<a href="/">back</a><p><pre>' + JSON.stringify(thisPostsFormData) + '</pre></p>');
-        console.log(thisPostsFormData);
+        
     
 	});
 
@@ -158,10 +156,39 @@ module.exports = function (router) {
         var category_ex = req.body.category_ex;
         var subcategory_ex = req.body.subcategory_ex;
         var indicators_id_ex = req.body.indicators_id_ex;
-        //var last = req.body.las
+        
+
+        model.sequelize.query("delete from public.\"Data\" where \"Indicator_ID\" = " + indicators_id_ex).spread(function(results, metadata) {
+        
+            
+        });
+        
+        csv
+             .fromPath(req.files.data_file_ex.path, {headers: true})
+             .on("data", function(data){
+                 //console.log(data[0]);
+                 /*console.log("**** ********");
+                 console.log(data.Country);
+                 console.log("****");*/
+
+                 model.sequelize.query("insert into public.\"Data\" (\"Country_ID\", \"Indicator_ID\", \"Date\", \"Value\",\"createdAt\",\"updatedAt\") values" +
+                                         "((select \"Country_ID\" from public.\"Countries\" Where \"Country_Name\" like '" + data.Country + "')," + indicators_id_ex +
+                                        "," + data.Year + "," + data.Value + "," + "now(),now())"
+ 
+                        ).then(function(results, metadata) {
+            
+                        })
+
+             })
+             .on("end", function(){
+                 console.log("done");
+             });
+
+ 
 
         model.sequelize.query("delete from public.\"Category_Junction\" where \"Indicator_ID\" = " + indicators_id_ex).spread(function(results, metadata) {
-        
+                
+                
         });
 
        model.sequelize.query("update public.\"Indicators\" set \"Indicator_URL\" = \'" + url + "\', \"Indicator_Data_URL\" = \'" + data_url + "\'," +  
@@ -217,6 +244,8 @@ module.exports = function (router) {
                         })
             });
         });
+
+        
 
     }); 
         
