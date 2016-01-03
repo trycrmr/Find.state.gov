@@ -236,7 +236,7 @@ Terry Creamer, Leroy Bryant -->
   </div> 
 
   <!--The modal with the form on it-->
-  <div class="modal fade" id="modal-find-existing" enctype="multipart/form-data")>
+  <div class="modal fade" id="modal-find-existing">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -248,7 +248,7 @@ Terry Creamer, Leroy Bryant -->
 
         <div class="modal-body">
           <!--Form-->
-          <form method="post" action="/ingest/update">
+          <form method="post" action="/ingest/update" ENCTYPE="multipart/form-data">
             <div class="form-group">
               <label for="indicators_ex">Indicators</label>              
               <select name="indicators_ex" id="indicators_ex" class="form-control">
