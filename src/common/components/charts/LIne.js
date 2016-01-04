@@ -54,14 +54,14 @@ export default class LineChart extends Component {
         const { countries, numbers } = this.props.data
 
         // this scale is used for chart axis
-        var dateScale = {}
-        numbers.map(function(set){
-            if ( !dateScale.min || dateScale.min > set[0].x)
-                dateScale.min = set[0].x
-            if ( !dateScale.max || dateScale.max < set[set.length - 1].x)
-                dateScale.max = set[set.length - 1].x
-        })
-        dateScale.mid = new Date(dateScale.max - (dateScale.max-dateScale.min)/2)
+        // var dateScale = {}
+        // numbers.map(function(set){
+        //     if ( !dateScale.min || dateScale.min > set[0].x)
+        //         dateScale.min = set[0].x
+        //     if ( !dateScale.max || dateScale.max < set[set.length - 1].x)
+        //         dateScale.max = set[set.length - 1].x
+        // })
+        // dateScale.mid = new Date(dateScale.max - (dateScale.max-dateScale.min)/2)
         
         // legend setup
         var legendSetup = []

@@ -87,7 +87,10 @@ var Data = function(request, response, rescallback) {
         //var dbArray = []
 
         self.indicators.map(function(i) {
-            self.dbArray.push(i.split(' ').join('_').toLowerCase())
+            
+
+            self.dbArray.push(i.trim().split(' ').join('_').toLowerCase().replace(/,/g , ""))
+            console.log(self.dbArray)
         })
 
 
@@ -291,9 +294,6 @@ var Data = function(request, response, rescallback) {
             countries: res_countries,
             numbers: res_numbers
         } 
-
-
-
 
 
         response['attributes'] = _.map(self.drilldown, function(d){

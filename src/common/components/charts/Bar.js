@@ -80,7 +80,7 @@ export default class BarChart extends Component {
                     <VictoryBar
                         key={i} 
                         data={dset}
-                        style={{ data: {fill:colors[i]} }}
+                        style={{ data: {fill:colors[i],width:40} }}
                     />
                 )}
                 

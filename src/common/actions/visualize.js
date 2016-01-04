@@ -233,93 +233,10 @@ function fetchData(ind, cty, cht ) {
         })
         .then(response => response.json())
         .then(json => {
-          console.log(json.data_set.numbers);
-            var dataSet = {
-              countries: json.data_set.countries,
-              numbers: new Array(json.data_set.numbers.length)
-            };
-            json.data_set.numbers.forEach(function(set, setdex) {
-              // do this to each set in the array
-              dataSet.numbers[setdex] = new Array();
-              set.forEach(function(row, rowdex){
-                // do this to each row in set
-                // take the row, make it date format, insert into new object
-                dataSet.numbers[setdex].push({x: +(new Date(row.x,1,1)), y:row.y})
-              })
-            })
-
-            dispatch(receiveData(dataSet))
-        });
-  };
-}
-
-export function requestDataForBuild() {
-    return (dispatch, getState) => {
-        // No need to call the external API if data is already in memory:
-        const { selectedIndicators,
-                selectedCountries,
-                selectedChart } = getState().visualize.present
-        return dispatch(fetchData(selectedIndicators, selectedCountries, selectedChart));
-    }
-}
-
-// action creators
-export function fetchDataIfNeeded() {
-    return (dispatch, getState) => {
-        // No need to call the external API if data is already in memory:
-        if ( getState().data && getState().data.loaded ) {
-          // Let the calling code know there's nothing to wait for.
-          return Promise.resolve();
-        } else {
-          return dispatch(fetchData());
-        }
-    }
-}
-
-
-/********************
- *   MAP Actions   *
- ********************/
-
-// actions to be dispatched
-function requestData() {
-  return {
-    type: GET_DATA
-  };
-}
-
-function receiveData(json) {
-  return {
-    type: GET_DATA_SUCCESS,
-    data: json
-  };
-}
-
-// action functionality
-function fetchData(ind, cty, cht ) {
-  // thunk middleware knows how to handle functions
-  return function (dispatch) {
-    dispatch(requestData());
-
-    // Return a promise to wait for
-    return fetch('http://localhost:3000/visualize/data', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                indicators: ind,
-                countries: cty,
-                chart: cht
-            })
-        })
-        .then(response => response.json())
-        .then(json => {
             var dataSet = {
               countries: json.data_set.countries,
               numbers: new Array(json.data_set.numbers.length),
-              averages: new Array(json.data_set.numbers.length)
+              averages: new Array(json.data_set.countries.length)
             };
             json.data_set.numbers.forEach(function(set, setdex) {
               // do this to each set in the array
@@ -331,9 +248,16 @@ function fetchData(ind, cty, cht ) {
                 dataSet.numbers[setdex].push({x: +(new Date(row.x,1,1)), y:row.y})
                 dataSet.averages[setdex] += row.y
               })
-              dataSet.averages[setdex] = dataSet.averages[setdex] / dataSet.numbers[setdex].length
-            })
+               var total = dataSet.averages[setdex] / dataSet.numbers[setdex].length
+               dataSet.averages[setdex] = {}
+               var final = [{
+                  x: dataSet.countries[setdex],
+                  y: total
+               }]
+               dataSet.averages[setdex] = final
 
+            })
+            console.log(dataSet.averages)
             dispatch(receiveData(dataSet))
         });
   };
