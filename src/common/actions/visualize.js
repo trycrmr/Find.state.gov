@@ -169,7 +169,7 @@ function fetchSetup() {
     dispatch(requestSetup());
 
     // Return a promise to wait for
-    return fetch('http://localhost:3000/visualize/setup')
+    return fetch('http://localhost:3000/setup/indicatorsByCategory')
       .then(response => response.json())
       .then(json => {
         dispatch(receiveSetup(json))

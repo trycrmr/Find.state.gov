@@ -123,7 +123,6 @@ module.exports = function (router) {
           }  
         }
 
-
         res.json(obj);
       })
   });  
