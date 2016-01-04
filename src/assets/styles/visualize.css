@@ -99,7 +99,7 @@
 }
 .category-list dt {
   padding-left: 5px;
-  font-size: 1.2em;
+  font-size: 1em;
   line-height: 30px;
   color: #981b1e;
   min-height: 20px;
@@ -112,7 +112,7 @@
 }
 .category-list dd {
   padding-left: 15px;
-  font-size: 1.2em;
+  font-size: 1em;
   height: 100%;
   color: #323a45;
   margin: 3px;
