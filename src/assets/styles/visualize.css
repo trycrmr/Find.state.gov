@@ -90,10 +90,12 @@
 }
 .viz-column hr {
   border-width: 6px;
-  border-color: #205493;;
+  border-color: #205493;
 }
 .menu-selected {
   background-color: #dce4ef;
+  border: 1px dotted #205493;
+  border-radius: 5px;
 }
 .category-list dt {
   padding-left: 5px;
@@ -106,7 +108,7 @@
   clear: both;
 }
 .category-list dt:hover {
-  background-color: #dce4ef;
+  background-color: lightslategray;
 }
 .category-list dd {
   padding-left: 15px;
@@ -147,7 +149,7 @@
   text-align:  center
 }
 .cat-icons:hover {
-  background-color: grey;
+  background-color: lightslategray;
   cursor: pointer;
 }
 .filter-country {

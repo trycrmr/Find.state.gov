@@ -87,7 +87,13 @@ export default class Category extends Component {
         <header className="viz-col-head"><h4>Choose Indicators</h4><hr/></header>
         <div className="icon-container">
           {categories.map((cat, i) =>
-              <div onClick={this.collapseCat.bind(this, cat.name)} className="cat-icons"><p>{cat.name}</p></div> 
+              <div 
+              onClick={this.collapseCat.bind(this, cat.name)} 
+              className={
+                this.state.openCat != cat.name ? 'cat-icons' : 'cat-icons menu-selected'
+              }>
+              <p>{cat.name}</p>
+              </div> 
           )}
         </div>
           {categories.map((cat, i) =>
