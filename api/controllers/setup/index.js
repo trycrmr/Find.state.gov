@@ -123,6 +123,9 @@ module.exports = function (router) {
           }  
         }
 
+        var ctys = [{name: "Iraq"}]
+        obj.countries = ctys
+
         res.json(obj);
       })
   });  
