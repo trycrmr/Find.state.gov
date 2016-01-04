@@ -158,7 +158,7 @@ module.exports = function (router) {
         var indicators_id_ex = req.body.indicators_id_ex;
         
 
-        model.sequelize.query("delete from public.\"Data\" where \"Indicator_ID\" = " + indicators_id_ex).spread(function(results, metadata) {
+        model.sequelize.query("delete from public.\"Data\" where \"Indicator_ID\" = " + indicators_id_ex).then(function(results, metadata) {
         
             
         });
@@ -172,7 +172,7 @@ module.exports = function (router) {
                  console.log("****");*/
 
                  model.sequelize.query("insert into public.\"Data\" (\"Country_ID\", \"Indicator_ID\", \"Date\", \"Value\",\"createdAt\",\"updatedAt\") values" +
-                                         "((select \"Country_ID\" from public.\"Countries\" Where \"Country_Name\" like '" + data.Country + "')," + indicators_id_ex +
+                                         "((select \"Country_ID\" from public.\"Countries\" Where \"Sub_Country_Name\" like '" + data.Country + "')," + indicators_id_ex +
                                         "," + data.Year + "," + data.Value + "," + "now(),now())"
  
                         ).then(function(results, metadata) {
@@ -193,7 +193,7 @@ module.exports = function (router) {
 
        model.sequelize.query("update public.\"Indicators\" set \"Indicator_URL\" = \'" + url + "\', \"Indicator_Data_URL\" = \'" + data_url + "\'," +  
                             "\"Direct_Indicator_Source\" = \'" + dsource + "\', \"Original_Indicator_Source\"=\'" + osource + "\',\"Units\"=\'" + units + "\'," + 
-                            " \"Indicator_Definition\"=\'" + definition + "\', \"Update_Cycle\"=\'" + frequency + "\', \"updatedAtupdatedAt\" = now()::date " + 
+                            " \"Indicator_Definition\"=\'" + definition + "\', \"Update_Cycle\"=\'" + frequency + "\', \"updatedAt\" = now()::date " + 
                              "where \"Indicator_Name\" like \'%" + indicators_ex + "%\'").spread(function(results, metadata) {
         
             
