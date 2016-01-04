@@ -63,7 +63,7 @@ export default class MapChart extends Component {
                 }
 
                 return(
-                      <Map center={position} zoom={3}>                        
+                      <Map center={position} zoom={2.5}>                        
                         <GeoJson 
                             data={this.state.geoObj} 
                             style={style}
