@@ -241,6 +241,29 @@ color: #981b1e;
   background-size: contain;
 }
 
+/* Banner */
+.edit-btn {
+  float: left;
+  background-color: lightslategray;
+  color: white;
+  font-size: .8em;
+  margin-left: 3%;
+  margin-top: 2%;
+  width: 15em;
+  padding: 5px;
+  border: none;
+}
+.edit-btn:hover {
+  background-color: #323a45;
+}
+.ind-title {
+  color: #323a45;
+  clear: both;
+}
+.chart-content {
+  clear: both;
+}
+
 /* build button pulsing */
 .build-button {
   position: relative;

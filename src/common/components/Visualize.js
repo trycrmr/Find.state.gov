@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 
 import BuildMenu from './visualize/BuildMenu'
 
+import ChartBanner from './charts/Banner'
 import LineChart from './charts/Line'
 import BarChart from './charts/Bar'
-
 import MapChart from './charts/Map'
-
-
 
 class Visualize extends Component {
     constructor(props) {
@@ -15,7 +13,8 @@ class Visualize extends Component {
     }
 
     componentWillMount() {
-        this.props.fetchSetupIfNeeded();
+        this.props.fetchSetupIfNeeded()
+        this.props.displayModal
     }
 
     render() {
@@ -31,6 +30,10 @@ class Visualize extends Component {
                         <button onClick={this.props.displayModal} type="button" className="btn btn-lg" >Build a Visualization</button>
                     </span>
                     </div>
+                }
+                {this.props.dataLoaded === true &&
+                    // always shown for any chart
+                    <ChartBanner {...this.props} data={this.props.data} />
                 }
                 {this.props.dataLoaded === true && this.props.selectedChart === 'line' &&
                     <LineChart data={this.props.data} />

@@ -71,7 +71,7 @@ export default class LineChart extends Component {
 
         
         return (
-            <div>
+            <div className="chart-content">
             {!this.props.dataLoaded || this.props.data === {} &&
                 <h3>Loading...</h3>
             } 
