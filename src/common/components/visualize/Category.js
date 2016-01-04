@@ -33,13 +33,20 @@ class Subcategory extends Component {
   componentDidMount() {
     // Create a local state for forms
     this.setState({
-      openSubs: []
+      openSub: ""
     });
   }
 
-  collapseSub(id) {
-    this.state.openSubs.push(id)
-    console.log(this.state.openSubs)
+  collapseSub(sub) {
+    if(this.state.openSub != sub) { 
+      this.setState({
+        openSub: sub
+      });
+    } else {
+    this.setState({
+        openSub: ""
+      });
+    }
   }
 
   render () {
@@ -47,15 +54,19 @@ class Subcategory extends Component {
     return (
       <dl>
         {subcategories.map((sub, i) =>
-          <div
-            className="sub-list"
-            key={i}
-            //onClick={this.collapseSub.bind(this, i)}
-            >
-            <dt>{sub.name}</dt>
-            <Indicator {...this.props} indicators={sub.indicators} />
-          </div>       
-        )}
+            this.state.openSub === sub.name ?  
+              <div key={i} >
+                <dt onClick={this.collapseSub.bind(this, sub.name)} className={
+                  this.state.openSub != sub.name ? 'sub-list' : 'sub-list menu-selected'
+                }>{sub.name}</dt>         
+                <Indicator {...this.props} indicators={sub.indicators} />
+              </div>
+            :
+              <div className="sub-list" key={i} onClick={this.collapseSub.bind(this, sub.name)}>
+                <dt>{sub.name}</dt>
+              </div> 
+            
+          )} 
       </dl>
     );
   }
@@ -87,9 +98,7 @@ export default class Category extends Component {
         <header className="viz-col-head"><h4>Choose Indicators</h4><hr/></header>
         <div className="icon-container">
           {categories.map((cat, i) =>
-              <div 
-              onClick={this.collapseCat.bind(this, cat.name)} 
-              className={
+              <div key={i} onClick={this.collapseCat.bind(this, cat.name)} className={
                 this.state.openCat != cat.name ? 'cat-icons' : 'cat-icons menu-selected'
               }>
               <p>{cat.name}</p>

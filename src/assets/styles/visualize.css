@@ -121,10 +121,6 @@
 .category-list dd:hover {
   background-color: lightslategray;
 }
-.ind-list {
-  position: absolute;
-  visibility: hidden;
-}
 .icon-container {
   width: 100%;
   height: 105px;
