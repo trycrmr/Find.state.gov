@@ -44,39 +44,5 @@ module.exports = function (router) {
 		});
 	});
 
-	/**
-	 * @GET localhost/visualize/setup
-	 */
-    router.get('/setup', function (req, res) {
-    	var jres = {
-				"categories": [
-					{
-						"title": "Economic Growth",
-						"indicators": [
-							{"name": "Access to electricity"}, {"name": "Access to Land"}, {"name": "Adults using mobile money in the past year"}
-						]
-					}, {
-						"title": "IT Developers",
-						"indicators": [
-							{"name": "GDP Growth"}, {"name": "GDP per capita, PPP"}, {"name": "General government revenue"}
-						]
-					}, {
-						"title": "Office of eDiplomacy",
-						"indicators": [
-							{"name": "Employees, agriculture, male"}, {"name": "Employees, industry, female"}, {"name": "Unemployment, total"}
-						]
-					}
-				],
-				"countries": [
-					{"name": "Iraq"},
-					{"name": "Brazil"},
-					{"name": "France"},
-					{"name": "China"},
-					{"name": "Angola"}
-				]
-		}
-
-    	res.json(jres);
-	});      
 
 };

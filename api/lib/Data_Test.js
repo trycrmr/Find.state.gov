@@ -87,8 +87,6 @@ var Data = function(request, response, rescallback) {
         //var dbArray = []
 
         self.indicators.map(function(i) {
-            
-
             self.dbArray.push(i.trim().split(' ').join('_').toLowerCase().replace(/,/g , ""))
             console.log(self.dbArray)
         })
@@ -271,6 +269,7 @@ var Data = function(request, response, rescallback) {
         var res_countries = [];
         var res_numbers = [];
         var iterator = 0;
+        var res_ind = self.indicators[0]
 
         // TODO explain the map functionality
         var ind = self.dbArray[0] + '__avg'
@@ -292,7 +291,8 @@ var Data = function(request, response, rescallback) {
         // prepare the response object with chartable data
         response['data_set'] = {
             countries: res_countries,
-            numbers: res_numbers
+            numbers: res_numbers,
+            indicator: res_ind
         } 
 
 

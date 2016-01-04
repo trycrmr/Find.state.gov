@@ -234,10 +234,12 @@ function fetchData(ind, cty, cht ) {
         .then(response => response.json())
         .then(json => {
             var dataSet = {
+              indicator: json.data_set.indicator,
               countries: json.data_set.countries,
               numbers: new Array(json.data_set.numbers.length),
               averages: new Array(json.data_set.countries.length)
             };
+            console.log(dataSet)
             json.data_set.numbers.forEach(function(set, setdex) {
               // do this to each set in the array
               dataSet.numbers[setdex] = new Array()
@@ -257,7 +259,7 @@ function fetchData(ind, cty, cht ) {
                dataSet.averages[setdex] = final
 
             })
-            console.log(dataSet.averages)
+            console.log(dataSet.indicator_name)
             dispatch(receiveData(dataSet))
         });
   };
