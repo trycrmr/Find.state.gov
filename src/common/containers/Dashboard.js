@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import React, { Component} from 'react'
 import { connect } from 'react-redux'
-import Dash from '../components/dashboard'
+import Dash from '../components/Dashboard'
 import * as DashActions from '../actions/dashboard'
 
 //Data that needs to be called before rendering the component
