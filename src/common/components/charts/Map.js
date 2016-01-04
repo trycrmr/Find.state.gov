@@ -27,12 +27,11 @@ export default class MapChart extends Component {
             else {
                 
                 const position = [51.505, -0.09];
-
-                var countries = ['Brazil', 'China', 'Iraq','Iran','Canada']
-                var averages = [20,5,12,2,9]
-                var maxAvg = [20]
-                var chlorapleth = ['']
-
+                const {countries, averages} = this.props.data
+                // var countries = ['Brazil', 'China', 'Iraq','Iran','Canada']
+                // var averages = [20,5,12,2,9]
+                var maxAvg = 31000
+                
                 function chloropleth(d, rangeTop) {
                     return d >= rangeTop ? '#800026' :
                            d > rangeTop * .8  ? '#BD0026' :
@@ -44,9 +43,10 @@ export default class MapChart extends Component {
                 }
                
                 var getColor = function(f) {
-                    var index = countries.indexOf(f.properties.sovereignt)
+                    var index = countries.indexOf(f.properties.sovereignt.toLowerCase())
                     if( index != -1) {
-                        return chloropleth(averages[index],maxAvg)
+                        
+                        return chloropleth(averages[index][0].y,maxAvg)
                     }   
                     else
                         return "grey"
