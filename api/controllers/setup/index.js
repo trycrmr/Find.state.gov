@@ -188,4 +188,44 @@ module.exports = function (router) {
         res.sendFile(file);
     }); 
 
+    /**
+     * @GET localhost/setup/geoJson
+     */
+    router.get('/jquery', function (req, res) {
+      var file = '/Users/ramboramos/eDip/Find.state.gov/node_modules/jquery/dist/jquery.min.js'
+        res.sendFile(file);
+    }); 
+
+    /**
+     * @GET localhost/setup/geoJson
+     */
+    router.get('/leaflet/js', function (req, res) {
+      var file = '/Users/ramboramos/eDip/Find.state.gov/node_modules/leaflet/dist/leaflet.js'
+        res.sendFile(file);
+    }); 
+
+    /**
+     * @GET localhost/setup/geoJson
+     */
+    router.get('/leaflet/css', function (req, res) {
+      var file = '/Users/ramboramos/eDip/Find.state.gov/node_modules/leaflet/dist/leaflet.css'
+        res.sendFile(file);
+    }); 
+
+    /**
+     * @GET localhost/setup/geoJson
+     */
+    router.get('/bootstrap/css', function (req, res) {
+      var file = '/Users/ramboramos/eDip/Find.state.gov/node_modules/bootstrap/dist/css/bootstrap.min.css'
+        res.sendFile(file);
+    }); 
+
+    /**
+     * @GET localhost/setup/geoJson
+     */
+    router.get('/bootstrap/js', function (req, res) {
+      var file = '/Users/ramboramos/eDip/Find.state.gov/node_modules/bootstrap/dist/js/bootstrap.min.js'
+        res.sendFile(file);
+    }); 
+
 };

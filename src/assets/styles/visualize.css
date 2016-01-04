@@ -213,31 +213,31 @@ color: #981b1e;
   background-color: none;
 }
 .barcon {
-  background: url("http://find.state.gov/static/find-ui/dist/app/images/noun_bar_45998.png") center center no-repeat;
+  background: url(../img/noun_bar_45998.png) center center no-repeat;
   background-size: contain;
 }
 .scattercon {
-  background: url("http://find.state.gov/static/find-ui/dist/app/images/noun_scatter_105477.png") center center no-repeat;
+  background: url(../img/noun_scatter_105477.png) center center no-repeat;
   background-size: contain;
 }
 .linecon {
-  background: url("http://find.state.gov/static/find-ui/dist/app/images/noun_line_105490.png") center center no-repeat;
+  background: url(../img/noun_line_105490.png) center center no-repeat;
   background-size: contain;
 }
 .bubblecon {
-  background: url("http://find.state.gov/static/find-ui/dist/app/images/noun_scatter_105477.png") center center no-repeat;
+  background: url(../img/noun_scatter_105477.png) center center no-repeat;
   background-size: contain;
 }
 .mapcon {
-  background: url("http://find.state.gov/static/find-ui/dist/app/images/noun_globe_76672.png") center center no-repeat;
+  background: url(../img/noun_globe_76672.png) center center no-repeat;
   background-size: contain;
 }
 .radarcon {
-  background: url("http://find.state.gov/static/find-ui/dist/app/images/noun_radar_50835.png") center center no-repeat;
+  background:  url(../img/noun_radar_50835.png) center center no-repeat;
   background-size: contain;
 }
 .treecon {
-  background: url("http://find.state.gov/static/find-ui/dist/app/images/treemap.png") center center no-repeat;
+  background: url(../img/treemap.png) center center no-repeat;
   background-size: contain;
 }
 

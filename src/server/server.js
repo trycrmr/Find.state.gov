@@ -24,9 +24,9 @@ const renderFullPage = (html, initialState) => {
       <head>
         <meta charset="utf-8">
         <title>Find State Tests</title>
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-        <link rel="stylesheet" type="text/css" href="/static/app.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="http://localhost:3000/setup/leaflet/css" />
+        <link rel="stylesheet" type="text/css" href="/static/app.css" />
+        <link rel="stylesheet" type="text/css" href="http://localhost:3000/setup/bootstrap/css" />
       </head>
       <body>
         <div id="root">${html}</div>
@@ -36,9 +36,9 @@ const renderFullPage = (html, initialState) => {
         <script src="/static/bundle.js"></script>
          
 
-        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://localhost:3000/setup/leaflet/js"></script>
+        <script src="http://localhost:3000/setup/jquery"></script>
+        <script src="http://localhost:3000/setup/bootstrap/js"></script>
       </body>
     </html>
   `;
