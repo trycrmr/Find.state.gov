@@ -57,7 +57,7 @@ class Subcategory extends Component {
             this.state.openSub === sub.name ?  
               <div key={i} >
                 <dt onClick={this.collapseSub.bind(this, sub.name)} className={
-                  this.state.openSub != sub.name ? 'sub-list' : 'sub-list menu-selected'
+                  this.state.openSub != sub.name ? 'sub-list' : 'sub-list menu-selected-option'
                 }>{sub.name}</dt>         
                 <Indicator {...this.props} indicators={sub.indicators} />
               </div>
@@ -99,7 +99,7 @@ export default class Category extends Component {
         <div className="icon-container">
           {categories.map((cat, i) =>
               <div key={i} onClick={this.collapseCat.bind(this, cat.name)} className={
-                this.state.openCat != cat.name ? 'cat-icons' : 'cat-icons menu-selected'
+                this.state.openCat != cat.name ? 'cat-icons' : 'cat-icons menu-selected-option'
               }>
               <p>{cat.name}</p>
               </div> 
