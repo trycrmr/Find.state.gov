@@ -61,7 +61,7 @@ class Login extends Component {
       } 
       else {
         this.setState({
-          failed: 'email'
+          failed: 'Email Format not correct'
         })
       }
     } 
