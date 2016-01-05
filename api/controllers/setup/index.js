@@ -184,7 +184,7 @@ module.exports = function (router) {
      * @GET localhost/setup/geoJson
      */
     router.get('/geoJson', function (req, res) {
-      var file = '/Users/ramboramos/eDip/Find.state.gov/api/public/geo/sovereignt_None.geoJson'
+      var file = '/Users/bryantlc/Find.state.gov/api/public/geo/sovereignt_None.geoJson'
         res.sendFile(file);
     }); 
 
@@ -192,7 +192,7 @@ module.exports = function (router) {
      * @GET localhost/setup/geoJson
      */
     router.get('/jquery', function (req, res) {
-      var file = '/Users/ramboramos/eDip/Find.state.gov/node_modules/jquery/dist/jquery.min.js'
+      var file = '/Users/bryantlc/Find.state.gov/node_modules/jquery/dist/jquery.min.js'
         res.sendFile(file);
     }); 
 
@@ -200,7 +200,7 @@ module.exports = function (router) {
      * @GET localhost/setup/geoJson
      */
     router.get('/leaflet/js', function (req, res) {
-      var file = '/Users/ramboramos/eDip/Find.state.gov/node_modules/leaflet/dist/leaflet.js'
+      var file = '/Users/bryantlc/Find.state.gov/node_modules/leaflet/dist/leaflet.js'
         res.sendFile(file);
     }); 
 
@@ -208,7 +208,7 @@ module.exports = function (router) {
      * @GET localhost/setup/geoJson
      */
     router.get('/leaflet/css', function (req, res) {
-      var file = '/Users/ramboramos/eDip/Find.state.gov/node_modules/leaflet/dist/leaflet.css'
+      var file = '/Users/bryantlc/Find.state.gov/node_modules/leaflet/dist/leaflet.css'
         res.sendFile(file);
     }); 
 
@@ -216,7 +216,7 @@ module.exports = function (router) {
      * @GET localhost/setup/geoJson
      */
     router.get('/bootstrap/css', function (req, res) {
-      var file = '/Users/ramboramos/eDip/Find.state.gov/node_modules/bootstrap/dist/css/bootstrap.min.css'
+      var file = '/Users/bryantlc/Find.state.gov/node_modules/bootstrap/dist/css/bootstrap.min.css'
         res.sendFile(file);
     }); 
 
@@ -224,7 +224,7 @@ module.exports = function (router) {
      * @GET localhost/setup/geoJson
      */
     router.get('/bootstrap/js', function (req, res) {
-      var file = '/Users/ramboramos/eDip/Find.state.gov/node_modules/bootstrap/dist/js/bootstrap.min.js'
+      var file = '/Users/bryantlc/Find.state.gov/node_modules/bootstrap/dist/js/bootstrap.min.js'
         res.sendFile(file);
     }); 
 
