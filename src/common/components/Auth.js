@@ -40,9 +40,36 @@ class Login extends Component {
 
   login(e) {
     e.preventDefault();
-    // methods will extract parts they need from this local 
-    // state and to put into the global state
-    this.props.loginUser(this.state)
+    var { email, pass} = this.state
+
+    function len(inp) {
+      return validator.isLength(inp, 2, 55);
+    }
+    
+    if ( len(email), len(pass) ) {
+      reg_email = validator.normalizeEmail(email);
+      if ( reg_email != false ) {
+        reg_email = validator.escape(email)
+        reg_pass = validator.escape(pass)
+
+        var sanatized = {
+          email: reg_email,
+          pass: reg_pass
+        } 
+        // all checks passed
+        this.props.loginUser(sanatized)
+      } 
+      else {
+        this.setState({
+          failed: 'email'
+        })
+      }
+    } 
+    else {
+      this.setState({
+        failed: 'must only enter 2-55 characters'
+      })
+    }  
   }
 
   register(e) {
