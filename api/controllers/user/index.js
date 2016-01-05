@@ -6,9 +6,8 @@
  */
 'use strict';
 import validator from 'validator';
+var model = require("../../models").getModel();
 
-
-//import UserModel from '../../lib/user';
 
 // global key used for jwt signing
 var uuid = require('node-uuid');
@@ -20,7 +19,7 @@ module.exports = function (router) {
 	 * @GET localhost/user
 	 */
     router.get('/', function (req, res) {
-    	var um = new UserModel();
+    	//var um = new UserModel();
     	res.send(um.getUserData());
     	//TODO REMOVE THIS ^
 	});
@@ -41,14 +40,14 @@ module.exports = function (router) {
     	//var um = new UserModel();
     	console.log("=========USER REGISTER==========")
     	console.log(req.body);
-    	var User = new UserModel();
-    	var newUser = User.build({
-  			Name: req.body.reg_name,
-  			Email: req.body.reg_email,
-  			Password: req.body.reg_pass
+   
+    	var User = model.User.build({
+  			Name: req.body.name,
+  			Email: req.body.email,
+  			Password: req.body.password
 		})
-		User.save().then(function() {
-  			console.log('added new user')
+		User.save().then(function(data) {
+  			console.log('added new user' + data)
 		}).catch(function(err) {
 			console.log(err);
 		})
