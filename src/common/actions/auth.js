@@ -93,7 +93,8 @@ export function fetchUserIfNeeded() {
 export function loginUser(input) {
   // thunk middleware knows how to handle functions
   return function (dispatch) {
-    dispatch(requestValidation());
+    //dispatch(requestValidation());
+    console.log(input)
 
     // Return a promise to wait for
     return fetch('http://localhost:3000/user/validate', {
@@ -104,7 +105,7 @@ export function loginUser(input) {
       },
       body: JSON.stringify({
         email: input.email,
-        password: input.password
+        password: input.pass
       })
     }).then(response => response.json())
       .then(json => {

@@ -8,7 +8,7 @@ class Login extends Component {
     // Create a local state for forms
     this.setState({
       email: '',
-      password: '',
+      pass: '',
       reg_email: '',
       reg_pass: '',
       reg_name: '',
@@ -22,8 +22,8 @@ class Login extends Component {
       case 'email':
         this.setState({email: event.target.value});
         break;
-      case 'password':
-        this.setState({password: event.target.value})
+      case 'pass':
+        this.setState({pass: event.target.value})
         break;
       case 'reg_email':
         this.setState({reg_email: event.target.value})
@@ -41,20 +41,20 @@ class Login extends Component {
   login(e) {
     e.preventDefault();
     var { email, pass} = this.state
-
+    
     function len(inp) {
       return validator.isLength(inp, 2, 55);
     }
-    
+
     if ( len(email), len(pass) ) {
-      reg_email = validator.normalizeEmail(email);
-      if ( reg_email != false ) {
-        reg_email = validator.escape(email)
-        reg_pass = validator.escape(pass)
+      email = validator.normalizeEmail(email);
+      if ( email != false ) {
+        email = validator.escape(email)
+        pass = validator.escape(pass)
 
         var sanatized = {
-          email: reg_email,
-          pass: reg_pass
+          email: email,
+          pass: pass
         } 
         // all checks passed
         this.props.loginUser(sanatized)
@@ -112,7 +112,7 @@ class Login extends Component {
   render() {
 
     const { 
-      email, password,
+      email, pass,
       reg_email, reg_pass, reg_name
     } = this.state
 
@@ -137,8 +137,8 @@ class Login extends Component {
               </div>
 
               <div className="form-group">
-                <label htmlFor="password"><span>*</span> Password</label>
-                <input value={password}  onChange={this.handleChange.bind(this)} placeholder="Password" type="password" className="form-control" name="password" id="password" aria-required="true" aria-invalid="true" required />
+                <label htmlFor="pass"><span>*</span> Password</label>
+                <input value={pass}  onChange={this.handleChange.bind(this)} placeholder="Password" type="password" className="form-control" name="pass" id="password" aria-required="true" aria-invalid="true" required />
               </div>
 
               <button  onClick={this.login.bind(this)} className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
