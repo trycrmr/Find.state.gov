@@ -5,6 +5,7 @@
  * @author Michael Ramos, Leroy Bryant
  */
 'use strict';
+var path = require('path')
 
 var model = require("../../models").getModel();
 
@@ -184,48 +185,42 @@ module.exports = function (router) {
      * @GET localhost/setup/geoJson
      */
     router.get('/geoJson', function (req, res) {
-      var file = '/Users/bryantlc/Find.state.gov/api/public/geo/sovereignt_None.geoJson'
-        res.sendFile(file);
+        res.sendFile(path.resolve(__dirname+'../../../public/geo/sovereignt_None.geoJson'))
     }); 
 
     /**
      * @GET localhost/setup/geoJson
      */
     router.get('/jquery', function (req, res) {
-      var file = '/Users/bryantlc/Find.state.gov/node_modules/jquery/dist/jquery.min.js'
-        res.sendFile(file);
+        res.sendFile(path.resolve(__dirname+'../../../../node_modules/jquery/dist/jquery.min.js'));
     }); 
 
     /**
      * @GET localhost/setup/geoJson
      */
     router.get('/leaflet/js', function (req, res) {
-      var file = '/Users/bryantlc/Find.state.gov/node_modules/leaflet/dist/leaflet.js'
-        res.sendFile(file);
+        res.sendFile(path.resolve(__dirname+'../../../../node_modules/leaflet/dist/leaflet.js'));
     }); 
 
     /**
      * @GET localhost/setup/geoJson
      */
     router.get('/leaflet/css', function (req, res) {
-      var file = '/Users/bryantlc/Find.state.gov/node_modules/leaflet/dist/leaflet.css'
-        res.sendFile(file);
+        res.sendFile(path.resolve(__dirname+'../../../../node_modules/leaflet/dist/leaflet.css'));
     }); 
 
     /**
      * @GET localhost/setup/geoJson
      */
     router.get('/bootstrap/css', function (req, res) {
-      var file = '/Users/bryantlc/Find.state.gov/node_modules/bootstrap/dist/css/bootstrap.min.css'
-        res.sendFile(file);
+        res.sendFile(path.resolve(__dirname+'../../../../node_modules/bootstrap/dist/css/bootstrap.min.css'));
     }); 
 
     /**
      * @GET localhost/setup/geoJson
      */
     router.get('/bootstrap/js', function (req, res) {
-      var file = '/Users/bryantlc/Find.state.gov/node_modules/bootstrap/dist/js/bootstrap.min.js'
-        res.sendFile(file);
+        res.sendFile(path.resolve(__dirname+'../../../../node_modules/bootstrap/dist/js/bootstrap.min.js'));
     }); 
 
 };

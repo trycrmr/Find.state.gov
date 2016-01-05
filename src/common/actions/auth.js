@@ -14,7 +14,7 @@ function requestValidation() {
 function receiveValidation(json) {
   return {
     type: VALIDATE_USER_COMPLETE,
-    message: json.msg
+    message: json.msg,
     token: json.jwt
   };
 }

@@ -10,6 +10,7 @@
 import CategoryModel from '../../models/category';
 import IndicatorModel from '../../models/indicator';
 import DataModel from '../../models/data';
+var path = require('path')
 var model = require("../../models").getModel();
 var _ = require('lodash');
 var csv = require("fast-csv");
@@ -20,11 +21,7 @@ module.exports = function (router) {
 	 * @GET localhost/ingest
 	 */
     router.get('/', function (req, res) {
-    		
-    	// TODO Send html file to client
-    	// res.send('PATH TO HTML FORM');
-    	res.sendFile('/Users/bryantlc/Find.state.gov/api/public/form.html');
-    
+    	res.sendFile(path.resolve(__dirname+'../../../public/form.html')); 
 	});
 
     /**
@@ -35,8 +32,6 @@ module.exports = function (router) {
 		// TODO handle form data
 		// parse req, validate, connect to DB, run sql statements
 
-        
-    
 	});
 
 
