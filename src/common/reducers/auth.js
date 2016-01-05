@@ -22,8 +22,7 @@ export default function auth(state = initialState, action) {
     return {
       ...state,
       validating: false,
-      loggedIn: true,
-      token: action.token
+      loggedIn: true
     };
   case LOGOUT_USER:
     return {

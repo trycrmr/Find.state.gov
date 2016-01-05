@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import validator from 'validator'
 
 class Login extends Component {
 
@@ -7,10 +8,11 @@ class Login extends Component {
     // Create a local state for forms
     this.setState({
       email: '',
-      password: '',
+      pass: '',
       reg_email: '',
       reg_pass: '',
-      reg_name: ''
+      reg_name: '',
+      failed: 'none'
     });
   }
 
@@ -20,8 +22,8 @@ class Login extends Component {
       case 'email':
         this.setState({email: event.target.value});
         break;
-      case 'password':
-        this.setState({password: event.target.value})
+      case 'pass':
+        this.setState({pass: event.target.value})
         break;
       case 'reg_email':
         this.setState({reg_email: event.target.value})
@@ -38,21 +40,79 @@ class Login extends Component {
 
   login(e) {
     e.preventDefault();
-    // methods will extract parts they need from this local 
-    // state and to put into the global state
-    this.props.loginUser(this.state)
+    var { email, pass} = this.state
+    
+    function len(inp) {
+      return validator.isLength(inp, 2, 55);
+    }
+
+    if ( len(email), len(pass) ) {
+      email = validator.normalizeEmail(email);
+      if ( email != false ) {
+        email = validator.escape(email)
+        pass = validator.escape(pass)
+
+        var sanatized = {
+          email: email,
+          pass: pass
+        } 
+        // all checks passed
+        this.props.loginUser(sanatized)
+      } 
+      else {
+        this.setState({
+          failed: 'Email Format not correct'
+        })
+      }
+    } 
+    else {
+      this.setState({
+        failed: 'must only enter 2-55 characters'
+      })
+    }  
   }
 
   register(e) {
     e.preventDefault();
-    // TODO:
-    this.props.RegisterUser(this.state)
+
+    var { reg_email, reg_pass, reg_name } = this.state
+
+    function len(inp) {
+      return validator.isLength(inp, 2, 55);
+    }
+    
+    if ( len(reg_email), len(reg_pass), len(reg_name) ) {
+      reg_email = validator.normalizeEmail(reg_email);
+      if ( reg_email != false ) {
+        reg_email = validator.escape(reg_email)
+        reg_pass = validator.escape(reg_pass)
+        reg_name = validator.escape(reg_name)
+
+        var sanatized = {
+          reg_email: reg_email,
+          reg_pass: reg_pass,
+          reg_name: reg_name
+        } 
+        // all checks passed
+        this.props.registerUser(sanatized)
+      } 
+      else {
+        this.setState({
+          failed: 'email'
+        })
+      }
+    } 
+    else {
+      this.setState({
+        failed: 'must only enter 2-55 characters'
+      })
+    }  
   }
 
   render() {
 
     const { 
-      email, password,
+      email, pass,
       reg_email, reg_pass, reg_name
     } = this.state
 
@@ -62,6 +122,7 @@ class Login extends Component {
         <header>
           <h1>Welcome to Find</h1>
         </header>
+        {this.state.failed === 'none' ? null : <h2> Input Failed: {this.state.failed} </h2>}
 
         <div className="content">
 
@@ -76,14 +137,15 @@ class Login extends Component {
               </div>
 
               <div className="form-group">
-                <label htmlFor="password"><span>*</span> Password</label>
-                <input value={password}  onChange={this.handleChange.bind(this)} placeholder="Password" type="password" className="form-control" name="password" id="password" aria-required="true" aria-invalid="true" required />
+                <label htmlFor="pass"><span>*</span> Password</label>
+                <input value={pass}  onChange={this.handleChange.bind(this)} placeholder="Password" type="password" className="form-control" name="pass" id="password" aria-required="true" aria-invalid="true" required />
               </div>
 
               <button  onClick={this.login.bind(this)} className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
             </form>
           </div> 
+          
           <h1> or </h1>
           <div className="form-container">
 
@@ -105,7 +167,7 @@ class Login extends Component {
                 <input value={reg_name} onChange={this.handleChange.bind(this)} type="text" className="form-control" name="reg_name" id="name" aria-required="true" aria-invalid="true" required />
               </div>
 
-              <button onClick={this.login.bind(this)} className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+              <button onClick={this.register.bind(this)} className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 
             </form>
           </div> 

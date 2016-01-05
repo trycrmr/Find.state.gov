@@ -1,4 +1,6 @@
 import fetch from 'isomorphic-fetch';
+import validator from 'validator';
+
 
 export const VALIDATE_USER = 'VALIDATE_USER';
 export const VALIDATE_USER_COMPLETE = 'VALIDATE_USER_COMPLETE';
@@ -13,6 +15,12 @@ function requestValidation() {
 
 function receiveValidation(json) {
   return {
+    type: VALIDATE_USER_COMPLETE
+  };
+}
+
+function invalidInput(input) {
+  return {
     type: VALIDATE_USER_COMPLETE,
     message: json.msg,
     token: json.jwt
@@ -25,7 +33,7 @@ function receiveValidation(json) {
 // actions above (thanks to redux-thunk middleware):
 
 function setSessionToken(json) {
-  if (json || json.token != null ) {
+  if (json || json.token != null || !json.valid) {
     localStorage.setItem('token', json.token);
   }
 }
@@ -83,7 +91,8 @@ export function fetchUserIfNeeded() {
 export function loginUser(input) {
   // thunk middleware knows how to handle functions
   return function (dispatch) {
-    dispatch(requestValidation());
+    //dispatch(requestValidation());
+    console.log(input)
 
     // Return a promise to wait for
     return fetch('http://localhost:3000/user/validate', {
@@ -94,7 +103,7 @@ export function loginUser(input) {
       },
       body: JSON.stringify({
         email: input.email,
-        password: input.password
+        password: input.pass
       })
     }).then(response => response.json())
       .then(json => {
@@ -117,13 +126,14 @@ export function registerUser(input) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: input.email,
-        name: input.name,
-        password: input.password
+        email: input.reg_email,
+        name: input.reg_name,
+        password: input.reg_pass
       })
     }).then(response => response.json())
       .then(json => {
         // on a successful registration lets log them in
+        console.log(json)
         setSessionToken(json)
         dispatch(receiveValidation(json))
       });

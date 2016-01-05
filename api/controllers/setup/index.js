@@ -5,8 +5,8 @@
  * @author Michael Ramos, Leroy Bryant
  */
 'use strict';
-var path = require('path')
 
+var path = require('path')
 var model = require("../../models").getModel();
 
 module.exports = function (router) {
