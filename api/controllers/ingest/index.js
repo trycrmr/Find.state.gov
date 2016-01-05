@@ -23,7 +23,7 @@ module.exports = function (router) {
     		
     	// TODO Send html file to client
     	// res.send('PATH TO HTML FORM');
-    	res.sendFile('/Users/ramboramos/eDip/Find.state.gov/api/public/form.html');
+    	res.sendFile('/Users/bryantlc/Find.state.gov/api/public/form.html');
     
 	});
 
@@ -74,6 +74,33 @@ module.exports = function (router) {
         var category = req.body.category;
         var subcategory = req.body.subcategory;
         var indicators_id = req.body.indicators_id;
+
+        if(req.files.data_file_ex.size>0){
+            
+
+                model.sequelize.query("delete from public.\"Data\" where \"Indicator_ID\" = " + indicators_id_ex).then(function(results, metadata) {
+                
+                    
+                });
+                
+                csv
+                     .fromPath(req.files.data_file_ex.path, {headers: true})
+                     .on("data", function(data){
+                        
+                         model.sequelize.query("insert into public.\"Data\" (\"Country_ID\", \"Indicator_ID\", \"Date\", \"Value\",\"createdAt\",\"updatedAt\") values" +
+                                                 "((select \"Country_ID\" from public.\"Countries\" Where \"Sub_Country_Name\" like '" + data.Country + "')," + indicators_id_ex +
+                                                "," + data.Year + "," + data.Value + "," + "now(),now())"
+         
+                                ).then(function(results, metadata) {
+                    
+                                })
+
+                     })
+                     .on("end", function(){
+                         console.log("done");
+                     });
+
+        }
 
         model.sequelize.query("insert into public.\"Indicators\" (\"Indicator_Name\", \"Indicator_URL\", \"Indicator_Data_URL\", \"Direct_Indicator_Source\"," +
                             "\"Original_Indicator_Source\", \"Units\", \"Indicator_Definition\", \"Update_Cycle\", \"updatedAt\",\"createdAt\") values ('" + indicators + 
@@ -158,33 +185,32 @@ module.exports = function (router) {
         var indicators_id_ex = req.body.indicators_id_ex;
         
 
-        model.sequelize.query("delete from public.\"Data\" where \"Indicator_ID\" = " + indicators_id_ex).then(function(results, metadata) {
-        
+        if(req.files.data_file_ex.size>0){
             
-        });
-        
-        csv
-             .fromPath(req.files.data_file_ex.path, {headers: true})
-             .on("data", function(data){
-                 //console.log(data[0]);
-                 /*console.log("**** ********");
-                 console.log(data.Country);
-                 console.log("****");*/
 
-                 model.sequelize.query("insert into public.\"Data\" (\"Country_ID\", \"Indicator_ID\", \"Date\", \"Value\",\"createdAt\",\"updatedAt\") values" +
-                                         "((select \"Country_ID\" from public.\"Countries\" Where \"Sub_Country_Name\" like '" + data.Country + "')," + indicators_id_ex +
-                                        "," + data.Year + "," + data.Value + "," + "now(),now())"
- 
-                        ).then(function(results, metadata) {
-            
-                        })
+                model.sequelize.query("delete from public.\"Data\" where \"Indicator_ID\" = " + indicators_id_ex).then(function(results, metadata) {
+                
+                    
+                });
+                
+                csv
+                     .fromPath(req.files.data_file_ex.path, {headers: true})
+                     .on("data", function(data){
+                        
+                         model.sequelize.query("insert into public.\"Data\" (\"Country_ID\", \"Indicator_ID\", \"Date\", \"Value\",\"createdAt\",\"updatedAt\") values" +
+                                                 "((select \"Country_ID\" from public.\"Countries\" Where \"Sub_Country_Name\" like '" + data.Country + "')," + indicators_id_ex +
+                                                "," + data.Year + "," + data.Value + "," + "now(),now())"
+         
+                                ).then(function(results, metadata) {
+                    
+                                })
 
-             })
-             .on("end", function(){
-                 console.log("done");
-             });
+                     })
+                     .on("end", function(){
+                         console.log("done");
+                     });
 
- 
+        }
 
         model.sequelize.query("delete from public.\"Category_Junction\" where \"Indicator_ID\" = " + indicators_id_ex).spread(function(results, metadata) {
                 
