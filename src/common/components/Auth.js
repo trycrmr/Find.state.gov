@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import validator from 'validator'
 
 class Login extends Component {
 
@@ -10,7 +11,8 @@ class Login extends Component {
       password: '',
       reg_email: '',
       reg_pass: '',
-      reg_name: ''
+      reg_name: '',
+      failed: 'none'
     });
   }
 
@@ -45,8 +47,39 @@ class Login extends Component {
 
   register(e) {
     e.preventDefault();
-    // TODO:
-    this.props.RegisterUser(this.state)
+
+    var { reg_email, reg_pass, reg_name } = this.state
+
+    function len(inp) {
+      return validator.isLength(inp, 2, 55);
+    }
+    
+    if ( len(reg_email), len(reg_pass), len(reg_name) ) {
+      reg_email = validator.normalizeEmail(reg_email);
+      if ( reg_email != false ) {
+        reg_email = validator.escape(reg_email)
+        reg_pass = validator.escape(reg_pass)
+        reg_name = validator.escape(reg_name)
+
+        var sanatized = {
+          reg_email: reg_email,
+          reg_pass: reg_pass,
+          reg_name: reg_name
+        } 
+        // all checks passed
+        this.props.registerUser(sanatized)
+      } 
+      else {
+        this.setState({
+          failed: 'email'
+        })
+      }
+    } 
+    else {
+      this.setState({
+        failed: 'must only enter 2-55 characters'
+      })
+    }  
   }
 
   render() {
@@ -62,6 +95,7 @@ class Login extends Component {
         <header>
           <h1>Welcome to Find</h1>
         </header>
+        {this.state.failed === 'none' ? null : <h2> Input Failed: {this.state.failed} </h2>}
 
         <div className="content">
 
@@ -84,6 +118,7 @@ class Login extends Component {
 
             </form>
           </div> 
+          
           <h1> or </h1>
           <div className="form-container">
 
@@ -105,7 +140,7 @@ class Login extends Component {
                 <input value={reg_name} onChange={this.handleChange.bind(this)} type="text" className="form-control" name="reg_name" id="name" aria-required="true" aria-invalid="true" required />
               </div>
 
-              <button onClick={this.login.bind(this)} className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+              <button onClick={this.register.bind(this)} className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 
             </form>
           </div> 

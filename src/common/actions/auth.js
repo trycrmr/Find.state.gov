@@ -1,4 +1,6 @@
 import fetch from 'isomorphic-fetch';
+import validator from 'validator';
+
 
 export const VALIDATE_USER = 'VALIDATE_USER';
 export const VALIDATE_USER_COMPLETE = 'VALIDATE_USER_COMPLETE';
@@ -12,6 +14,14 @@ function requestValidation() {
 }
 
 function receiveValidation(json) {
+  return {
+    type: VALIDATE_USER_COMPLETE,
+    message: json.msg,
+    token: json.jwt
+  };
+}
+
+function invalidInput(input) {
   return {
     type: VALIDATE_USER_COMPLETE,
     message: json.msg,
@@ -117,9 +127,9 @@ export function registerUser(input) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: input.email,
-        name: input.name,
-        password: input.password
+        email: input.reg_email,
+        name: input.reg_name,
+        password: input.reg_pass
       })
     }).then(response => response.json())
       .then(json => {
