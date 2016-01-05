@@ -14,9 +14,12 @@ function requestValidation() {
 function receiveValidation(json) {
   return {
     type: VALIDATE_USER_COMPLETE,
+    message: json.msg
     token: json.jwt
   };
 }
+
+// TODO : Add logout actions
 
 // Build action creaters (export funcs) that return a function instead of the
 // actions above (thanks to redux-thunk middleware):
@@ -95,6 +98,32 @@ export function loginUser(input) {
       })
     }).then(response => response.json())
       .then(json => {
+        setSessionToken(json)
+        dispatch(receiveValidation(json))
+      });
+  };
+}
+
+export function registerUser(input) {
+  // thunk middleware knows how to handle functions
+  return function (dispatch) {
+    dispatch(requestValidation());
+
+    // Return a promise to wait for
+    return fetch('http://localhost:3000/user/register', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: input.email,
+        name: input.name,
+        password: input.password
+      })
+    }).then(response => response.json())
+      .then(json => {
+        // on a successful registration lets log them in
         setSessionToken(json)
         dispatch(receiveValidation(json))
       });

@@ -44,8 +44,9 @@ class Login extends Component {
   }
 
   register(e) {
+    e.preventDefault();
     // TODO:
-    // this.props.RegisterUser(this.state)
+    this.props.RegisterUser(this.state)
   }
 
   render() {
