@@ -37,17 +37,14 @@ module.exports = function (router) {
 	 * @POST localhost/setup/category
 	 */
     router.post('/register', function (req, res) {
-    	//var um = new UserModel();
-    	console.log("=========USER REGISTER==========")
-    	console.log(req.body);
-   
     	var User = model.User.build({
   			Name: req.body.name,
   			Email: req.body.email,
   			Password: req.body.password
 		})
 		User.save().then(function(data) {
-  			console.log('added new user' + data)
+			// TODO login here as well
+  			res.json({valid: true})
 		}).catch(function(err) {
 			console.log(err);
 		})
