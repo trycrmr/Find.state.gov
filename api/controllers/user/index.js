@@ -5,12 +5,13 @@
  * @author Michael Ramos 
  */
 'use strict';
-import validator from 'validator';
-var model = require("../../models").getModel();
 
+var model = require("../../models").getModel();
+var uuid = require('node-uuid');
+var nJwt = require('nJwt')
 
 // global key used for jwt signing
-var uuid = require('node-uuid');
+
 var secretKey = uuid.v4();
 
 module.exports = function (router) {
@@ -43,13 +44,22 @@ module.exports = function (router) {
   			Password: req.body.password
 		})
 		User.save().then(function(data) {
-			// TODO login here as well
-  			res.json({valid: true})
+			var token = createToken(data.User_ID)
+  			res.json({token: token})
 		}).catch(function(err) {
 			console.log(err);
 		})
+    });
 
-    });    
+    function createToken(userID) {
+    	var claims = {
+				userID: userID,
+				iss: 'http://find.state.gov',
+				role: 'admin'
+			}
+		var jwt = nJwt.create(claims,secretKey);
+		return jwt.compact();
+    } 
 
 };
 

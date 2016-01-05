@@ -35,7 +35,7 @@ function invalidInput(input) {
 // actions above (thanks to redux-thunk middleware):
 
 function setSessionToken(json) {
-  if (json || json.token != null ) {
+  if (json || json.token != null || !json.valid) {
     localStorage.setItem('token', json.token);
   }
 }
@@ -135,6 +135,7 @@ export function registerUser(input) {
     }).then(response => response.json())
       .then(json => {
         // on a successful registration lets log them in
+        console.log(json)
         setSessionToken(json)
         dispatch(receiveValidation(json))
       });
