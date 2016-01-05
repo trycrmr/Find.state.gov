@@ -41,8 +41,18 @@ module.exports = function (router) {
     	//var um = new UserModel();
     	console.log("=========USER REGISTER==========")
     	console.log(req.body);
+    	var User = new UserModel();
+    	var newUser = User.build({
+  			Name: req.body.reg_name,
+  			Email: req.body.reg_email,
+  			Password: req.body.reg_pass
+		})
+		User.save().then(function() {
+  			console.log('added new user')
+		}).catch(function(err) {
+			console.log(err);
+		})
 
-    	console.log(validator.normalizeEmail(req.body.email))
     });    
 
 };
