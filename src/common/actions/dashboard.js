@@ -26,7 +26,7 @@ function fetchUserData() {
     dispatch(requestUserData());
 
     // Return a promise to wait for
-    return fetch('http://localhost:3000/setup/datastories')
+    return fetch('http://localhost:8080/setup/datastories')
       .then(response => response.json())
       .then(json => {
         dispatch(receiveUserData(json))

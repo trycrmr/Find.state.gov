@@ -49,7 +49,7 @@ function fetchUser(token) {
     // TODO: AUTO LOGIN FAILURE, CLEAR JWT AND USER STATE
     } else {
       // Return a promise to wait for
-      return fetch('http://localhost:3000/user/validate', {
+      return fetch('http://localhost:8080/user/validate', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -95,7 +95,7 @@ export function loginUser(input) {
     console.log(input)
 
     // Return a promise to wait for
-    return fetch('http://localhost:3000/user/validate', {
+    return fetch('http://localhost:8080/user/validate', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -119,7 +119,7 @@ export function registerUser(input) {
     dispatch(requestValidation());
 
     // Return a promise to wait for
-    return fetch('http://localhost:3000/user/register', {
+    return fetch('http://localhost:8080/user/register', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

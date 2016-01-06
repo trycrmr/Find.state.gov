@@ -169,7 +169,7 @@ function fetchSetup() {
     dispatch(requestSetup());
 
     // Return a promise to wait for
-    return fetch('http://localhost:3000/setup/indicatorsByCategory')
+    return fetch('http://localhost:8080/setup/indicatorsByCategory')
       .then(response => response.json())
       .then(json => {
         dispatch(receiveSetup(json))
@@ -219,7 +219,7 @@ function fetchData(ind, cty, cht ) {
     dispatch(requestData());
 
     // Return a promise to wait for
-    return fetch('http://localhost:3000/visualize/data', {
+    return fetch('http://localhost:8080/visualize/data', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -24,9 +24,9 @@ const renderFullPage = (html, initialState) => {
       <head>
         <meta charset="utf-8">
         <title>Find State Tests</title>
-        <link rel="stylesheet" type="text/css" href="http://localhost:3000/setup/leaflet/css" />
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/setup/leaflet/css" />
         <link rel="stylesheet" type="text/css" href="/static/app.css" />
-        <link rel="stylesheet" type="text/css" href="http://localhost:3000/setup/bootstrap/css" />
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/setup/bootstrap/css" />
       </head>
       <body>
         <div id="root">${html}</div>
@@ -36,9 +36,9 @@ const renderFullPage = (html, initialState) => {
         <script src="/static/bundle.js"></script>
          
 
-        <script src="http://localhost:3000/setup/leaflet/js"></script>
-        <script src="http://localhost:3000/setup/jquery"></script>
-        <script src="http://localhost:3000/setup/bootstrap/js"></script>
+        <script src="http://localhost:8080/setup/leaflet/js"></script>
+        <script src="http://localhost:8080/setup/jquery"></script>
+        <script src="http://localhost:8080/setup/bootstrap/js"></script>
       </body>
     </html>
   `;
@@ -83,7 +83,7 @@ app.get('/*', function (req, res) {
   
 });
 
-const server = app.listen(3001, function () {
+const server = app.listen(80, function () {
   const host = server.address().address;
   const port = server.address().port;
   console.log('CLI ===> 🖥  Client Available at http://localhost:%d/home', port);
