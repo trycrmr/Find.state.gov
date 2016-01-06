@@ -37,7 +37,7 @@ function fetchUserData() {
 // No need to call the external API if data is already in memory:
 export function fetchUserDataIfNeeded() {
   return (dispatch, getState) => {
-    if ( true === false ) {
+    if ( getState() ) {
       // Let the calling code know there's nothing to wait for.
       return Promise.resolve();
     } else {
