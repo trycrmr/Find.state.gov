@@ -2,7 +2,7 @@
  * Category Model
  *
  * @desc find.state.gov, categories, sequelize orm
- * @author Michael Ramos && Leroy Bryant
+ * @author Michael Ramos 
  */
 'use strict';
 
@@ -15,17 +15,19 @@ module.exports = function(sequelize, DataTypes) {
     },
     Category_Name: {
         type: DataTypes.STRING
+    },
+    Sub_Category_Name: {
+        type: DataTypes.STRING
     }
   },
   {
     classMethods: {
       // Executed in ./index.js
         associate: function(models) {
-            Category.belongsToMany(models.Subcategory, {
-                through: 'Category_Subcategory_Junction',
+            Category.belongsToMany(models.Indicator, {
+                through: 'Category_Junction',
                 foreignKey: 'Category_ID'
             });
-            
         }
     }   
   });
