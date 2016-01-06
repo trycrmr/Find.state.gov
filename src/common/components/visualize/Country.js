@@ -17,7 +17,7 @@ export default class Country extends Component {
                     {countries.map((cty, i) =>                  
                         <li 
                         className={
-                            this.props.selectedCountries.indexOf(cty.name) != -1 ? 'menu-selected' : ''
+                            this.props.selectedCountries.indexOf(cty.name) != -1 ? 'cty-row menu-selected' : 'cty-row'
                         }
                         onClick={this.selectOne.bind(this, cty)} 
                         key={i}><span 
