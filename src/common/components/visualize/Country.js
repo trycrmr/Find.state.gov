@@ -10,7 +10,7 @@ export default class Country extends Component {
         if(!this.props.countries) return <span>Loading</span>;
         const {countries} = this.props
         return (
-            <div>
+            <div className='f32'>
                 <header className="viz-col-head"><h4>Choose Countries</h4><hr/></header>
                 <input className="filter-country" placeholder="Quick Search"/>
                 <ul className="country-list">
@@ -21,7 +21,7 @@ export default class Country extends Component {
                         }
                         onClick={this.selectOne.bind(this, cty)} 
                         key={i}><span 
-                        className="glyphicon glyphicon-th-list">&nbsp;</span>{cty.name}</li>
+                        className={'flag ' + cty.abv}>&nbsp;</span>{cty.name}</li>
                     )} 
                 </ul>  
             </div>            

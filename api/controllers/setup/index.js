@@ -124,8 +124,8 @@ module.exports = function (router) {
           }  
         }
 
-        var ctys = [{name: "France"},{name: "United States"},{name: "China"},{name: "Iraq"}
-          ,{name: "Russia"},{name: "Argentina"},{name: "Canada"},{name: "Australia"}]
+        var ctys = [{name: "France", abv: 'fr'},{name: "United States", abv: 'us'},{name: "China", abv:'cn'},{name: "Iraq", abv: 'iq'}
+          ,{name: "Russia", abv: 'ru'},{name: "Argentina", abv: 'ar'},{name: "Canada", abv: 'ca'},{name: "Australia", abv: 'au'}]
         obj.countries = ctys
 
         res.json(obj);
