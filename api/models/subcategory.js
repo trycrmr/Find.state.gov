@@ -1,19 +1,19 @@
 /**
- * Category Model
+ * Subcategory Model
  *
  * @desc find.state.gov, categories, sequelize orm
- * @author Michael Ramos && Leroy Bryant
+ * @author Leroy Bryant
  */
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Category = sequelize.define("Category", {
-    Category_ID: {
+  var Subcategory = sequelize.define("Subcategory", {
+    Subcategory_ID: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    Category_Name: {
+    Subcategory_Name: {
         type: DataTypes.STRING
     }
   },
@@ -21,14 +21,17 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       // Executed in ./index.js
         associate: function(models) {
-            Category.belongsToMany(models.Subcategory, {
+            Subcategory.belongsToMany(models.Category, {
                 through: 'Category_Subcategory_Junction',
-                foreignKey: 'Category_ID'
+                foreignKey: 'Subcategory_ID'
             });
-            
+            Subcategory.belongsToMany(models.Indicator, {
+                through: 'Subcategory_Indicator_Junction',
+                foreignKey: 'Subcategory_ID'
+            });
         }
     }   
   });
 
-  return Category;
+  return Subcategory;
 };
