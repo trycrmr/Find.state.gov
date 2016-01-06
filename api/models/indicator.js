@@ -42,8 +42,12 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
           // Executed in ./index.js
           associate: function(models) {
-            Indicator.belongsToMany(models.Category, {
+            /*Indicator.belongsToMany(models.Category, {
                 through: 'Category_Junction',
+                foreignKey: 'Indicator_ID'
+            });*/
+            Indicator.belongsToMany(models.Subcategory, {
+                through: 'Subcategory_Indicator_Junction',
                 foreignKey: 'Indicator_ID'
             });
             Indicator.belongsToMany(models.Collection, {
