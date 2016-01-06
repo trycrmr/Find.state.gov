@@ -18,15 +18,7 @@ export default class BuildMenu extends Component {
         return ( 
             <Modal show={true} onHide={this.props.displayModal} >  
                 <div className="modal-content">
-                    <div className="modal-header">
-                        <h4 className="modal-title" >Visualization Options</h4>
-                    </div>
-                    <span 
-                        className={
-                            this.props.buildReady != true ? 'build-button nopulse' : 'build-button pulsing'
-                        }
-                        onClick={this.props.requestDataForBuild}> build
-                    </span>
+                    
                     <div className="modal-body">
                         <div className="row viz-column-set">
                             <div className="col-md-4 viz-column-box">
@@ -46,6 +38,12 @@ export default class BuildMenu extends Component {
                             </div>
                         </div>
                     </div>
+                    <span 
+                        className={
+                            this.props.buildReady != true ? 'build-button nopulse' : 'build-button pulsing'
+                        }
+                        onClick={this.props.requestDataForBuild}> build
+                    </span>
                 </div>
             </Modal>
         );

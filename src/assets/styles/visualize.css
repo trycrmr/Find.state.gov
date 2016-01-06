@@ -90,6 +90,7 @@
 }
 .viz-column hr {
   border-width: 6px;
+  margin-top: none;
   border-color: #205493;
 }
 .menu-selected {
@@ -180,12 +181,21 @@ color: #981b1e;
 }
 .country-list li{
   list-style: none; 
-  font-size: 1.2em;
+  font-size: 1em;
    margin: 3px;
 }
 .country-list li:hover {
   background-color: lightslategray;
   cursor: pointer;
+}
+.cty-row {
+  float:left;
+  width: 44%;
+  display : flex;
+  align-items: center;
+}
+.flag {
+  margin-right: 2%;
 }
 
 .chart-list {
@@ -276,11 +286,11 @@ color: #981b1e;
   text-align: center;  
   color: white;
   border: none;
-  border-radius: .3em;
-  margin-top: 10px;
+  border-radius: .2em;
+  margin-bottom: 15px;
   margin-right: auto;
   margin-left: auto;
-  width:80%;
+  width:60%;
 }
 .nopulse {
   background-color: lightgrey;
