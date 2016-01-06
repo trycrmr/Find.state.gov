@@ -4,7 +4,7 @@ export default class MapChart extends Component {
 
     // this gets called initially 
     componentWillMount() {
-        $.get('http://localhost:3000/setup/geoJson', function(result) {
+        $.get('http://localhost:8080/setup/geoJson', function(result) {
             var geoJsonObj = result
             console.log('got result')
             this.setState({
