@@ -14,7 +14,7 @@ function requestUserData() {
 function receiveUserData(json) {
   return {
     type: RECIEVE_USER_DATA,
-    userData: json
+    user: json
   };
 }
 

@@ -21,7 +21,7 @@ export default function dashboard(state = initialState, action) {
       ...state,
       loading: false,
       loaded: true,
-      userData: action.userData
+      user: action.user
     };
   default:
     return state;

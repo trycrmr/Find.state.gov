@@ -7,7 +7,7 @@ import * as DashActions from '../actions/dashboard'
 //Data that needs to be called before rendering the component
 //This is used for server side rending via the fetchComponentDataBeforeRending() method
 Dash.need = [
-  DashActions.fetchUserDataIfNeeded
+  DashActions.autoLoginUser
 ]
 
 function mapStateToProps(state) {
@@ -33,7 +33,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(AuthActions, dispatch);
+  return bindActionCreators(DashActions, dispatch);
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Dash);

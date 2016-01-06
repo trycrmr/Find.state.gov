@@ -1,37 +1,40 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 
 class Dashboard extends Component {
 
-    componentDidMount() {
-      // returns out of method is current user already exists
-      if (this.props.user) return;
+  constructor(props, context) {
+     super(props);
+     console.log(context) //=> not undefined
+  }
 
-      let jwt = localStorage.getItem('jwt');
-      let unauthorized = !this.props.user && !jwt;
-
-      // automatically authenticates the user if a JWT is found
-      if (jwt) this.props.autoLoginUser(jwt);
-
-      // redirect to login page is theres no current user state or any JWT
-      if (unauthorized) this.context.router.transitionTo('/login');
+  componentWillMount() {
+    // we need to look for JWT token before continuing with the user view
+    // if token in storage, fetch data if needed
+    // if no token, take user to login screen
+    let jwt = localStorage.getItem('jwt');
+    if (!jwt) {
+      this.props.history.pushState(null, '/auth')
     }
+    //let unauthorized = !this.props.user && !jwt;
 
-    componentWillUnmount() {
-      this._unsubscribe();
-    }
-    
+    // automatically authenticates the user if a JWT is found
+    // if (jwt) {
+    //   this.props.autoLoginUser(jwt);
+    // } else {
+    //   this.context.router.transitionTo('/login');
+    // }
+
+  }    
 
   render() {
-
-    const { user } = this.props.user;
-      
+    //this.context.router.transitionTo('auth');
       // we show a loading screen initally, and based on if the current user is updated or not, we either show the contents intended to be rendered, or redirec the client to the login page.
-
-      if (user) {
-        return <ComponentToBeRendered {...this.props} currentUser={user} />;
-      } else {
-        return <Spinner fullScreen={true} />;
-      }
+      return <h1>Admin Dashboard</h1>
+      // if (user) {
+      //   return <ComponentToBeRendered {...this.props} currentUser={user} />;
+      // } else {
+      //   return <Spinner fullScreen={true} />;
+      // }
 
   }
 }

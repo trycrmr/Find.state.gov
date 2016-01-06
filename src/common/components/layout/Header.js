@@ -25,7 +25,7 @@ class Header extends Component {
 		      </ul>
 		      <ul className="nav navbar-nav pull-right">
 		        <li>
-		        {this.props.loggedIn ?
+		        {!this.props.loggedIn ?
 		          <Link to="auth">Login/Register(USG Only)</Link>
 		          :
 		          <Link to="dashboard">Dashboard</Link>
