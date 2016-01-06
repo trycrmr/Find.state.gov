@@ -35,10 +35,10 @@ export default class ChartMenu extends Component {
                         this.props.selectedChart.indexOf("bubble") != -1 ? 'menu-selected' : ''
                         }><span onClick={this.selectOne.bind(this, "bubble")} className="bubblecon chartcon"></span><br/>Bubble</td>
                         
-                        <td className="soon"><span className="radarcon chartcon"></span><br/>Radar (Coming Soon)</td>
+                        <td className="soon"><span className="radarcon chartcon"></span><br/>(Coming Soon)</td>
                       </tr>
                       <tr>
-                        <td className="soon"><span className="treecon chartcon"></span><br/>Tree (Coming Soon)</td>
+                        <td className="soon"><span className="treecon chartcon"></span><br/>(Coming Soon)</td>
                       </tr>
                     </tbody>
                 </table>
