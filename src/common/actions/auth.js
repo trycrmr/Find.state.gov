@@ -3,7 +3,7 @@ import validator from 'validator';
 
 export const VALIDATE_USER = 'VALIDATE_USER';
 export const VALIDATE_COMPLETE_SUCCESS = 'VALIDATE_COMPLETE_SUCCESS';
-export const VALIDATE_COMPLETE_FAILURE = 'VALIDATE_COMPLETE_FAILURE';
+export const VALIDATE_COMPLETE_FAILED = 'VALIDATE_COMPLETE_FAILED';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 
@@ -74,6 +74,7 @@ function validateToken(token) {
         dispatch(receiveValidation(json.user))
       } else {
         // server responded with invalid
+        localStorage.removeItem('token');
         dispatch(receiveValidationFailed(json.message))
       }
     });
@@ -81,36 +82,36 @@ function validateToken(token) {
 }
 
 export function loginUserProcess(input) {
-  // the process needs to happen in the browser
-  if( process.env.BROWSER ) {
-    // first check if token exists
-    let token = localStorage.getItem('token');
-    if (!token) {
-      // user not logged in, just dispatch logout 
-      return function (dispatch) {
+  return function (dispatch) {
+    // the process needs to happen in the browser
+    if( process.env.BROWSER ) {
+      // first check if token exists
+      let token = localStorage.getItem('token');
+      if (!token || token === "undefined") {
+        // user not logged in, just dispatch logout 
         // the reducer will clear the user state
+        localStorage.removeItem('token');
         dispatch(logoutUser())
-      }
-    } else {
-      // user claims to already have token
-      // process the rest of auth actions
-      return function (dispatch, getState) {
-        // check to see if user object already exists
-        // now validate it with the server
-        var user = getState().auth.user
-        if (user && user != undefined && user != {}) {
-          // user exists, dispatch login granted
-          return dispatch(loginUser())
-        } else {
-          // user object doesn't exist, but they have the token
-          // so request the object from server, send along with token
-          return validateToken(token);
-        }
+      } else {
+        // user claims to already have token
+        // process the rest of auth actions
+        return function (dispatch, getState) {
+          // check to see if user object already exists
+          // now validate it with the server
+          var user = getState().auth.user
+          if (user && user != undefined && user != {}) {
+            // user exists, dispatch login granted
+            return dispatch(loginUser())
+          } else {
+            // user object doesn't exist, but they have the token
+            // so request the object from server, send along with token
+            return validateToken(token);
+          }
+        } 
       } 
-    } 
+    }
   }
 }
-
 
 export function loginUserSubmit(input) {
   // thunk middleware knows how to handle functions
@@ -136,6 +137,7 @@ export function loginUserSubmit(input) {
           setSessionToken(json.token)
           dispatch(receiveValidation(json.user))
         } else {
+          localStorage.removeItem('token');
           dispatch(receiveValidationFailed(json.message))
         }
       });
@@ -166,6 +168,7 @@ export function registerUserSubmit(input) {
           setSessionToken(json.token)
           dispatch(receiveValidation(json.user))
         } else {
+          localStorage.removeItem('token');
           dispatch(receiveValidationFailed(json.message))
         }
       });

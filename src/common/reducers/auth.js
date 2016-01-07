@@ -8,7 +8,7 @@ const initialState = {
   validating: false,
   loggedIn: false,
   invalidMsg: '',
-  user: null
+  user: {}
 };
 
 export default function auth(state = initialState, action) {
@@ -25,7 +25,7 @@ export default function auth(state = initialState, action) {
       loggedIn: true,
       user: action.user
     };
-  case VALIDATE_COMPLETE_FAILURE:
+  case VALIDATE_COMPLETE_FAILED:
     return {
       ...state,
       invalidMsg: action.message
@@ -39,7 +39,7 @@ export default function auth(state = initialState, action) {
     return {
       ...state,
       loggedIn: false,
-      user: null
+      user: {}
     };
   default:
     return state;

@@ -18,13 +18,9 @@ class App extends Component {
     
     return (
       <div>
-        {this.props.children === null || !this.props.children.auth &&
+        {process.env.BROWSER &&
           <Header  />
         }
-        {this.props.children.auth &&
-          <Header user={true} />
-        }
-        
         {!this.props.children && <Home />}
           {this.props.children}
         

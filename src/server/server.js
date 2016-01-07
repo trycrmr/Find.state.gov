@@ -34,8 +34,6 @@ const renderFullPage = (html, initialState) => {
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}; 
         </script>
         <script src="/static/bundle.js"></script>
-         
-
         <script src="http://localhost:8080/setup/leaflet/js"></script>
         <script src="http://localhost:8080/setup/jquery"></script>
         <script src="http://localhost:8080/setup/bootstrap/js"></script>

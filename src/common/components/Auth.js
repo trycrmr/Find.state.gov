@@ -6,10 +6,7 @@ class Auth extends Component {
   componentWillMount() {
     // Decide if user is logged in already
     this.props.loginUserProcess()
-  }
-
-  componentDidMount() {
-    // Create a local state for forms
+     // Create a local state for forms
     this.setState({
       email: '',
       pass: '',
@@ -114,6 +111,7 @@ class Auth extends Component {
   }
 
   render() {
+    console.log(this.props.auth)
 
     const { 
       email, pass,
@@ -123,10 +121,10 @@ class Auth extends Component {
       loggedIn, validating,
       invalidMsg, user } = this.props
 
-    validating ? return <h3>Validating</h3> :
-    loggedIn ? return <h3>Already Logged In </h3> :
-
     return (
+    validating ? <h3>Validating</h3> :
+    loggedIn ? <h3>Already Logged In </h3> :
+
       <div className="container">
           
         <header>

@@ -20,7 +20,6 @@ export default function datastory(state = initialState, action) {
       ...state,
       loading: false,
       loaded: true,
-      lastUpdated: Date.now(),
       stories: action.stories
     };
   default:

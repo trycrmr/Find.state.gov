@@ -5,10 +5,13 @@ class Header extends Component {
 
   render() {
 
-  	if( process.env.BROWSER ) {
-      let jwt = localStorage.getItem('token');
-      var loggedIn = !jwt ? false : true
-    }
+	let jwt = localStorage.getItem('token');
+	var loggedIn;
+	if (!jwt || jwt === "undefined") {
+		loggedIn = false
+	}else {
+		loggedIn = true
+	}
 
     return (
 		<div className="navbar navbar-default">
@@ -43,9 +46,5 @@ class Header extends Component {
     );
   }
 }
-
-Header.propTypes = {
-  user: PropTypes.bool
-};
 
 export default Header;

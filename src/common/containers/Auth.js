@@ -21,12 +21,12 @@ function mapStateToProps(state) {
     const {
         validating,
         loggedIn,
-        token,
+        user,
         invalidMsg
     } = auth || {
         validating: false,
         loggedIn: false,
-        user: null,
+        user: {},
         invalidMsg: ''
     };
     return {
