@@ -20,9 +20,9 @@ module.exports = function (router) {
 	 * @GET localhost/user
 	 */
     router.get('/', function (req, res) {
-    	//var um = new UserModel();
+    	// TODO REMOVE THIS - only use for testing
+    	var um = model.User;
     	res.send(um.getUserData());
-    	//TODO REMOVE THIS ^
 	});
 
 	/**
@@ -39,7 +39,10 @@ module.exports = function (router) {
     			var mss = {valid:false, message:'token not valid any longer'}
     			res.json(mss);
   			} else{
-    			// todo query user here
+    			// todo query userID here
+
+    			var resBody = {}
+    			res.json(resBody)
   			}
 		});
 	});
