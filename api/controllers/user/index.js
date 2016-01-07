@@ -55,7 +55,6 @@ module.exports = function (router) {
   			} else{
     			// todo query userID here
     			
-    			
     			res.json(resBody)
   			}
 		});

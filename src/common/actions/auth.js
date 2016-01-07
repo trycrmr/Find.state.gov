@@ -1,11 +1,11 @@
 import fetch from 'isomorphic-fetch';
 import validator from 'validator';
 
-
 export const VALIDATE_USER = 'VALIDATE_USER';
-export const VALIDATE_USER_COMPLETE = 'VALIDATE_USER_COMPLETE';
+export const VALIDATE_COMPLETE_SUCCESS = 'VALIDATE_COMPLETE_SUCCESS';
+export const VALIDATE_COMPLETE_FAILURE = 'VALIDATE_COMPLETE_FAILURE';
 export const LOGOUT_USER = 'LOGOUT_USER';
-export const INVALID_INPUT = 'INVALID_INPUT';
+export const LOGIN_USER = 'LOGIN_USER';
 
 function requestValidation() {
   return {
@@ -27,9 +27,9 @@ function receiveValidationFailed(message) {
   };
 }
 
-function invalidInput(message) {
+function loginUser() {
   return {
-    type: INVALID_INPUT
+    type: LOGIN_USER
   };
 }
 
@@ -39,9 +39,6 @@ function logoutUser() {
   };
 }
 
-
-// TODO : Add logout actions
-
 // Build action creaters (export funcs) that return a function instead of the
 // actions above (thanks to redux-thunk middleware):
 
@@ -50,6 +47,8 @@ function setSessionToken(json) {
     localStorage.setItem('token', json.token);
   }
 }
+
+// TODO : Add logout actions -- tokens
 
 
 function validateToken(token) {
@@ -75,7 +74,7 @@ function validateToken(token) {
         dispatch(receiveValidation(json.user))
       } else {
         // server responded with invalid
-        dispatch(invalidInput(json.message))
+        dispatch(receiveValidationFailed(json.message))
       }
     });
   };
@@ -98,7 +97,8 @@ export function loggedInUserStatus(input) {
       return function (dispatch, getState) {
         // check to see if user object already exists
         // now validate it with the server
-        if (getState().auth.user) {
+        var user = getState().auth.user
+        if (user && user != undefined && user != {}) {
           // user exists, dispatch login granted
           return dispatch(loginUser())
         } else {
@@ -131,8 +131,13 @@ export function loginUserSubmit(input) {
       })
     }).then(response => response.json())
       .then(json => {
-        setSessionToken(json)
-        dispatch(receiveValidation(json))
+        if(json.valid) {
+          // on a successful registration lets log them in
+          setSessionToken(json.token)
+          dispatch(receiveValidation(json.user))
+        } else {
+          dispatch(receiveValidationFailed(json.message))
+        }
       });
   };
 }
@@ -156,9 +161,13 @@ export function registerUser(input) {
       })
     }).then(response => response.json())
       .then(json => {
-        // on a successful registration lets log them in
-        setSessionToken(json.token)
-        dispatch(receiveValidation(json.user))
+        if(json.valid) {
+          // on a successful registration lets log them in
+          setSessionToken(json.token)
+          dispatch(receiveValidation(json.user))
+        } else {
+          dispatch(receiveValidationFailed(json.message))
+        }
       });
   };
 }
