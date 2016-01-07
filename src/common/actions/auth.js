@@ -5,7 +5,7 @@ import validator from 'validator';
 export const VALIDATE_USER = 'VALIDATE_USER';
 export const VALIDATE_USER_COMPLETE = 'VALIDATE_USER_COMPLETE';
 export const LOGOUT_USER = 'LOGOUT_USER';
-export const LOGOUT_USER_COMPLETE = 'LOGOUT_USER_COMPLETE';
+export const INVALID_INPUT = 'INVALID_INPUT';
 
 function requestValidation() {
   return {
@@ -15,17 +15,23 @@ function requestValidation() {
 
 function receiveValidation(json) {
   return {
-    type: VALIDATE_USER_COMPLETE
+    type: VALIDATE_USER_COMPLETE,
+    user: json.user
   };
 }
 
 function invalidInput(input) {
   return {
-    type: VALIDATE_USER_COMPLETE,
-    message: json.msg,
-    token: json.jwt
+    type: INVALID_INPUT
   };
 }
+
+function logoutUser() {
+  return {
+    type: LOGOUT_USER
+  };
+}
+
 
 // TODO : Add logout actions
 
@@ -38,99 +44,69 @@ function setSessionToken(json) {
   }
 }
 
-function fetchUser(token) {
-  // thunk middleware knows how to handle functions
+
+function validateToken(token) {
+  
   return function (dispatch) {
+    // tell the reducer we are currently validating the user token
     dispatch(requestValidation());
 
-    let savedToken = localStorage.getItem('token');
-    if (savedToken !== token) {
-    // if the jwt passed in and the jwt in localStorage don't match, then we redirect them to the manual login page to reprompt for password
-    // TODO: AUTO LOGIN FAILURE, CLEAR JWT AND USER STATE
-    } else {
-      // Return a promise to wait for
-      return fetch('http://localhost:8080/user/validate', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          token: token
-        })
+    // ask the server to validate the current token
+    return fetch('http://localhost:8080/user/validate', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: token
       })
-      .then(response => response.json())
-      .then(json => {
+    })
+    .then(response => response.json())
+    .then(json => {
+      if (json.valid) {
         setSessionToken(json)
         dispatch(receiveValidation(json))
-      });
-    }
+      } else {
+        // server responded with invalid
+        dispatch(invalidInput())
+      }
+    });
   };
 }
 
-export function checkLoggedInStatus(input) {
+export function loggedInUserStatus(input) {
   // the process needs to happen in the browser
   if( process.env.BROWSER ) {
     // first check if token exists
     let token = localStorage.getItem('token');
     if (!token) {
-      // user not logged in, just log them out
+      // user not logged in, just dispatch logout 
       return function (dispatch) {
-        dispatch(logoutUser)
+        // the reducer will clear the user state
+        dispatch(logoutUser())
       }
     } else {
       // user claims to already have token
       // process the rest of auth actions
-      return function (dispatch) {
+      return function (dispatch, getState) {
         // check to see if user object already exists
         // now validate it with the server
-
-        // Return a promise to wait for
-        return fetch('http://localhost:8080/user/register', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: input.reg_email,
-            name: input.reg_name,
-            password: input.reg_pass
-          })
-        }).then(response => response.json())
-          .then(json => {
-            // on a successful registration lets log them in
-            console.log(json)
-            setSessionToken(json)
-            dispatch(receiveValidation(json))
-          });
-      };
+        if (getState().auth.user) {
+          // user exists, dispatch login granted
+          return dispatch(loginUser())
+        } else {
+          // user object doesn't exist, but they have the token
+          // so request the object from server, send along with token
+          return validateToken(token);
+        }
+      } 
     } 
-
-  } 
+  }
 }
 
-export function fetchUserIfNeeded() {
-  return (dispatch, getState) => {
 
-    // session token
-    let token = localStorage.getItem('token');
-    
-    // if no session exits, then there is no user
-    if ( !token ) {
-      // no user token, not logged in
-      return Promise.resolve();
-    } else if(getState().auth.present.loggedIn) {
-      // there is a token and stored user state
-      return Promise.resolve();
-    } else {
-      // theres a token but no user state
-      return dispatch(fetchUser(token));
-    }
-  };
-}
-
-export function loginUser(input) {
+export function loginUserSubmit(input) {
   // thunk middleware knows how to handle functions
   return function (dispatch) {
     //dispatch(requestValidation());
