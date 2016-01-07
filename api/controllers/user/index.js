@@ -57,15 +57,31 @@ module.exports = function (router) {
     	// if invalid send an invalid response
 
     	// Load hash from your password DB.
+    	var User = model.User;
+    	var resBody = {};
     	
+    	User.findOne({
+		  where: {Email: req.body.email}
+		}).then(function(user) {
+		  	var userData = user.dataValues	
+		  	// got the user, now compare passwords
+		  	bcrypt.compare(req.body.password, userData.Password, function(err, valid) {
+	    		if (err) {
+	    			// passwords dont match
+	    			resBody = {valid:false, message:'could not authenticate user'}
+    				res.json(resBody)
+	    		} else {
+	    			// todo create session token
 
-		bcrypt.compare(req.body.password, hash, function(err, valid) {
-    		if (err) {
-    			console.log(err)
-    		} else {
-    			console.log(valid)
-    		}
-		});
+	    			res.json(resBody)
+	    		}
+			});
+		}).catch(function(err){
+			resBody = {valid:false, message:'could not authenticate user'}
+    		res.json(resBody);
+		})
+
+		
     	
 	});
 
