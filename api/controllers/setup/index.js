@@ -20,26 +20,23 @@ module.exports = function (router) {
       		res.json(data);
       		//console.log(data);
       	});
-	});      
+	});  
+   
 
 	/**
 	 * @GET localhost/setup/indicators
 	 */
 	router.get('/indicators', function (req, res) {
-      	// model.Indicator.findAll({
-      	// 	attributes:['Indicator_ID','Indicator_Name','Indicator_URL','Indicator_Data_URL','Direct_Indicator_Source',
-       //                'Original_Indicator_Source','Update_Cycle','Units','updatedAt','Indicator_Definition']
-      	// }).then(function(data) {
-      	// 	res.send(data);
-      	// });
-    const staticData = {data:[
-      {Indicator_ID:1,Indicator_Name: 'Test 1', Defintion_Name: 'Define 1' },
-      {Indicator_ID:2,Indicator_Name: 'Test 2', Defintion_Name: 'Define 2' },
-      {Indicator_ID:3,Indicator_Name: 'Test 3', Defintion_Name: 'Define 3' },
-      {Indicator_ID:4,Indicator_Name: 'Test 4', Defintion_Name: 'Define 4' }
-    ]}
-    res.json(staticData);
+      	 model.Indicator.findAll({
+      	 	attributes:['Indicator_ID','Indicator_Name','Indicator_URL','Indicator_Data_URL','Direct_Indicator_Source',
+                       'Original_Indicator_Source','Units','updatedAt','Indicator_Definition']
+      	 }).then(function(data) {
+      	 	res.json(data);
+      	});
+    
 	});  
+
+
 
   /**
    * @GET localhost/setup/indicatorsByCategory
