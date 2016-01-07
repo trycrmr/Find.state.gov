@@ -80,7 +80,7 @@ function validateToken(token) {
   };
 }
 
-export function loggedInUserStatus(input) {
+export function loginUserProcess(input) {
   // the process needs to happen in the browser
   if( process.env.BROWSER ) {
     // first check if token exists
@@ -142,7 +142,7 @@ export function loginUserSubmit(input) {
   };
 }
 
-export function registerUser(input) {
+export function registerUserSubmit(input) {
   // thunk middleware knows how to handle functions
   return function (dispatch) {
     dispatch(requestValidation());

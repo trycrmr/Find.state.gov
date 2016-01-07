@@ -7,8 +7,9 @@ import * as AuthActions from '../actions/auth'
 // Data that needs to be called before rendering the component
 // This is used for server side rending via the fetchComponentDataBeforeRending() method
 Auth.need = [
-  AuthActions.fetchUserIfNeeded,
-  AuthActions.loginUser
+  AuthActions.loginUserProcess,
+  AuthActions.loginUserSubmit,
+  AuthActions.registerUserSubmit
 ]
 
 function mapStateToProps(state) {

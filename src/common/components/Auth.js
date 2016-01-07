@@ -1,23 +1,14 @@
 import React, { Component } from 'react'
 import validator from 'validator'
 
-class Login extends Component {
+class Auth extends Component {
 
-  // React initial method
   componentWillMount() {
-    
-
     // Decide if user is logged in already
-    // if so take them to the dashboard
-    // localstorage is only accessable in the browser
-    if( process.env.BROWSER ) {
-      let jwt = localStorage.getItem('token');
-      if (jwt && jwt != undefined) {
-        this.props.history.pushState(null, '/dashboard')
-      }
-    }
+    this.props.loginUserProcess()
+  }
 
-
+  componentDidMount() {
     // Create a local state for forms
     this.setState({
       email: '',
@@ -107,7 +98,7 @@ class Login extends Component {
           reg_name: reg_name
         } 
         // all checks passed
-        this.props.registerUser(sanatized)
+        this.props.registerUserSubmit(sanatized)
       } 
       else {
         this.setState({
@@ -128,6 +119,12 @@ class Login extends Component {
       email, pass,
       reg_email, reg_pass, reg_name
     } = this.state
+    const {
+      loggedIn, validating,
+      invalidMsg, user } = this.props
+
+    validating ? return <h3>Validating</h3> :
+    loggedIn ? return <h3>Already Logged In </h3> :
 
     return (
       <div className="container">
@@ -192,4 +189,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Auth;
