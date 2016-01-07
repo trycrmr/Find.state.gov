@@ -5,6 +5,11 @@ class Header extends Component {
 
   render() {
 
+  	if( process.env.BROWSER ) {
+      let jwt = localStorage.getItem('token');
+      var loggedIn = !jwt ? false : true
+    }
+
     return (
 		<div className="navbar navbar-default">
 		  <div className="container">
@@ -25,7 +30,7 @@ class Header extends Component {
 		      </ul>
 		      <ul className="nav navbar-nav pull-right">
 		        <li>
-		        {!this.props.loggedIn ?
+		        {!loggedIn ?
 		          <Link to="auth">Login/Register(USG Only)</Link>
 		          :
 		          <Link to="dashboard">Dashboard</Link>

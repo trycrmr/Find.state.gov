@@ -11,18 +11,13 @@ class Dashboard extends Component {
     // we need to look for JWT token before continuing with the user view
     // if token in storage, fetch data if needed
     // if no token, take user to login screen
-    let jwt = localStorage.getItem('jwt');
-    if (!jwt) {
-      this.props.history.pushState(null, '/auth')
+    // localstorage is only accessable in the browser
+    if( process.env.BROWSER ) {
+      let jwt = localStorage.getItem('token');
+      if (!jwt) {
+        this.props.history.pushState(null, '/auth')
+      }
     }
-    //let unauthorized = !this.props.user && !jwt;
-
-    // automatically authenticates the user if a JWT is found
-    // if (jwt) {
-    //   this.props.autoLoginUser(jwt);
-    // } else {
-    //   this.context.router.transitionTo('/login');
-    // }
 
   }    
 

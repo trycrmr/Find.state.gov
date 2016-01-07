@@ -5,6 +5,19 @@ class Login extends Component {
 
   // React initial method
   componentWillMount() {
+    
+
+    // Decide if user is logged in already
+    // if so take them to the dashboard
+    // localstorage is only accessable in the browser
+    if( process.env.BROWSER ) {
+      let jwt = localStorage.getItem('token');
+      if (jwt && jwt != undefined) {
+        this.props.history.pushState(null, '/dashboard')
+      }
+    }
+
+
     // Create a local state for forms
     this.setState({
       email: '',
