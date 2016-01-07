@@ -7,6 +7,7 @@
 'use strict';
 
 var model = require("../../models").getModel();
+var User = model.User;
 var uuid = require('node-uuid');
 var nJwt = require('nJwt')
 var bcrypt = require('bcrypt');
@@ -22,8 +23,7 @@ module.exports = function (router) {
 	 */
     router.get('/', function (req, res) {
     	// TODO REMOVE THIS - only use for testing
-    	var um = model.User;
-    	res.send(um.getUserData());
+    	res.send(User.getUserData());
 	});
 
 	/**
@@ -57,7 +57,6 @@ module.exports = function (router) {
     	// if invalid send an invalid response
 
     	// Load hash from your password DB.
-    	var User = model.User;
     	var resBody = {};
     	
     	User.findOne({
@@ -98,16 +97,11 @@ module.exports = function (router) {
     	User.findOne({
 		  where: {Email: req.body.email}
 		}).then(function(exists){
-			// email already exists in db
-			resBody = {valid:false, message:'Email already exists'}
-			// -- response --
-			res.json(resBody)
-			// -- response --
-		}).catch(function(){
-			// no email already exists good to go
-			// generate a hash for the password
-	    	// we are using async so out processing doesnt get tied up
-	    	bcrypt.genSalt(10, function(err, salt) {
+			if (exists === null) {
+				// no email already exists good to go
+				// generate a hash for the password
+	    		// we are using async so out processing doesnt get tied up
+				bcrypt.genSalt(10, function(err, salt) {
 	    		bcrypt.hash(req.body.password, salt, function(err, hash) {
 	        		var User = model.User.build({
 			  			Name: req.body.name,
@@ -125,7 +119,16 @@ module.exports = function (router) {
 					})
 			    });
 			});
-	    });
+
+			} else {
+				// email already exists in db
+				resBody = {valid:false, message:'Email already exists'}
+				console.log(resBody)
+				// -- response --
+				res.json(resBody)
+				// -- response --
+			}
+		});
     });
 
     function createToken(userID) {
