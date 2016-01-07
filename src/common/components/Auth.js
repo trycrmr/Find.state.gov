@@ -70,7 +70,7 @@ class Login extends Component {
           pass: pass
         } 
         // all checks passed
-        this.props.loginUser(sanatized)
+        this.props.loginUserSubmit(sanatized)
       } 
       else {
         this.setState({

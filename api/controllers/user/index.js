@@ -57,8 +57,14 @@ module.exports = function (router) {
     	// if invalid send an invalid response
 
     	// Load hash from your password DB.
-		bcrypt.compare(req.body.password, hash, function(err, res) {
-    		// res == true
+    	
+
+		bcrypt.compare(req.body.password, hash, function(err, valid) {
+    		if (err) {
+    			console.log(err)
+    		} else {
+    			console.log(valid)
+    		}
 		});
     	
 	});
