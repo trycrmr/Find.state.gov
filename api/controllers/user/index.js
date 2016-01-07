@@ -9,7 +9,7 @@
 var model = require("../../models").getModel();
 var uuid = require('node-uuid');
 var nJwt = require('nJwt')
-var bcrypt = require('bcryptjs');
+var bcrypt = require('bcrypt');
 var salt = bcrypt.genSaltSync(10);
 
 // global key used for jwt signing
@@ -41,7 +41,7 @@ module.exports = function (router) {
     			res.json(mss);
   			} else{
     			// todo query userID here
-    			//bcrypt.hashSync(req.body.password, salt)
+    			
     			var resBody = {}
     			res.json(resBody)
   			}
@@ -55,6 +55,11 @@ module.exports = function (router) {
     	// user has submitted login credentials
     	// verify the credentials, send back user ibject and token if valid
     	// if invalid send an invalid response
+
+    	// Load hash from your password DB.
+		bcrypt.compare(req.body.password, hash, function(err, res) {
+    		// res == true
+		});
     	
 	});
 
@@ -63,17 +68,22 @@ module.exports = function (router) {
 	 * @POST localhost/user/register
 	 */
     router.post('/register', function (req, res) {
-    	var User = model.User.build({
-  			Name: req.body.name,
-  			Email: req.body.email,
-  			Password: bcrypt.hashSync(req.body.password, salt)
-		})
-		User.save().then(function(data) {
-			var token = createToken(data.User_ID)
-  			res.json({token: token})
-		}).catch(function(err) {
-			console.log(err);
-		})
+    	// we are using async so out processing doesnt get tied up
+    	bcrypt.genSalt(10, function(err, salt) {
+    		bcrypt.hash(req.body.password, salt, function(err, hash) {
+        		var User = model.User.build({
+		  			Name: req.body.name,
+		  			Email: req.body.email,
+		  			Password: hash
+				})
+				User.save().then(function(data) {
+					var token = createToken(data.User_ID)
+		  			res.json({token: token})
+				}).catch(function(err) {
+					console.log(err);
+				})
+		    });
+		});
     });
 
     function createToken(userID) {
