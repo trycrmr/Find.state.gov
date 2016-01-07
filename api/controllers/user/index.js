@@ -28,10 +28,20 @@ module.exports = function (router) {
 	/**
 	 * @POST localhost/user/validate
 	 */
-    router.post('/validate', function (req, res) {
-    	//var um = new UserModel();
-    	console.log("=========USER VALIDATE==========")
-    	console.log(req.body);
+    router.post('/validateToken', function (req, res) {
+    	// user has a token and sends to us for user access
+    	// if token is valid it will contain a userID
+    	// use the userid to query user data and send back to client
+    	// if invalid send an invalid response
+    	nJwt.verify(req.body.token, secretKey, function(err,token){
+  			if (err){
+    			// token not valid
+    			var mss = {valid:false, message:'token not valid any longer'}
+    			res.json(mss);
+  			} else{
+    			// todo query user here
+  			}
+		});
 	});
 
 	/**

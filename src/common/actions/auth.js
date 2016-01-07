@@ -13,14 +13,21 @@ function requestValidation() {
   };
 }
 
-function receiveValidation(json) {
+function receiveValidation(user) {
   return {
-    type: VALIDATE_USER_COMPLETE,
-    user: json.user
+    type: VALIDATE_COMPLETE_SUCCESS,
+    user: user
   };
 }
 
-function invalidInput(input) {
+function receiveValidationFailed(message) {
+  return {
+    type: VALIDATE_COMPLETE_FAILED,
+    message: message
+  };
+}
+
+function invalidInput(message) {
   return {
     type: INVALID_INPUT
   };
@@ -65,11 +72,10 @@ function validateToken(token) {
     .then(response => response.json())
     .then(json => {
       if (json.valid) {
-        setSessionToken(json)
-        dispatch(receiveValidation(json))
+        dispatch(receiveValidation(json.user))
       } else {
         // server responded with invalid
-        dispatch(invalidInput())
+        dispatch(invalidInput(json.message))
       }
     });
   };
