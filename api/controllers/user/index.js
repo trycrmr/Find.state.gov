@@ -73,16 +73,18 @@ module.exports = function (router) {
 	    		} else {
 	    			// todo create session token
 
-	    			res.json(resBody)
+	    			// -- response --
+			  		res.json(resBody)
+			  		// -- response --
 	    		}
 			});
 		}).catch(function(err){
 			resBody = {valid:false, message:'could not authenticate user'}
-    		res.json(resBody);
+			// -- response --
+			res.json(resBody)
+			// -- response --
 		})
 
-		
-    	
 	});
 
 
@@ -90,22 +92,40 @@ module.exports = function (router) {
 	 * @POST localhost/user/register
 	 */
     router.post('/register', function (req, res) {
-    	// we are using async so out processing doesnt get tied up
-    	bcrypt.genSalt(10, function(err, salt) {
-    		bcrypt.hash(req.body.password, salt, function(err, hash) {
-        		var User = model.User.build({
-		  			Name: req.body.name,
-		  			Email: req.body.email,
-		  			Password: hash
-				})
-				User.save().then(function(data) {
-					var token = createToken(data.User_ID)
-		  			res.json({token: token})
-				}).catch(function(err) {
-					console.log(err);
-				})
-		    });
-		});
+    	var resBody = {};
+
+    	// lets check and see if email already exists first
+    	User.findOne({
+		  where: {Email: req.body.email}
+		}).then(function(exists){
+			// email already exists in db
+			resBody = {valid:false, message:'Email already exists'}
+			// -- response --
+			res.json(resBody)
+			// -- response --
+		}).catch(function(){
+			// no email already exists good to go
+			// generate a hash for the password
+	    	// we are using async so out processing doesnt get tied up
+	    	bcrypt.genSalt(10, function(err, salt) {
+	    		bcrypt.hash(req.body.password, salt, function(err, hash) {
+	        		var User = model.User.build({
+			  			Name: req.body.name,
+			  			Email: req.body.email,
+			  			Password: hash
+					})
+					User.save().then(function(data) {
+						var token = createToken(data.User_ID)
+						resBody = {valid:true, token: token}
+						// -- response --
+			  			res.json(resBody)
+			  			// -- response --
+					}).catch(function(err) {
+						console.log(err);
+					})
+			    });
+			});
+	    });
     });
 
     function createToken(userID) {
