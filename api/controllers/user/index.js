@@ -9,9 +9,10 @@
 var model = require("../../models").getModel();
 var uuid = require('node-uuid');
 var nJwt = require('nJwt')
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
 
 // global key used for jwt signing
-
 var secretKey = uuid.v4();
 
 module.exports = function (router) {
@@ -26,7 +27,7 @@ module.exports = function (router) {
 	});
 
 	/**
-	 * @POST localhost/user/validate
+	 * @POST localhost/user/validateToken
 	 */
     router.post('/validateToken', function (req, res) {
     	// user has a token and sends to us for user access
@@ -40,7 +41,7 @@ module.exports = function (router) {
     			res.json(mss);
   			} else{
     			// todo query userID here
-
+    			//bcrypt.hashSync(req.body.password, salt)
     			var resBody = {}
     			res.json(resBody)
   			}
@@ -48,7 +49,7 @@ module.exports = function (router) {
 	});
 
 	/**
-	 * @POST localhost/user/validate
+	 * @POST localhost/user/validateLogin
 	 */
     router.post('/validateLogin', function (req, res) {
     	// user has submitted login credentials
@@ -59,13 +60,13 @@ module.exports = function (router) {
 
 
 	/**
-	 * @POST localhost/setup/category
+	 * @POST localhost/user/register
 	 */
     router.post('/register', function (req, res) {
     	var User = model.User.build({
   			Name: req.body.name,
   			Email: req.body.email,
-  			Password: req.body.password
+  			Password: bcrypt.hashSync(req.body.password, salt)
 		})
 		User.save().then(function(data) {
 			var token = createToken(data.User_ID)
