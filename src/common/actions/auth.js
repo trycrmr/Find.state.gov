@@ -115,11 +115,11 @@ export function loggedInUserStatus(input) {
 export function loginUserSubmit(input) {
   // thunk middleware knows how to handle functions
   return function (dispatch) {
-    //dispatch(requestValidation());
-    console.log(input)
-
-    // Return a promise to wait for
-    return fetch('http://localhost:8080/user/validate', {
+    // let reducer know we are currently validating
+    dispatch(requestValidation());
+  
+    // ask server to validate login info
+    return fetch('http://localhost:8080/user/validateLogin', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -157,9 +157,8 @@ export function registerUser(input) {
     }).then(response => response.json())
       .then(json => {
         // on a successful registration lets log them in
-        console.log(json)
-        setSessionToken(json)
-        dispatch(receiveValidation(json))
+        setSessionToken(json.token)
+        dispatch(receiveValidation(json.user))
       });
   };
 }

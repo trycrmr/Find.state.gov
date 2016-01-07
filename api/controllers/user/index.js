@@ -45,6 +45,17 @@ module.exports = function (router) {
 	});
 
 	/**
+	 * @POST localhost/user/validate
+	 */
+    router.post('/validateLogin', function (req, res) {
+    	// user has submitted login credentials
+    	// verify the credentials, send back user ibject and token if valid
+    	// if invalid send an invalid response
+    	
+	});
+
+
+	/**
 	 * @POST localhost/setup/category
 	 */
     router.post('/register', function (req, res) {
