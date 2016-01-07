@@ -13,16 +13,24 @@ class Indicator extends Component {
               <th></th>
               <th>Indicator ID</th>
               <th>Indicator Name</th>
-              <th>Defintion Name</th>
+              <th>Units</th>
+              <th>URL</th>
+              <th>Data URL</th>
+              <th>Last Update</th>
+              <th>Indicator Definition</th>
             </tr>
           </thead>
           <tbody>
-          {this.props.indicators.data.map((row, i) => 
+          {this.props.indicators.map((row, i) => 
             <tr key={i}>
               <td><i className="glyphicon glyphicon-folder-open"></i></td>
               <td>{row.Indicator_ID}</td>
               <td>{row.Indicator_Name}</td>
-              <td>{row.Defintion_Name}</td>
+              <td>{row.Units}</td>
+              <td>{row.Indicator_URL}</td>
+              <td>{row.Indicator_Data_URL}</td>
+              <td>{row.updatedAt}</td>
+              <td>{row.Indicator_Definition}</td>
             </tr>
           )}
           </tbody>
