@@ -2,12 +2,14 @@ import { bindActionCreators } from 'redux'
 import React, { Component} from 'react'
 import { connect } from 'react-redux'
 import Dash from '../components/Dashboard'
+
 import * as DashActions from '../actions/dashboard'
 
 //Data that needs to be called before rendering the component
 //This is used for server side rending via the fetchComponentDataBeforeRending() method
 Dash.need = [
-  DashActions.autoLoginUser
+  DashActions.fetchIndicatorsIfNeeded
+  // add more actions here
 ]
 
 function mapStateToProps(state) {
@@ -17,18 +19,15 @@ function mapStateToProps(state) {
     dashboard = dashboard.present;
 
     const {
-        loaded,
-        loading,
-        userData
+        indicators,
+        indicatorsLoaded
     } = dashboard || {
-        loaded: false,
-        loading: false,
-        userData: {}
+        indicators: [],
+        indicatorsLoaded: false
     };
     return {
-        loaded,
-        loading,
-        userData
+        indicators,
+        indicatorsLoaded
     };
 }
 

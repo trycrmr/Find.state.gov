@@ -68,6 +68,48 @@ function fetchUser(token) {
   };
 }
 
+export function checkLoggedInStatus(input) {
+  // the process needs to happen in the browser
+  if( process.env.BROWSER ) {
+    // first check if token exists
+    let token = localStorage.getItem('token');
+    if (!token) {
+      // user not logged in, just log them out
+      return function (dispatch) {
+        dispatch(logoutUser)
+      }
+    } else {
+      // user claims to already have token
+      // process the rest of auth actions
+      return function (dispatch) {
+        // check to see if user object already exists
+        // now validate it with the server
+
+        // Return a promise to wait for
+        return fetch('http://localhost:8080/user/register', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: input.reg_email,
+            name: input.reg_name,
+            password: input.reg_pass
+          })
+        }).then(response => response.json())
+          .then(json => {
+            // on a successful registration lets log them in
+            console.log(json)
+            setSessionToken(json)
+            dispatch(receiveValidation(json))
+          });
+      };
+    } 
+
+  } 
+}
+
 export function fetchUserIfNeeded() {
   return (dispatch, getState) => {
 
